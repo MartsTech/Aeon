@@ -1,0 +1,32 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/weather/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/weather/{everything}",
+      "UpstreamHttpMethod": ["Get"],
+      "SwaggerKey": "weather"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "weather",
+      "Config": [
+        {
+          "Name": "Weather API",
+          "Version": "v1",
+          "Url": "http://localhost:5001/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost"
+  }
+}

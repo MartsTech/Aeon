@@ -1,0 +1,28 @@
+version: "3"
+services:
+  #######################################################
+  #  Gateway
+  #######################################################
+  gateaway:
+    image: "martstech/aeon-gateaway"
+    mem_limit: 128m
+    ports:
+      - "80:80"
+    depends_on:
+      - weather
+    networks:
+      - aeon
+  #######################################################
+  #  Weather
+  #######################################################
+  weather:
+    image: "martstech/aeon-weather"
+    mem_limit: 128m
+    ports:
+      - "5001:5001"
+    networks:
+      - aeon
+
+networks:
+  aeon:
+    name: aeon
