@@ -1,4 +1,3 @@
-using BuildingBlocks.Authentication;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -18,7 +17,6 @@ new WebHostBuilder()
         services.AddOcelot();
         services.AddMvc();
         services.AddSwaggerForOcelot(context.Configuration);
-        services.AddAuthentication(context.Configuration);
     })
     .ConfigureLogging((hostingContext, logging) =>
     {

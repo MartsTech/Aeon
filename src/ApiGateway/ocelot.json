@@ -13,10 +13,6 @@
       "UpstreamHttpMethod": [
         "Get"
       ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
       "SwaggerKey": "weather"
     }
   ],
