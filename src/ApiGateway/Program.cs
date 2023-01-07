@@ -1,3 +1,4 @@
+using BuildingBlocks.Authentication;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -13,8 +14,9 @@ new WebHostBuilder()
             .AddJsonFile("ocelot.json")
             .AddEnvironmentVariables();
     })
-    .ConfigureServices(s => {
-        s.AddOcelot();
+    .ConfigureServices((context, services) => {
+        services.AddOcelot();
+        services.AddAuthentication(context.Configuration);
     })
     .ConfigureLogging((hostingContext, logging) =>
     {
