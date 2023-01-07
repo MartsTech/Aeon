@@ -2,17 +2,15 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/weather/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "host.docker.internal",
           "Port": 5001
         }
       ],
       "UpstreamPathTemplate": "/api/weather/{everything}",
-      "UpstreamHttpMethod": [
-        "Get"
-      ],
+      "UpstreamHttpMethod": ["Get"],
       "SwaggerKey": "weather"
     }
   ],
@@ -23,12 +21,12 @@
         {
           "Name": "Weather API",
           "Version": "v1",
-          "Url": "https://localhost:5001/swagger/v1/swagger.json"
+          "Url": "http://host.docker.internal:5001/swagger/v1/swagger.json"
         }
       ]
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost"
+    "BaseUrl": "http://host.docker.internal"
   }
 }

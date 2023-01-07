@@ -44,7 +44,7 @@ public static class SwaggerExtensions
     
     public static IApplicationBuilder UseSwagger(this IApplicationBuilder app, IWebHostEnvironment? environment)
     {
-        if (environment == null || !environment.IsDevelopment())
+        if (environment == null)
         {
             return app;
         }

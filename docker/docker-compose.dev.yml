@@ -1,0 +1,31 @@
+version: "3"
+services:
+  #######################################################
+  #  Gateway
+  #######################################################
+  gateaway:
+    restart: always
+    build:
+      context: ../
+      dockerfile: src/ApiGateway/Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - weather
+    networks:
+      - aeon
+  #######################################################
+  #  Weather
+  #######################################################
+  weather:
+    build:
+      context: ../
+      dockerfile: src/Services/Weather/Dockerfile
+    ports:
+      - "5001:5001"
+    networks:
+      - aeon
+
+networks:
+  aeon:
+    name: aeon
