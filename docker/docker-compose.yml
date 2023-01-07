@@ -3,8 +3,8 @@ services:
   #######################################################
   #  Gateway
   #######################################################
-  gateaway:
-    image: "martstech/aeon-gateaway"
+  gateway:
+    image: "teamaeon.azurecr.io/aeon-gateway"
     mem_limit: 128m
     ports:
       - "80:80"
@@ -16,7 +16,7 @@ services:
   #  Weather
   #######################################################
   weather:
-    image: "martstech/aeon-weather"
+    image: "teamaeon.azurecr.io/aeon-weather"
     mem_limit: 128m
     ports:
       - "5001:5001"
