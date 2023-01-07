@@ -16,6 +16,8 @@ new WebHostBuilder()
     })
     .ConfigureServices((context, services) => {
         services.AddOcelot();
+        services.AddMvc();
+        services.AddSwaggerForOcelot(context.Configuration);
         services.AddAuthentication(context.Configuration);
     })
     .ConfigureLogging((hostingContext, logging) =>
@@ -25,6 +27,7 @@ new WebHostBuilder()
     .UseIISIntegration()
     .Configure(app =>
     {
+        app.UseSwaggerForOcelotUI();
         app.UseOcelot().Wait();
     })
     .Build()

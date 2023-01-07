@@ -9,17 +9,30 @@
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/weather/{everything}",
+      "UpstreamPathTemplate": "/api/weather/{everything}",
       "UpstreamHttpMethod": [
         "Get"
       ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
-      }
+      },
+      "SwaggerKey": "weather"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "weather",
+      "Config": [
+        {
+          "Name": "Weather API",
+          "Version": "v1",
+          "Url": "https://localhost:5001/swagger/v1/swagger.json"
+        }
+      ]
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5000"
+    "BaseUrl": "https://localhost"
   }
 }
