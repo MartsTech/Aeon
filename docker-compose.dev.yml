@@ -4,12 +4,15 @@ services:
   #  Gateway
   #######################################################
   gateway:
-    restart: always
+    hostname: gateway
+    restart: on-failure
     build:
-      context: ../
+      context: ./
       dockerfile: src/ApiGateway/Dockerfile
     ports:
       - "80:80"
+    links:
+      - weather
     depends_on:
       - weather
     networks:
@@ -18,11 +21,10 @@ services:
   #  Weather
   #######################################################
   weather:
+    hostname: weather
     build:
-      context: ../
+      context: ./
       dockerfile: src/Services/Weather/Dockerfile
-    ports:
-      - "5001:5001"
     networks:
       - aeon
 

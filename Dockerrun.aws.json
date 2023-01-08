@@ -1,0 +1,26 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "gateway",
+      "image": "martstech/aeon-gateway",
+      "hostname": "gateway",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["weather"],
+      "memory": 128
+    },
+    {
+      "name": "weather",
+      "image": "martstech/aeon-weather",
+      "hostname": "weather",
+      "essential": false,
+      "memory": 128
+    }
+  ]
+}

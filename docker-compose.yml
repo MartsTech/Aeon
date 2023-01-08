@@ -4,10 +4,13 @@ services:
   #  Gateway
   #######################################################
   gateway:
+    hostname: gateway
     image: "martstech/aeon-gateway"
     mem_limit: 128m
     ports:
       - "80:80"
+    links:
+      - weather
     depends_on:
       - weather
     networks:
@@ -16,10 +19,9 @@ services:
   #  Weather
   #######################################################
   weather:
+    hostname: weather
     image: "martstech/aeon-weather"
     mem_limit: 128m
-    ports:
-      - "5001:5001"
     networks:
       - aeon
 
