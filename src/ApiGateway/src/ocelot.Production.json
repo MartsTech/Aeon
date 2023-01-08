@@ -1,27 +1,50 @@
 ﻿{
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/weather/{everything}",
+      "DownstreamPathTemplate": "/api/products/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "weather",
+          "Host": "products",
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/api/weather/{everything}",
+      "UpstreamPathTemplate": "/api/products/{everything}",
       "UpstreamHttpMethod": ["Get"],
-      "SwaggerKey": "weather"
+      "SwaggerKey": "products"
+    },
+    {
+      "DownstreamPathTemplate": "/api/categories/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "categories",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/categories/{everything}",
+      "UpstreamHttpMethod": ["Get"],
+      "SwaggerKey": "categories"
     }
   ],
   "SwaggerEndPoints": [
     {
-      "Key": "weather",
+      "Key": "products",
       "Config": [
         {
-          "Name": "Weather API",
+          "Name": "Products API",
           "Version": "v1",
-          "Url": "http://weather:5001/swagger/v1/swagger.json"
+          "Url": "http://products:5001/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "categories",
+      "Config": [
+        {
+          "Name": "Categories API",
+          "Version": "v1",
+          "Url": "http://categories:5002/swagger/v1/swagger.json"
         }
       ]
     }

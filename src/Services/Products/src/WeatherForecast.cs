@@ -1,4 +1,4 @@
-namespace Weather;
+namespace Products;
 
 public class WeatherForecast
 {

@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web.Resource;
 
-namespace Weather.Controllers;
+namespace Products.Controllers;
 
 [Authorize]
 [ApiController]
-[Route("api/weather/[controller]")]
+[Route("api/products/[controller]")]
 [RequiredScope("User.Scope")]
 public class WeatherForecastController : ControllerBase
 {

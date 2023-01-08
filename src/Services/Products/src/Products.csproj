@@ -8,8 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="MMLib.SwaggerForOcelot" Version="6.1.0" />
-      <PackageReference Include="Ocelot" Version="18.0.0" />
+      <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.csproj" />
     </ItemGroup>
 
 </Project>

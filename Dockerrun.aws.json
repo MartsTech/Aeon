@@ -12,13 +12,20 @@
           "containerPort": 80
         }
       ],
-      "links": ["weather"],
+      "links": ["products", "categories"],
       "memory": 128
     },
     {
-      "name": "weather",
-      "image": "martstech/aeon-weather",
-      "hostname": "weather",
+      "name": "products",
+      "image": "martstech/aeon-products",
+      "hostname": "products",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "categories",
+      "image": "martstech/aeon-categories",
+      "hostname": "categories",
       "essential": false,
       "memory": 128
     }

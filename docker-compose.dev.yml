@@ -12,19 +12,31 @@ services:
     ports:
       - "80:80"
     links:
-      - weather
+      - products
+      - categories
     depends_on:
-      - weather
+      - products
+      - categories
     networks:
       - aeon
   #######################################################
-  #  Weather
+  #  Products
   #######################################################
-  weather:
-    hostname: weather
+  products:
+    hostname: products
     build:
       context: ./
-      dockerfile: src/Services/Weather/Dockerfile
+      dockerfile: src/Services/Products/Dockerfile
+    networks:
+      - aeon
+  #######################################################
+  #  Categories
+  #######################################################
+  categories:
+    hostname: categories
+    build:
+      context: ./
+      dockerfile: src/Services/Categories/Dockerfile
     networks:
       - aeon
 

@@ -10,17 +10,28 @@ services:
     ports:
       - "80:80"
     links:
-      - weather
+      - products
+      - categories
     depends_on:
-      - weather
+      - products
+      - categories
     networks:
       - aeon
   #######################################################
-  #  Weather
+  #  Products
   #######################################################
-  weather:
-    hostname: weather
-    image: "martstech/aeon-weather"
+  products:
+    hostname: products
+    image: "martstech/aeon-products"
+    mem_limit: 128m
+    networks:
+      - aeon
+  #######################################################
+  #  Categories
+  #######################################################
+  categories:
+    hostname: categories
+    image: "martstech/aeon-categories"
     mem_limit: 128m
     networks:
       - aeon
