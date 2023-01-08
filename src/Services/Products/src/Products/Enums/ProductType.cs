@@ -2,6 +2,5 @@
 
 public enum ProductType
 {
-    Unknown = 0,
-    Book,
+    Unknown = 0
 }

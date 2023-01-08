@@ -10,6 +10,8 @@ namespace BuildingBlocks.EFCore;
 
 public abstract class DbContextBase: DbContext, IDbContext
 {
+    public const string DefaultSchema = "db-shema";
+    
     private readonly ICurrentUserProvider _currentUserProvider;
     
     private IDbContextTransaction? _currentTransaction;

@@ -10,12 +10,12 @@ public class GetPassengerByIdEndpoint : IMinimalEndpoint
 {
     public IEndpointRouteBuilder MapEndpoint(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGet($"{EndpointConfig.BaseApiPath}/passenger/{{id}}", GetById)
+        endpoints.MapGet($"{EndpointConfig.BaseApiPath}/products/{{id}}", GetById)
             .RequireAuthorization()
-            .WithTags("Passenger")
-            .WithName("GetPassengerById")
-            .WithMetadata(new SwaggerOperationAttribute("Get Passenger By Id", "Get Passenger By Id"))
-            .WithApiVersionSet(endpoints.NewApiVersionSet("Passenger").Build())
+            .WithTags("Product")
+            .WithName("GetProductById")
+            .WithMetadata(new SwaggerOperationAttribute("Get Product By Id", "Get Product By Id"))
+            .WithApiVersionSet(endpoints.NewApiVersionSet("Product").Build())
             .Produces<ProductResponseDto>()
             .Produces(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest)

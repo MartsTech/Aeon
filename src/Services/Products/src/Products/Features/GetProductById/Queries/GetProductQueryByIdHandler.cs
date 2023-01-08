@@ -4,7 +4,7 @@ using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Products.Data;
 using Products.Products.Dtos;
-using Products.Products.Features.GetProductById.Exceptions;
+using Products.Products.Exceptions;
 
 namespace Products.Products.Features.GetProductById.Queries;
 
@@ -23,12 +23,12 @@ public class GetProductQueryByIdHandler : IQueryHandler<GetProductQueryById, Pro
     {
         Guard.Against.Null(query, nameof(query));
 
-        var passenger =
-            await _productDbContext.Passengers.SingleOrDefaultAsync(x => x.Id == query.Id, cancellationToken);
+        var product =
+            await _productDbContext.Products.SingleOrDefaultAsync(x => x.Id == query.Id, cancellationToken);
 
-        if (passenger is null)
+        if (product is null)
             throw new ProductNotFoundException();
 
-        return _mapper.Map<ProductResponseDto>(passenger!);
+        return _mapper.Map<ProductResponseDto>(product);
     }
 }

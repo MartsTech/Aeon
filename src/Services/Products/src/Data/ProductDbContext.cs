@@ -10,5 +10,11 @@ public class ProductDbContext: DbContextBase
     {
     }
     
-    public DbSet<Products.Models.Product> Passengers => Set<Products.Models.Product>();
+    public DbSet<Products.Models.Product> Products => Set<Products.Models.Product>();
+    
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+        builder.ApplyConfigurationsFromAssembly(typeof(ProductRoot).Assembly);
+    }
 }
