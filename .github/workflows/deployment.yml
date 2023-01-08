@@ -9,30 +9,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-      - uses: actions/checkout@v3
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        uses: actions/checkout@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-
       - name: Build Docker images
         run: |
           docker build -t martstech/aeon-gateway -f src/ApiGateway/Dockerfile .
           docker build -t martstech/aeon-weather -f src/Services/Weather/Dockerfile .
-
       - name: Push Docker images
         run: |
           docker push martstech/aeon-gateway
           docker push martstech/aeon-weather
-
+      - name: Generate Deployment Package
+        run: zip -r deploy.zip . -x '*.git*'
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v21
         with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
           application_name: ${{ secrets.AWS_APP_NAME }}
           environment_name: ${{ secrets.AWS_ENV_NAME }}
           region: ${{ secrets.AWS_REGION }}
           existing_bucket_name: ${{ secrets.AWS_BUCKET_NAME }}
+          version_label: ${{ github.sha }}
+          deployment_package: deploy.zip
+          use_existing_version_if_available: true

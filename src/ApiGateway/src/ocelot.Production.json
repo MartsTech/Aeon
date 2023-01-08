@@ -5,7 +5,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "host.docker.internal",
+          "Host": "weather",
           "Port": 5001
         }
       ],
@@ -21,12 +21,12 @@
         {
           "Name": "Weather API",
           "Version": "v1",
-          "Url": "http://host.docker.internal:5001/swagger/v1/swagger.json"
+          "Url": "http://weather:5001/swagger/v1/swagger.json"
         }
       ]
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://host.docker.internal"
+    "BaseUrl": "http://gateway"
   }
 }
