@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web.Resource;
 
-namespace Weather.Controllers;
+namespace Weather.Api.Controllers;
 
 [Authorize]
 [ApiController]
