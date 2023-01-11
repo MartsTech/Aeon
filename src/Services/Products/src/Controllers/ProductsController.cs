@@ -8,7 +8,7 @@ namespace Products.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/products/[controller]")]
     [RequiredScope("User.Scope")]
     public class ProductsController : ControllerBase
     {
