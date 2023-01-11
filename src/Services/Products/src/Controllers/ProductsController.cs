@@ -23,12 +23,14 @@ namespace Products.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<ProductModel>> GetAll()
         {
-            if (_productService.GetAllProducts().Count == 0)
+            List<ProductModel> products = _productService.GetAllProducts();
+
+            if (products.Count == 0)
             {
                 return NotFound();
             }
 
-            return Ok(_productService.GetAllProducts());
+            return Ok(products);
         }
 
         // GET: api/Products/5
