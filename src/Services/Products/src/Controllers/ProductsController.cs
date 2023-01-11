@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Web.Resource;
 using Products.Models;
 using Products.Services;
 
 namespace Products.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    [Route("api/[controller]")]
+    [RequiredScope("User.Scope")]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;

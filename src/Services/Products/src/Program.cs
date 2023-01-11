@@ -25,8 +25,8 @@ namespace Products
 
             app.UseSwagger(app.Environment);
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllers();
 
