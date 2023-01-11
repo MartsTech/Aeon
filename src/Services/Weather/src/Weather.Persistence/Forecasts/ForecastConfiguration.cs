@@ -14,6 +14,9 @@ public sealed class ForecastConfiguration: IEntityTypeConfiguration<Domain.Forec
 
         builder.Ignore(e => e.TemperatureF);
 
+        builder.Property(e => e.Id)
+            .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
+
         builder.Property(e => e.Date)
             .IsRequired();
 

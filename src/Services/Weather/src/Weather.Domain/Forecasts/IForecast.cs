@@ -2,6 +2,8 @@
 
 public interface IForecast
 {
+    public Guid Id { get; }
+    
     public DateOnly Date { get; }
 
     public int TemperatureC { get; }
