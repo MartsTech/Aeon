@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using BuildingBlocks.Web;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,11 +23,29 @@ public static class MassTransitExtensions
             x.AddSagas(entryAssembly);
             x.AddActivities(entryAssembly);
 
-            x.UsingInMemory((context, cfg) =>
+            x.UsingRabbitMq((ctx, cfg) =>
             {
-                cfg.ConfigureEndpoints(context);
+                var rabbitMqOptions = configuration.GetOptions<RabbitMqOptions>("RabbitMqOptions");
+                
+                Console.WriteLine(rabbitMqOptions.HostName);
+                
+                cfg.Host(rabbitMqOptions?.HostName ?? "rabbitmq", rabbitMqOptions?.Port ?? 5672, "/", h =>
+                {
+                    h.Username(rabbitMqOptions?.UserName);
+                    h.Password(rabbitMqOptions?.Password);
+                });
+                
+                cfg.ConfigureEndpoints(ctx);
             });
         });
+        
+        services.AddOptions<MassTransitHostOptions>()
+            .Configure(options =>
+            {
+                options.WaitUntilStarted = true;
+                options.StartTimeout = TimeSpan.FromSeconds(10);
+                options.StopTimeout = TimeSpan.FromSeconds(30);
+            });
 
         return services;
     }

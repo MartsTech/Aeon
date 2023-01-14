@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BuildingBlocks.EFCore;
+using BuildingBlocks.Web;
+using Microsoft.EntityFrameworkCore;
 using Weather.Domain;
 using Weather.Domain.Forecasts;
 using Weather.Persistence;
@@ -13,7 +15,9 @@ public static class DomainExtensions
     {
         services.AddDbContext<DbContext>(options =>
         {
-            options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
+            var mysql = configuration.GetOptions<MySQLOptions>("MySQLOptions");
+            var connection = $"Server={mysql.Host};Port={mysql.Port};User Id={mysql.User};Password={mysql.Password};Database={mysql.Database};";
+            options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 31)));
         });
         
         services.AddScoped<IForecastRepository, ForecastRepository>();

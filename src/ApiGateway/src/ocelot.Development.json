@@ -10,7 +10,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/weather/{everything}",
-      "UpstreamHttpMethod": ["Get"],
+      "UpstreamHttpMethod": ["Get", "Post"],
       "SwaggerKey": "weather"
     }
   ],

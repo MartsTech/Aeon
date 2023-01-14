@@ -1,6 +1,7 @@
 ﻿using BuildingBlocks.Core;
 using BuildingBlocks.EFCore;
 using FluentValidation;
+using MassTransit;
 using MediatR;
 using Weather.Domain;
 using Weather.Domain.Forecasts;

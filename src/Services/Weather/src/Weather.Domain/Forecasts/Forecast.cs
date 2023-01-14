@@ -2,7 +2,7 @@ namespace Weather.Domain.Forecasts;
 
 public class Forecast : IForecast
 {
-    public Forecast(Guid id, DateOnly date, int temperatureC, string? summary)
+    public Forecast(Guid id, DateTime date, int temperatureC, string? summary)
     {
         Id = id;
         Date = date;
@@ -12,7 +12,7 @@ public class Forecast : IForecast
     
     public Guid Id { get; }
 
-    public DateOnly Date { get; }
+    public DateTime Date { get; }
     
     public int TemperatureC { get; }
     

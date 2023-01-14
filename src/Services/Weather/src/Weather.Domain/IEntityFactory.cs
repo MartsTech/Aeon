@@ -4,5 +4,5 @@ namespace Weather.Domain;
 
 public interface IEntityFactory
 {
-    Forecast NewForecast(DateOnly date, int temperatureC, string? summary);
+    Forecast NewForecast(DateTime date, int temperatureC, string? summary);
 }

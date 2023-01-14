@@ -1,4 +1,5 @@
 ﻿using BuildingBlocks.Core;
+using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,11 @@ public abstract class BaseController: ControllerBase
     
     protected IMediator Mediator => _mediator ??= HttpContext.RequestServices
         .GetService<IMediator>()!;
+    
+    private IPublishEndpoint _publishEndpoint =  null!;
+    
+    protected IPublishEndpoint PublishEndpoint => _publishEndpoint ??= HttpContext.RequestServices
+        .GetService<IPublishEndpoint>()!;
     
     protected ActionResult HandleResult<T>(Result<T>? result)
     {
@@ -29,5 +35,10 @@ public abstract class BaseController: ControllerBase
             return NotFound();
         }
         return BadRequest(result.Error);
+    }
+    
+    protected void HandlePublish<T>(T @event) where T : class
+    {
+        PublishEndpoint.Publish(@event);
     }
 }

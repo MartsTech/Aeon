@@ -20,7 +20,7 @@ public static class ForecastSeeder
 
         builder.Entity<Forecast>().HasData(Enumerable.Range(1, 5).Select(index =>
             factory.NewForecast(
-                DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                DateTime.Now.AddDays(index),
                 Random.Shared.Next(-20, 55),
                 Summaries[Random.Shared.Next(Summaries.Length)])
             )

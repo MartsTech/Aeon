@@ -22,7 +22,7 @@ public sealed class DbContext: DbContextBase
         }
         
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(DbContext).Assembly);
-        
+
         ForecastSeeder.SeedData(modelBuilder);
     }
 }
