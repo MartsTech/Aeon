@@ -19,22 +19,21 @@ public sealed class GetForecastsQuery
             _forecastRepository = forecastRepository;
         }
 
-        public Task<Result<IList<ForecastDto>>> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<Result<IList<ForecastDto>>> Handle(Query request, CancellationToken cancellationToken)
         {
-            return GetForecasts();
+            var result = await GetForecasts()
+                .ConfigureAwait(false);
+            
+            return Result<IList<ForecastDto>>.Success(result);
         }
         
-        private async Task<Result<IList<ForecastDto>>> GetForecasts()
+        private async Task<IList<ForecastDto>> GetForecasts()
         {
             var forecasts = await _forecastRepository
                 .GetForecasts()
                 .ConfigureAwait(false);
             
-            List<ForecastDto> result = new(forecasts.Count);
-            
-            result.AddRange(forecasts.Select(forecast => new ForecastDto(forecast)));
-
-            return Result<IList<ForecastDto>>.Success(result);
+            return new List<ForecastDto>(forecasts.Select(forecast => new ForecastDto(forecast)));
         }
     }
 }

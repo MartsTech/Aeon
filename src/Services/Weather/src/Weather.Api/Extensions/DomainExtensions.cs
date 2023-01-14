@@ -1,5 +1,4 @@
-﻿using BuildingBlocks.EFCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Weather.Domain;
 using Weather.Domain.Forecasts;
 using Weather.Persistence;
@@ -8,14 +7,15 @@ using DbContext = Weather.Persistence.DbContext;
 
 namespace Weather.Api.Extensions;
 
-public static class DbContextExtensions
+public static class DomainExtensions
 {
-    public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddCustomDomain(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<DbContext>(options =>
         {
             options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
         });
+        
         services.AddScoped<IForecastRepository, ForecastRepository>();
         services.AddScoped<IEntityFactory, EntityFactory>();
 

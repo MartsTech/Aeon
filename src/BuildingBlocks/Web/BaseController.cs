@@ -9,12 +9,12 @@ namespace BuildingBlocks.Web;
 [ApiController]
 public abstract class BaseController: ControllerBase
 {
-    private IMediator _mediator;
+    private IMediator _mediator = null!;
     
     protected IMediator Mediator => _mediator ??= HttpContext.RequestServices
-        .GetService<IMediator>();
+        .GetService<IMediator>()!;
     
-    protected ActionResult HandleResult<T>(Result<T> result)
+    protected ActionResult HandleResult<T>(Result<T>? result)
     {
         if (result == null)
         {

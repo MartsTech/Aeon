@@ -6,13 +6,13 @@ namespace Weather.Persistence.Forecasts;
 public sealed class ForecastRepository: IForecastRepository
 {
     private readonly DbContext _context;
-    
+
     public ForecastRepository(DbContext context)
     {
         _context = context;
     }
     
-    public async Task<IList<Domain.Forecasts.Forecast>> GetForecasts()
+    public async Task<IList<Forecast>> GetForecasts()
     {
         var forecasts = await _context
             .Forecasts
@@ -20,5 +20,13 @@ public sealed class ForecastRepository: IForecastRepository
             .ConfigureAwait(false);
 
         return forecasts;
+    }
+
+    public async Task CreateForecast(Forecast forecast)
+    {
+        await _context
+            .Forecasts
+            .AddAsync(forecast)
+            .ConfigureAwait(false);
     }
 }

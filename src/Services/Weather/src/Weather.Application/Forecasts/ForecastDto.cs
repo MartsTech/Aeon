@@ -2,7 +2,7 @@
 
 namespace Weather.Application.Forecasts;
 
-public sealed class ForecastDto
+public sealed record ForecastDto
 {
     public ForecastDto(IForecast forecast)
     {

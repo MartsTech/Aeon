@@ -1,20 +1,21 @@
 using BuildingBlocks.Authentication;
+using BuildingBlocks.MassTransit;
 using BuildingBlocks.Swagger;
 using Weather.Api.Extensions;
-using Microsoft.EntityFrameworkCore;
-using DbContext = Weather.Persistence.DbContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddSwagger();
-builder.Services.AddAuthentication(builder.Configuration);
-builder.Services.AddCustomDbContext(builder.Configuration);
-builder.Services.AddCustomMediatR();
+builder.Services.AddCustomAuthentication(builder.Configuration);
+builder.Services.AddCustomMassTransit(builder.Configuration);
+builder.Services.AddCustomSwagger();
+builder.Services.AddCustomDomain(builder.Configuration);
+builder.Services.AddCustomApplication();
+builder.Services.AddCustomPersistence();
 
 var app = builder.Build();
 
-app.UseSwagger(app.Environment);
+app.UseCustomSwagger();
 
 app.UseAuthentication();
 app.UseAuthorization();
