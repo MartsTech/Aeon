@@ -1,8 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks", "src\BuildingBlocks\BuildingBlocks.csproj", "{3DDD6EE6-1520-4C3F-950E-9FFFC93DE176}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingBlocks", "src\BuildingBlocks\BuildingBlocks.csproj", "{3DDD6EE6-1520-4C3F-950E-9FFFC93DE176}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "src\ApiGateway\src\ApiGateway.csproj", "{758F1D4B-4C00-4B42-8C7D-52D4429DFA6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "src\ApiGateway\src\ApiGateway.csproj", "{758F1D4B-4C00-4B42-8C7D-52D4429DFA6C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.Api", "src\Services\Weather\src\Weather.Api\Weather.Api.csproj", "{1DEFA1B4-E30C-4661-A220-257BF0BFA6B4}"
 EndProject
@@ -13,6 +16,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.Persistence", "src\Services\Weather\src\Weather.Persistence\Weather.Persistence.csproj", "{2A2F38BF-CD5B-4C88-A7F5-E245CD7F7583}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.Application", "src\Services\Weather\src\Weather.Application\Weather.Application.csproj", "{CD6C4982-BAD4-4B27-B992-242912553B69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Products", "src\Services\Products\src\Products.csproj", "{57DD3E69-E604-462D-B55B-88C7E12CD46E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
