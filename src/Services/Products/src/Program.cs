@@ -13,9 +13,8 @@ namespace Products
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwagger();
-            builder.Services.AddAuthentication(builder.Configuration);
+            builder.Services.AddCustomSwagger();
+            builder.Services.AddCustomAuthentication(builder.Configuration);
             builder.Services.AddDbContext<ProductsDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -23,7 +22,7 @@ namespace Products
 
             var app = builder.Build();
 
-            app.UseSwagger(app.Environment);
+            app.UseCustomSwagger();
 
             app.UseAuthentication();
             app.UseAuthorization();

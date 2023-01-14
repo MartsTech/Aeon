@@ -44,7 +44,7 @@
         {
           "Name": "Products API",
           "Version": "v1",
-          "Url": "http://products:5001/swagger/v1/swagger.json"
+          "Url": "http://products:5002/swagger/v1/swagger.json"
         }
       ]
     }

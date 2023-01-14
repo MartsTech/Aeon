@@ -16,7 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.Persistence", "src\Services\Weather\src\Weather.Persistence\Weather.Persistence.csproj", "{2A2F38BF-CD5B-4C88-A7F5-E245CD7F7583}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weather.Application", "src\Services\Weather\src\Weather.Application\Weather.Application.csproj", "{CD6C4982-BAD4-4B27-B992-242912553B69}"
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Products", "src\Services\Products\src\Products.csproj", "{57DD3E69-E604-462D-B55B-88C7E12CD46E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Products", "src\Services\Products\src\Products.csproj", "{BEF853D7-5D84-4295-9B73-CC15836EFE24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +49,10 @@ Global
 		{CD6C4982-BAD4-4B27-B992-242912553B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD6C4982-BAD4-4B27-B992-242912553B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD6C4982-BAD4-4B27-B992-242912553B69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEF853D7-5D84-4295-9B73-CC15836EFE24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEF853D7-5D84-4295-9B73-CC15836EFE24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEF853D7-5D84-4295-9B73-CC15836EFE24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEF853D7-5D84-4295-9B73-CC15836EFE24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1DEFA1B4-E30C-4661-A220-257BF0BFA6B4} = {368670B3-1B22-4417-A19C-FF10395AD2A5}

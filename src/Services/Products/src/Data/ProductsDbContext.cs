@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BuildingBlocks.EFCore;
+using Microsoft.EntityFrameworkCore;
 using Products.Data.Entities;
 
 namespace Products.Data
 {
-    public class ProductsDbContext : DbContext
+    public class ProductsDbContext : DbContextBase
     {
         public ProductsDbContext(DbContextOptions<ProductsDbContext> options) : base(options)
         {
