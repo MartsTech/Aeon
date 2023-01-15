@@ -1,7 +1,7 @@
 ﻿{
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/weather/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -10,7 +10,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/weather/{everything}",
-      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamHttpMethod": ["Get", "Post"],
       "SwaggerKey": "weather"
     },
     {
@@ -44,7 +44,7 @@
         {
           "Name": "Products API",
           "Version": "v1",
-          "Url": "http://products:5001/swagger/v1/swagger.json"
+          "Url": "http://products:5002/swagger/v1/swagger.json"
         }
       ]
     }

@@ -8,7 +8,7 @@ namespace BuildingBlocks.Swagger;
 
 public static class SwaggerExtensions
 {
-    public static IServiceCollection AddSwagger(this IServiceCollection services)
+    public static IServiceCollection AddCustomSwagger(this IServiceCollection services)
     {
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(options =>
@@ -42,13 +42,8 @@ public static class SwaggerExtensions
         return services;
     }
     
-    public static IApplicationBuilder UseSwagger(this IApplicationBuilder app, IWebHostEnvironment? environment)
+    public static IApplicationBuilder UseCustomSwagger(this IApplicationBuilder app)
     {
-        if (environment == null)
-        {
-            return app;
-        }
-        
         app.UseSwagger();
         app.UseSwaggerUI();
 
