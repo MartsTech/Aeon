@@ -38,13 +38,13 @@ namespace Catalog.Persistence.Products
             dbProduct.Title = product.Title;
             dbProduct.Price = product.Price;
             dbProduct.Description = product.Description;
-            dbProduct.Category = product.Category;
+            dbProduct.CategoryId = product.CategoryId;
             dbProduct.Discount = product.Discount;
             dbProduct.Quantity = product.Quantity;
             dbProduct.Image = product.Image;
 
             _context.Products.Update(dbProduct);
-            await _context.SaveChangesAsync().ConfigureAwait(false);
+            //await _context.SaveChangesAsync().ConfigureAwait(false);
 
             return true;
         }
@@ -58,7 +58,7 @@ namespace Catalog.Persistence.Products
             }
 
             _context.Products.Remove(product);
-            await _context.SaveChangesAsync().ConfigureAwait(false);
+            //await _context.SaveChangesAsync().ConfigureAwait(false);
 
             return true;
         }

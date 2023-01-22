@@ -1,6 +1,5 @@
 ﻿using Catalog.Application.Products;
 using Catalog.Domain.Categories;
-using Catalog.Domain.Products;
 
 namespace Catalog.Application.Categories
 {
