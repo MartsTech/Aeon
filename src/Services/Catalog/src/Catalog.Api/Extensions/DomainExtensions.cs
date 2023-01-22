@@ -1,4 +1,6 @@
-﻿using Catalog.Domain;
+﻿using BuildingBlocks.EFCore;
+using BuildingBlocks.Web;
+using Catalog.Domain;
 using Catalog.Domain.Categories;
 using Catalog.Domain.Products;
 using Catalog.Persistence;
@@ -14,8 +16,10 @@ public static class DomainExtensions
     {
         services.AddDbContext<CatalogDbContext>(options =>
         {
-            var connection = "Server=(localdb)\\MSSQLLocalDB;Database=ProductsDB;Trusted_Connection=True;MultipleActiveResultSets=true";
-            options.UseSqlServer(connection);
+            var mysql = configuration.GetOptions<MySQLOptions>("MySQLOptions");
+            var connection = $"Server={mysql.Host};Port={mysql.Port};User Id={mysql.User};Password={mysql.Password};Database={mysql.Database};";
+            options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 31)));
+
         });
         
         services.AddScoped<IProductRepository, ProductRepository>();
