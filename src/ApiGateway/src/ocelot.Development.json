@@ -14,7 +14,7 @@
       "SwaggerKey": "weather"
     },
     {
-      "DownstreamPathTemplate": "/api/products/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -22,9 +22,9 @@
           "Port": 5002
         }
       ],
-      "UpstreamPathTemplate": "/api/products/{everything}",
+      "UpstreamPathTemplate": "/api/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "SwaggerKey": "products"
+      "SwaggerKey": "catalog"
     }
   ],
   "SwaggerEndPoints": [
@@ -39,10 +39,10 @@
       ]
     },
     {
-      "Key": "products",
+      "Key": "catalog",
       "Config": [
         {
-          "Name": "Products API",
+          "Name": "Catalog API",
           "Version": "v1",
           "Url": "http://localhost:5002/swagger/v1/swagger.json"
         }
