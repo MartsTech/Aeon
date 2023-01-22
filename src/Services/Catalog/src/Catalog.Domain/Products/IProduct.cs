@@ -1,6 +1,4 @@
-﻿using Catalog.Domain.Categories;
-
-namespace Catalog.Domain.Products
+﻿namespace Catalog.Domain.Products
 {
     public interface IProduct
     {

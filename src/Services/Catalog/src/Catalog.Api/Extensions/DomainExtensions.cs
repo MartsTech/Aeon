@@ -1,6 +1,4 @@
-﻿using BuildingBlocks.EFCore;
-using BuildingBlocks.Web;
-using Catalog.Domain;
+﻿using Catalog.Domain;
 using Catalog.Domain.Categories;
 using Catalog.Domain.Products;
 using Catalog.Persistence;

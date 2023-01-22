@@ -1,7 +1,6 @@
 ﻿using BuildingBlocks.EFCore;
 using Catalog.Domain.Categories;
 using Catalog.Domain.Products;
-using Catalog.Persistence.Categories;
 using Catalog.Persistence.Products;
 using Microsoft.EntityFrameworkCore;
 

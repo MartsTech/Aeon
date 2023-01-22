@@ -45,7 +45,7 @@ namespace Catalog.Persistence.Categories
             category.Name = newName;
 
             _context.Categories.Update(category);
-            await _context.SaveChangesAsync().ConfigureAwait(false);
+            //await _context.SaveChangesAsync().ConfigureAwait(false);
 
             return true;
         }
@@ -59,7 +59,7 @@ namespace Catalog.Persistence.Categories
             }
 
             _context.Categories.Remove(category);
-            await _context.SaveChangesAsync().ConfigureAwait(false);
+            //await _context.SaveChangesAsync().ConfigureAwait(false);
 
             return true;
         }
