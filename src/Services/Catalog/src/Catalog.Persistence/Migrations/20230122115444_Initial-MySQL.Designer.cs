@@ -3,7 +3,6 @@ using System;
 using Catalog.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -12,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Catalog.Persistence.Migrations
 {
     [DbContext(typeof(CatalogDbContext))]
-    [Migration("20230121163407_Initial")]
-    partial class Initial
+    [Migration("20230122115444_Initial-MySQL")]
+    partial class InitialMySQL
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,20 +20,18 @@ namespace Catalog.Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.2")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Catalog.Domain.Categories.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(90)
-                        .HasColumnType("nvarchar(90)");
+                        .HasColumnType("varchar(90)");
 
                     b.HasKey("Id");
 
@@ -43,12 +40,12 @@ namespace Catalog.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cdd09831-7b35-4778-9e4b-fcbacb570d46"),
+                            Id = new Guid("1d0238af-4f54-4411-b6f3-248c69193e05"),
                             Name = "Fruits"
                         },
                         new
                         {
-                            Id = new Guid("456a79b0-f3db-413e-a850-84b1fbf44f98"),
+                            Id = new Guid("ea445d83-4def-4b12-8f18-f61638f2a9cb"),
                             Name = "Vegetables"
                         });
                 });
@@ -57,23 +54,23 @@ namespace Catalog.Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("CategoryId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Description")
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<decimal?>("Discount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -81,7 +78,7 @@ namespace Catalog.Persistence.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(90)
-                        .HasColumnType("nvarchar(90)");
+                        .HasColumnType("varchar(90)");
 
                     b.HasKey("Id");
 
@@ -92,8 +89,8 @@ namespace Catalog.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("584cae8d-89d6-48c9-ad33-89dc47190388"),
-                            CategoryId = new Guid("cdd09831-7b35-4778-9e4b-fcbacb570d46"),
+                            Id = new Guid("02ea6906-3464-44b0-8280-b5057671b575"),
+                            CategoryId = new Guid("1d0238af-4f54-4411-b6f3-248c69193e05"),
                             Description = "Orange fruit",
                             Discount = 0m,
                             Image = "",
@@ -103,8 +100,8 @@ namespace Catalog.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b3a22697-9f71-4b6a-9cae-667f415cbd6c"),
-                            CategoryId = new Guid("cdd09831-7b35-4778-9e4b-fcbacb570d46"),
+                            Id = new Guid("58e71a71-8f85-4c8d-bcac-3430e43e7413"),
+                            CategoryId = new Guid("1d0238af-4f54-4411-b6f3-248c69193e05"),
                             Description = "Red fruit",
                             Discount = 0m,
                             Image = "",
@@ -114,8 +111,8 @@ namespace Catalog.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("135b684e-8f74-4c9b-9177-e4ea50b68605"),
-                            CategoryId = new Guid("456a79b0-f3db-413e-a850-84b1fbf44f98"),
+                            Id = new Guid("65af12f2-82c9-45d4-8b27-d160f70a6ae2"),
+                            CategoryId = new Guid("ea445d83-4def-4b12-8f18-f61638f2a9cb"),
                             Description = "Green vegetable",
                             Discount = 0m,
                             Image = "",
@@ -125,8 +122,8 @@ namespace Catalog.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ca4ff4bb-f52f-4669-a4ff-a8c1d1101b7f"),
-                            CategoryId = new Guid("456a79b0-f3db-413e-a850-84b1fbf44f98"),
+                            Id = new Guid("9ee2fad3-5579-4e97-82e6-81d6e0afb702"),
+                            CategoryId = new Guid("ea445d83-4def-4b12-8f18-f61638f2a9cb"),
                             Description = "Red vegetable",
                             Discount = 0m,
                             Image = "",
