@@ -5,46 +5,23 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "weather",
+          "Host": "catalog",
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/api/weather/{everything}",
-      "UpstreamHttpMethod": ["Get", "Post"],
-      "SwaggerKey": "weather"
-    },
-    {
-      "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "catalog",
-          "Port": 5002
-        }
-      ],
       "UpstreamPathTemplate": "/api/catalog/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Put", "Post", "Delete" ],
+      "UpstreamHttpMethod": ["Get", "Put", "Post", "Delete"],
       "SwaggerKey": "catalog"
     }
   ],
   "SwaggerEndPoints": [
-    {
-      "Key": "weather",
-      "Config": [
-        {
-          "Name": "Weather API",
-          "Version": "v1",
-          "Url": "http://weather:5001/swagger/v1/swagger.json"
-        }
-      ]
-    },
     {
       "Key": "catalog",
       "Config": [
         {
           "Name": "Catalog API",
           "Version": "v1",
-          "Url": "http://catalog:5002/swagger/v1/swagger.json"
+          "Url": "http://catalog:5001/swagger/v1/swagger.json"
         }
       ]
     }

@@ -10,17 +10,17 @@ services:
     ports:
       - "80:80"
     links:
-      - weather
+      - catalog
     depends_on:
-      - weather
+      - catalog
     networks:
       - aeon
   #######################################################
-  #  Weather
+  #  Catalog
   #######################################################
-  weather:
-    hostname: weather
-    image: "martstech/aeon-weather"
+  catalog:
+    hostname: catalog
+    image: "martstech/aeon-catalog"
     mem_limit: 128m
     networks:
       - aeon

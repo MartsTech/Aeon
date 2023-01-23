@@ -1,14 +1,17 @@
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+ENV ASPNETCORE_URLS=http://+:5001
 WORKDIR /app
-EXPOSE 80
+EXPOSE 5001
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
+
 COPY ["src/Services/Catalog/src/Catalog.Api/Catalog.Api.csproj", "src/Services/Catalog/src/Catalog.Api/"]
-COPY ["src/BuildingBlocks/BuildingBlocks.csproj", "src/BuildingBlocks/"]
 COPY ["src/Services/Catalog/src/Catalog.Application/Catalog.Application.csproj", "src/Services/Catalog/src/Catalog.Application/"]
 COPY ["src/Services/Catalog/src/Catalog.Domain/Catalog.Domain.csproj", "src/Services/Catalog/src/Catalog.Domain/"]
 COPY ["src/Services/Catalog/src/Catalog.Persistence/Catalog.Persistence.csproj", "src/Services/Catalog/src/Catalog.Persistence/"]
+COPY ["src/BuildingBlocks/BuildingBlocks.csproj", "src/BuildingBlocks/"]
+
 RUN dotnet restore "src/Services/Catalog/src/Catalog.Api/Catalog.Api.csproj"
 COPY . .
 WORKDIR "/src/src/Services/Catalog/src/Catalog.Api"

@@ -12,21 +12,21 @@ services:
     ports:
       - "80:80"
     links:
-      - weather
+      - catalog
     depends_on:
-      - weather
+      - catalog
     networks:
       - aeon
 
   #######################################################
-  #  Weather
+  #  Catalog
   #######################################################
-  weather:
-    hostname: weather
+  catalog:
+    hostname: catalog
     restart: on-failure
     build:
       context: ./
-      dockerfile: src/Services/Weather/Dockerfile
+      dockerfile: src/Services/Catalog/Dockerfile
     depends_on:
       - rabbitmq
       - mysql
