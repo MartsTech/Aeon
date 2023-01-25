@@ -1,8 +1,8 @@
 import {pageTransition, pageZoom} from '@lib/utils/animations';
 import {motion} from 'framer-motion';
-import CartEmpty from './CartEmpty';
+import BookmarksEmpty from './BookmarksEmpty';
 
-const CartModule = () => {
+const BookmarksModule = () => {
   return (
     <motion.div
       initial="initial"
@@ -10,11 +10,11 @@ const CartModule = () => {
       exit="out"
       variants={pageZoom}
       transition={pageTransition}
-      className="py-12 px-6 sm:p-12 sm:pt-20">
-      <h4 className="mb-12 text-2xl font-semibold">Your Cart</h4>
-      <CartEmpty />
+      className="px-2 py-8">
+      <h4 className="mb-12 text-2xl font-semibold">Bookmarks</h4>
+      <BookmarksEmpty />
     </motion.div>
   );
 };
 
-export default CartModule;
+export default BookmarksModule;

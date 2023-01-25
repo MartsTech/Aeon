@@ -1,4 +1,4 @@
-import {pageSlide, pageTransition} from '@common/utils/animations';
+import {pageSlide, pageTransition} from '@lib/utils/animations';
 import {motion} from 'framer-motion';
 import CatalogCategories from './CatalogCategories';
 import CatalogProducts from './CatalogProducts';

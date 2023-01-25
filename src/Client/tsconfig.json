@@ -18,8 +18,7 @@
     "paths": {
       "@pages/*": ["./src/pages/*"],
       "@features/*": ["./src/features/*"],
-      "@lib/*": ["./src/lib/*"],
-      "@common/*": ["./src/common/*"]
+      "@lib/*": ["./src/lib/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

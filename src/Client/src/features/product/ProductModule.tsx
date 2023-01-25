@@ -1,8 +1,8 @@
-import {pageTransition, pageZoom} from '@common/utils/animations';
 import {ShoppingCartIcon} from '@heroicons/react/24/outline';
 import {BookmarkIcon, TagIcon} from '@heroicons/react/24/solid';
 import Button from '@lib/components/button/Button';
 import {useStoreSelector} from '@lib/store/store-hooks';
+import {pageTransition, pageZoom} from '@lib/utils/animations';
 import {motion} from 'framer-motion';
 import Image from 'next/image';
 import {productDetailsSelector} from './product-state';
