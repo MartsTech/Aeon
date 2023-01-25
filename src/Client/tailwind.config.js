@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
@@ -10,10 +12,22 @@ module.exports = {
         secondary: '#1a1a2c',
         accent: '##eaeaea',
       },
-      screens: {
-        '1xl': '1440px',
+      width: {
+        almost: 'calc(100% - 4rem)',
+      },
+      fontFamily: {
+        body: ['Nunito Sans', 'sans-serif'],
       },
     },
+    screens: {
+      xs: '550px',
+      semi: '880px',
+      '1xl': '1440px',
+      ...defaultTheme.screens,
+    },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide'),
+    require('@tailwindcss/line-clamp'),
+  ],
 };

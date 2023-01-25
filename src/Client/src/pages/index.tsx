@@ -1,3 +1,4 @@
+import CatalogModule from '@features/catalog/CatalogModule';
 import {categoriesApi} from '@features/categories/categories-api';
 import {productsApi} from '@features/products/products-api';
 import {api} from '@lib/api';
@@ -7,7 +8,7 @@ import {NextPageWithLayout} from '@lib/types/page';
 import {ReactElement} from 'react';
 
 const Home: NextPageWithLayout = () => {
-  return null;
+  return <CatalogModule />;
 };
 
 export default Home;
