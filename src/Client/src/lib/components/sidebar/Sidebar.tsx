@@ -18,10 +18,10 @@ interface Props {
 const Sidebar: FC<Props> = ({authenticated, active, toggleSidebar}) => {
   return (
     <section
-      className={`fixed top-0 left-0 z-50 flex h-screen w-20
-      -translate-x-20 transform flex-col items-center justify-between
-      bg-white py-6 shadow-lg transition-all duration-200 sm:w-24
-      sm:translate-x-0 sm:py-12 ${active && 'translate-x-0'}`}>
+      className={`fixed top-0 left-0 z-50 flex h-screen max-h-screen
+      w-20 -translate-x-20 transform flex-col items-center
+      justify-between bg-white py-6 shadow-lg transition-all duration-200
+      sm:w-24 sm:translate-x-0 sm:py-12 ${active && 'translate-x-0'}`}>
       <SidebarLogo active={active} toggleSidebar={toggleSidebar} />
       <div className="flex flex-col">
         <SidebarMenuItem

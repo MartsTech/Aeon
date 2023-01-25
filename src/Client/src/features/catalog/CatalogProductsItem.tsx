@@ -1,7 +1,7 @@
-import {pageTransition, pageZoom} from '@common/utils/animations';
 import type {ProductsListModal} from '@features/products/products-types';
 import {StarIcon} from '@heroicons/react/24/solid';
 import styles from '@lib/styles/product.module.css';
+import {pageTransition, pageZoom} from '@lib/utils/animations';
 import {motion} from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
