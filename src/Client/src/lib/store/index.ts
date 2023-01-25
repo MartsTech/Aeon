@@ -1,4 +1,5 @@
 import {appReducer} from '@features/app/app-state';
+import {authPersistedReducer} from '@features/auth/auth-state';
 import {cateogoriesMiddleware} from '@features/categories/categories-middleware';
 import {categoriesReducer} from '@features/categories/categories-state';
 import {productsMiddleware} from '@features/products/products-middleware';
@@ -22,6 +23,7 @@ if (process.env.NODE_ENV === `development`) {
 
 export const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
+  auth: authPersistedReducer,
   app: appReducer,
   products: productsReducer,
   categories: categoriesReducer,

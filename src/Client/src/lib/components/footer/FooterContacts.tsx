@@ -19,7 +19,7 @@ const FooterContacts: FC = () => {
           className="border-b border-dotted border-primary
           text-primary transition-all duration-200
           hover:border-red-600 hover:text-red-600">
-          {appConstants.APP_NAME}
+          {appConstants.APP_TEAM_NAME}
         </a>
       </span>
     </div>

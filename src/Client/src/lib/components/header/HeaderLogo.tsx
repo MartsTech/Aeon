@@ -4,7 +4,7 @@ import {FC} from 'react';
 
 const HeaderLogo: FC = () => {
   return (
-    <div className="flex cursor-default space-x-2">
+    <div className="hidden cursor-default space-x-2 sm:flex">
       <Image
         loading="lazy"
         src="/icons/icon-512x512.png"
