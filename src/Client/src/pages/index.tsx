@@ -4,7 +4,7 @@ import {api} from '@lib/api';
 import DefaultLayout from '@lib/layouts/DefaultLayout';
 import {storeWrapper} from '@lib/store';
 import {NextPageWithLayout} from '@lib/types/page';
-import type {ReactElement} from 'react';
+import {ReactElement} from 'react';
 
 const Home: NextPageWithLayout = () => {
   return null;

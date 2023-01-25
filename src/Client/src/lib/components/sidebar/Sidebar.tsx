@@ -10,11 +10,12 @@ import SidebarLogo from './SidebarLogo';
 import SidebarMenuItem from './SidebarMenuItem';
 
 interface Props {
+  authenticated: boolean;
   active: boolean;
   toggleSidebar: () => void;
 }
 
-const Sidebar: FC<Props> = ({active, toggleSidebar}) => {
+const Sidebar: FC<Props> = ({authenticated, active, toggleSidebar}) => {
   return (
     <section
       className={`fixed top-0 left-0 z-50 flex h-screen w-20
@@ -52,7 +53,7 @@ const Sidebar: FC<Props> = ({active, toggleSidebar}) => {
       </div>
       <SidebarMenuItem
         Icon={UserCircleIcon}
-        paths={['/login']}
+        paths={!authenticated ? ['/login'] : ['/logout']}
         sidebarActive={active}
         toggleSidebar={toggleSidebar}
       />

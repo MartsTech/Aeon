@@ -11,7 +11,7 @@ const HeaderBackButton: FC = () => {
   return (
     <button
       className="relative mr-4 rounded-lg bg-white
-          py-[0.33rem] px-[0.66rem] text-sm shadow-md sm:mr-auto"
+      py-[0.33rem] px-[0.66rem] text-sm shadow-md sm:mr-auto"
       onClick={() => router.back()}>
       Back
     </button>

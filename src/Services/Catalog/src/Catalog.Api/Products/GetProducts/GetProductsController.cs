@@ -1,9 +1,11 @@
 ﻿using BuildingBlocks.Web;
 using Catalog.Application.Products.GetProducts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Api.Products.GetProducts
 {
+    [AllowAnonymous]
     public class GetProductsController : UserController
     {
         [HttpGet]

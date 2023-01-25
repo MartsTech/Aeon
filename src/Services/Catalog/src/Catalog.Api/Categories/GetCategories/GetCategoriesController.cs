@@ -1,9 +1,11 @@
 ﻿using BuildingBlocks.Web;
 using Catalog.Application.Categories.GetCategories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Api.Categories.GetCategories
 {
+    [AllowAnonymous]
     public class GetCategoriesController : UserController
     {
         [HttpGet]
