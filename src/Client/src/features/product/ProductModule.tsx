@@ -21,21 +21,21 @@ const ProductModule = () => {
       exit="out"
       variants={pageZoom}
       transition={pageTransition}
-      className="p-12 pt-20">
-      <div className="flex">
+      className="p-6 pt-20 md:p-12">
+      <div className="flex flex-col md:flex-row">
         <motion.div
           layoutId={product?.id}
-          className="relative overflow-hidden rounded-2xl bg-white
-            pb-[50%] shadow-lg"
+          className="relative overflow-hidden rounded-2xl bg-white 
+          pb-[50%] shadow-lg"
           style={{flex: '0 0 calc(100% / 2.5)'}}>
           <Image
             fill
-            src={product?.image || '/images/product.jpg'}
+            src={product?.image || '/images/default.jpg'}
             alt={product?.title || 'Product'}
             className="absolute object-contain p-4"
           />
         </motion.div>
-        <div className="flex flex-col p-12 pr-4">
+        <div className="flex flex-col p-6 md:p-12 md:pr-4">
           <h5 className="text-xl font-bold line-clamp-3">{product?.title}</h5>
           <p className="relative my-4 text-justify text-base leading-7">
             {product?.description}

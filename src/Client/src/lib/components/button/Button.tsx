@@ -31,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
           : variant == 'outlined'
           ? '!border-2 !border-solid !border-gray-300 bg-none font-medium text-gray-400'
           : variant === 'red'
-          ? 'ml-2 h-6 rounded-md border-none bg-red-600 text-white'
+          ? 'ml-2 h-8 rounded-md border-none bg-red-600 text-white'
           : 'none'
       }`}
       style={{

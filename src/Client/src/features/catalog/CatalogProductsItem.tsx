@@ -37,7 +37,7 @@ const CatalogProductsItem: FC<Props> = ({item}) => {
             </span>
           )}
           <Image
-            src={item.image || '/images/product.jpg'}
+            src={item.image || '/images/default.jpg'}
             fill={true}
             alt={item.title}
             className="object-contain"

@@ -38,3 +38,7 @@ export const authPersistedReducer = persistReducer(
 
 export const authSignedSelector = (state: RootState): boolean =>
   state.auth.session !== null;
+
+export const authUserSelecter = (
+  state: RootState,
+): AuthSession['user'] | undefined => state.auth.session?.user;
