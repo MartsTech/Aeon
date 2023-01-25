@@ -20,23 +20,24 @@ const DefaultLayout: FC<Props> = ({children}) => {
   }, []);
 
   return (
-    <div className="relative flex min-h-screen w-screen flex-col bg-background">
+    <div
+      className="flex min-h-screen w-screen flex-col 
+      bg-background">
       <Sidebar
         authenticated={signed}
         active={sidebarActive}
         toggleSidebar={toggleSidebar}
       />
-      <div
-        className="mx-auto flex w-full max-w-screen-1xl flex-grow
-        flex-col sm:pl-24">
-        <AnimatePresence mode="wait">
-          <AnimateSharedLayout>
-            <Header />
-            {children}
-          </AnimateSharedLayout>
-        </AnimatePresence>
+      <div className="sticky top-0 z-40 sm:pl-24">
+        <Header />
       </div>
-
+      <main
+        className="mx-auto flex w-full max-w-screen-1xl flex-1
+        flex-grow flex-col sm:pl-24">
+        <AnimatePresence mode="wait">
+          <AnimateSharedLayout>{children}</AnimateSharedLayout>
+        </AnimatePresence>
+      </main>
       <Footer />
     </div>
   );

@@ -53,7 +53,7 @@ const Sidebar: FC<Props> = ({authenticated, active, toggleSidebar}) => {
       </div>
       <SidebarMenuItem
         Icon={UserCircleIcon}
-        paths={!authenticated ? ['/login'] : ['/logout']}
+        paths={!authenticated ? ['/login'] : ['/account']}
         sidebarActive={active}
         toggleSidebar={toggleSidebar}
       />
