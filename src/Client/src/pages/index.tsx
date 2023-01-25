@@ -5,6 +5,7 @@ import {api} from '@lib/api';
 import DefaultLayout from '@lib/layouts/DefaultLayout';
 import {storeWrapper} from '@lib/store';
 import {NextPageWithLayout} from '@lib/types/page';
+import {GetServerSideProps} from 'next';
 import {ReactElement} from 'react';
 
 const Home: NextPageWithLayout = () => {
@@ -17,15 +18,16 @@ Home.getLayout = (page: ReactElement) => {
   return <DefaultLayout>{page}</DefaultLayout>;
 };
 
-export const getStaticProps = storeWrapper.getStaticProps(store => {
-  return async () => {
-    store.dispatch(productsApi.endpoints.getProductsList.initiate());
-    store.dispatch(categoriesApi.endpoints.getCategoriesList.initiate());
+export const getServerSideProps: GetServerSideProps =
+  storeWrapper.getServerSideProps(store => {
+    return async () => {
+      store.dispatch(productsApi.endpoints.getProductsList.initiate());
+      store.dispatch(categoriesApi.endpoints.getCategoriesList.initiate());
 
-    await Promise.all(store.dispatch(api.util.getRunningQueriesThunk()));
+      await Promise.all(store.dispatch(api.util.getRunningQueriesThunk()));
 
-    return {
-      props: {},
+      return {
+        props: {},
+      };
     };
-  };
-});
+  });

@@ -1,9 +1,11 @@
 import {appReducer} from '@features/app/app-state';
 import {authPersistedReducer} from '@features/auth/auth-state';
 import {cateogoriesMiddleware} from '@features/categories/categories-middleware';
-import {categoriesReducer} from '@features/categories/categories-state';
+import {categoriesPersistedReducer} from '@features/categories/categories-state';
+import {productMiddleware} from '@features/product/product-middleware';
+import {productPersistedReducer} from '@features/product/product-state';
 import {productsMiddleware} from '@features/products/products-middleware';
-import {productsReducer} from '@features/products/products-state';
+import {productsPersistedReducer} from '@features/products/products-state';
 import {api} from '@lib/api';
 import {combineReducers, configureStore, Middleware} from '@reduxjs/toolkit';
 import {createWrapper} from 'next-redux-wrapper';
@@ -23,13 +25,14 @@ if (process.env.NODE_ENV === `development`) {
 
 export const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
-  auth: authPersistedReducer,
   app: appReducer,
-  products: productsReducer,
-  categories: categoriesReducer,
+  auth: authPersistedReducer,
+  categories: categoriesPersistedReducer,
+  products: productsPersistedReducer,
+  product: productPersistedReducer,
 });
 
-const makeStore = () =>
+export const makeStore = () =>
   configureStore({
     reducer: rootReducer,
     middleware: getDefaultMiddleware =>
@@ -39,8 +42,9 @@ const makeStore = () =>
         },
       }).concat(
         api.middleware,
-        productsMiddleware,
         cateogoriesMiddleware,
+        productsMiddleware,
+        productMiddleware,
         ...middlewares,
       ),
   });

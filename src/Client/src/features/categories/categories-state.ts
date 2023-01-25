@@ -1,5 +1,7 @@
 import type {RootState} from '@lib/store/store-types';
 import {createAction, createReducer} from '@reduxjs/toolkit';
+import {persistReducer} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import {CategoriesListModal} from './categories-types';
 
 export interface CategoriesState {
@@ -26,7 +28,7 @@ export const categoriesSelected = createAction<{
   id: CategoriesState['selectedId'];
 }>('categories/selected');
 
-export const categoriesReducer = createReducer(initialState, builder => {
+const categoriesReducer = createReducer(initialState, builder => {
   builder.addCase(categoriesHydrated, (state, action) => {
     state.hydrated = true;
     state.list = action.payload.list;
@@ -39,6 +41,15 @@ export const categoriesReducer = createReducer(initialState, builder => {
     state.selectedId = action.payload.id;
   });
 });
+
+export const categoriesPersistedReducer = persistReducer(
+  {
+    key: 'categories',
+    storage: storage,
+    whitelist: ['list'],
+  },
+  categoriesReducer,
+);
 
 export const categoriesListSelector = (
   state: RootState,
