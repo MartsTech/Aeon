@@ -1,6 +1,8 @@
 import type {RootState} from '@lib/store/store-types';
 import {createAction, createReducer} from '@reduxjs/toolkit';
 import type {ProductsListModal} from './products-types';
+import {persistReducer} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 export interface ProductsState {
   hydrated: boolean;
@@ -20,7 +22,7 @@ export const productsLoaded = createAction<{list: ProductsState['list']}>(
   'products/loaded',
 );
 
-export const productsReducer = createReducer(initialState, builder => {
+const productsReducer = createReducer(initialState, builder => {
   builder.addCase(productsHydrated, (state, action) => {
     state.hydrated = true;
     state.list = action.payload.list;
@@ -29,6 +31,15 @@ export const productsReducer = createReducer(initialState, builder => {
     state.list = action.payload.list;
   });
 });
+
+export const productsPersistedReducer = persistReducer(
+  {
+    key: 'products',
+    storage: storage,
+    whitelist: ['list'],
+  },
+  productsReducer,
+);
 
 export const productsListSelector = (state: RootState): ProductsState['list'] =>
   state.products.list;
