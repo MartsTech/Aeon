@@ -5,11 +5,13 @@ import {CategoriesListModal} from './categories-types';
 export interface CategoriesState {
   hydrated: boolean;
   list: CategoriesListModal[];
+  selectedId: CategoriesListModal['id'] | null;
 }
 
 const initialState: CategoriesState = {
   hydrated: false,
   list: [],
+  selectedId: null,
 };
 
 export const categoriesHydrated = createAction<{list: CategoriesState['list']}>(
@@ -20,16 +22,36 @@ export const categoriesLoaded = createAction<{list: CategoriesState['list']}>(
   'categories/loaded',
 );
 
+export const categoriesSelected = createAction<{
+  id: CategoriesState['selectedId'];
+}>('categories/selected');
+
 export const categoriesReducer = createReducer(initialState, builder => {
   builder.addCase(categoriesHydrated, (state, action) => {
     state.hydrated = true;
     state.list = action.payload.list;
+    state.selectedId = null;
   });
   builder.addCase(categoriesLoaded, (state, action) => {
     state.list = action.payload.list;
+  });
+  builder.addCase(categoriesSelected, (state, action) => {
+    state.selectedId = action.payload.id;
   });
 });
 
 export const categoriesListSelector = (
   state: RootState,
 ): CategoriesState['list'] => state.categories.list;
+
+export const categoriesSelectedIdSelector = (
+  state: RootState,
+): CategoriesState['selectedId'] => state.categories.selectedId;
+
+export const categoriesSelectedSelector = (
+  state: RootState,
+): CategoriesListModal | undefined => {
+  const selectedId = categoriesSelectedIdSelector(state);
+  const list = categoriesListSelector(state);
+  return list.find(item => item.id === selectedId);
+};
