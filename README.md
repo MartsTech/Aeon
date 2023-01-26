@@ -22,7 +22,7 @@
 
 [Swagger]()
 
-[RabbitMQ](https://b-bac56f6c-1745-4f19-a220-a24ad1ffd44b.mq.us-east-1.amazonaws.com/)
+[RabbitMQ]()
 
 ---
 
