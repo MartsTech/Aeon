@@ -17,7 +17,7 @@ public static class DomainExtensions
         services.AddDbContext<CatalogDbContext>(options =>
         {
             var mysql = configuration.GetOptions<MySQLOptions>("MySQLOptions");
-            var connection = $"Server={mysql.Host};Port={mysql.Port};User Id={mysql.User};Password={mysql.Password};Database={mysql.Database};";
+            var connection = $"Server={mysql.Host}; Port={mysql.Port}; Database={mysql.Database}; Uid={mysql.User}; Pwd={mysql.Password};";
             options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 31)), builder =>
             {
                 builder.EnableRetryOnFailure();
