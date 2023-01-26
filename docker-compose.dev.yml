@@ -12,22 +12,63 @@ services:
     ports:
       - "80:80"
     links:
-      - weather
+      - catalog
     depends_on:
-      - weather
+      - catalog
     networks:
       - aeon
+
   #######################################################
-  #  Weather
+  #  Catalog
   #######################################################
-  weather:
-    hostname: weather
+  catalog:
+    hostname: catalog
+    restart: on-failure
     build:
       context: ./
-      dockerfile: src/Services/Weather/Dockerfile
+      dockerfile: src/Services/Catalog/Dockerfile
+    depends_on:
+      - rabbitmq
+      - mysql
+    networks:
+      - aeon
+
+  #######################################################
+  #  Rabbitmq
+  #######################################################
+  rabbitmq:
+    hostname: rabbitmq
+    restart: on-failure
+    image: masstransit/rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - aeon
+
+  #######################################################
+  #  MySQL
+  #######################################################
+  mysql:
+    hostname: mysql
+    restart: on-failure
+    image: mysql:8.0.31
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_PASSWORD=password
+      - MYSQL_USER=user
+      - MYSQL_DATABASE=aeon
+      - MYSQL_PORT=3306
+    volumes:
+      - database:/var/lib/mysql
     networks:
       - aeon
 
 networks:
   aeon:
     name: aeon
+
+volumes:
+  database:

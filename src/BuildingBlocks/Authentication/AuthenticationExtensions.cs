@@ -7,7 +7,7 @@ namespace BuildingBlocks.Authentication;
 
 public static class AuthenticationExtensions
 {
-    public static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAdB2C"));
