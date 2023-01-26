@@ -18,7 +18,10 @@ public static class DomainExtensions
         {
             var mysql = configuration.GetOptions<MySQLOptions>("MySQLOptions");
             var connection = $"Server={mysql.Host};Port={mysql.Port};User Id={mysql.User};Password={mysql.Password};Database={mysql.Database};";
-            options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 31)));
+            options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 31)), builder =>
+            {
+                builder.EnableRetryOnFailure();
+            });
 
         });
         
