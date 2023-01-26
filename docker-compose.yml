@@ -6,6 +6,7 @@ services:
   gateway:
     hostname: gateway
     image: "martstech/aeon-gateway"
+    restart: on-failure
     mem_limit: 128m
     ports:
       - "80:80"
@@ -21,6 +22,7 @@ services:
   catalog:
     hostname: catalog
     image: "martstech/aeon-catalog"
+    restart: on-failure
     mem_limit: 128m
     networks:
       - aeon
