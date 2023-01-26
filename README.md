@@ -1,7 +1,5 @@
 <h1 align="center">Aeon</h1>
 
-<h4 align="center">Team Aeon 2023</h4>
-
 <p align="center">
   <a href="#acknowledgements">Acknowledgements</a> •
   <a href="#links">Links</a> •
@@ -30,6 +28,6 @@
 
 ## License
 
-> You can check out the full license [here](https://github.com/MartsTech/amazon-clone/blob/main/LICENSE)
+> You can check out the full license [here](https://github.com/MartsTech/Aeon/blob/main/LICENSE)
 
 This project is licensed under the terms of the **MIT** license
