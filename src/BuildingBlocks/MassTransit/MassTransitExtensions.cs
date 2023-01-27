@@ -25,32 +25,16 @@ public static class MassTransitExtensions
             
             var rabbitMqOptions = configuration.GetOptions<RabbitMqOptions>("RabbitMqOptions");
             
-            if (rabbitMqOptions.Transport == "RabbitMQ")
+            x.UsingRabbitMq((ctx, cfg) =>
             {
-                x.UsingRabbitMq((ctx, cfg) =>
+                cfg.Host(new Uri($"amqps://{rabbitMqOptions.HostName}:{rabbitMqOptions.Port}"), h =>
                 {
-                    cfg.Host(rabbitMqOptions?.HostName ?? "rabbitmq", rabbitMqOptions?.Port ?? 5672, "/", h =>
-                    {
-                        h.Username(rabbitMqOptions?.UserName);
-                        h.Password(rabbitMqOptions?.Password);
-                    });
-                
-                    cfg.ConfigureEndpoints(ctx);
+                    h.Username(rabbitMqOptions?.UserName);
+                    h.Password(rabbitMqOptions?.Password);
                 });
-            }
-            else if (rabbitMqOptions.Transport == "AmazonMQ")
-            {
-                x.UsingRabbitMq((ctx, cfg) =>
-                {
-                    cfg.Host(new Uri($"amqps://{rabbitMqOptions.HostName}:{rabbitMqOptions.Port}"), h =>
-                    {
-                        h.Username(rabbitMqOptions?.UserName);
-                        h.Password(rabbitMqOptions?.Password);
-                    });
                 
-                    cfg.ConfigureEndpoints(ctx);
-                });
-            }
+                cfg.ConfigureEndpoints(ctx);
+            });
         });
         
         services.AddOptions<MassTransitHostOptions>()
