@@ -23,18 +23,20 @@ public static class MassTransitExtensions
             x.AddSagas(entryAssembly);
             x.AddActivities(entryAssembly);
             
-            var rabbitMqOptions = configuration.GetOptions<RabbitMqOptions>("RabbitMqOptions");
+            // var rabbitMqOptions = configuration.GetOptions<RabbitMqOptions>("RabbitMqOptions");
             
-            x.UsingRabbitMq((ctx, cfg) =>
-            {
-                cfg.Host(new Uri($"amqps://{rabbitMqOptions.HostName}:{rabbitMqOptions.Port}"), h =>
-                {
-                    h.Username(rabbitMqOptions?.UserName);
-                    h.Password(rabbitMqOptions?.Password);
-                });
-                
-                cfg.ConfigureEndpoints(ctx);
-            });
+            // x.UsingRabbitMq((ctx, cfg) =>
+            // {
+            //     cfg.Host(new Uri($"amqps://{rabbitMqOptions.HostName}:{rabbitMqOptions.Port}"), h =>
+            //     {
+            //             h.Username(rabbitMqOptions?.UserName);
+            //             h.Password(rabbitMqOptions?.Password);
+            //         });
+            //     
+            //         cfg.ConfigureEndpoints(ctx);
+            //     });
+            
+            x.UsingInMemory();
         });
         
         services.AddOptions<MassTransitHostOptions>()
