@@ -22,21 +22,36 @@ public static class MassTransitExtensions
             x.AddSagaStateMachines(entryAssembly);
             x.AddSagas(entryAssembly);
             x.AddActivities(entryAssembly);
-
-            x.UsingRabbitMq((ctx, cfg) =>
+            
+            var rabbitMqOptions = configuration.GetOptions<RabbitMqOptions>("RabbitMqOptions");
+            
+            if (rabbitMqOptions.Transport == "RabbitMq")
             {
-                var rabbitMqOptions = configuration.GetOptions<RabbitMqOptions>("RabbitMqOptions");
-                
-                Console.WriteLine(rabbitMqOptions.HostName);
-                
-                cfg.Host(rabbitMqOptions?.HostName ?? "rabbitmq", rabbitMqOptions?.Port ?? 5672, "/", h =>
+                x.UsingRabbitMq((ctx, cfg) =>
                 {
-                    h.Username(rabbitMqOptions?.UserName);
-                    h.Password(rabbitMqOptions?.Password);
-                });
+                    cfg.Host(rabbitMqOptions?.HostName ?? "rabbitmq", rabbitMqOptions?.Port ?? 5672, "/", h =>
+                    {
+                        h.Username(rabbitMqOptions?.UserName);
+                        h.Password(rabbitMqOptions?.Password);
+                    });
                 
-                cfg.ConfigureEndpoints(ctx);
-            });
+                    cfg.ConfigureEndpoints(ctx);
+                });
+            }
+            else if (rabbitMqOptions.Transport == "ActiveMq")
+            {
+                x.UsingActiveMq((ctx, cfg) =>
+                {
+                    cfg.Host(rabbitMqOptions.HostName, rabbitMqOptions?.Port ?? 5672, h =>
+                    {
+                        h.UseSsl();
+                        h.Username(rabbitMqOptions?.UserName);
+                        h.Password(rabbitMqOptions?.Password);
+                    });
+                
+                    cfg.ConfigureEndpoints(ctx);
+                });
+            }
         });
         
         services.AddOptions<MassTransitHostOptions>()
