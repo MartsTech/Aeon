@@ -16,8 +16,7 @@ public static class CustomCorsExtensions
                 policy
                     .AllowAnyMethod()
                     .AllowAnyHeader()
-                    .AllowCredentials()
-                    .WithOrigins("https://aeon.martstech.com");
+                    .AllowAnyOrigin();
             });
         });
 
