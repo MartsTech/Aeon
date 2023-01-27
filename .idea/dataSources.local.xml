@@ -15,5 +15,11 @@
         </introspection-scope>
       </schema-mapping>
     </data-source>
+    <data-source name="awseb-e-y3qaxunim4-stack-awsebrdsdatabase-esvi6tetdvud@c5ntgar5besi.us-east-1.rds.amazonaws.com" uuid="e1571e47-6440-42c9-b58f-2f0034eb8dbd">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>admin</user-name>
+      <schema-mapping />
+    </data-source>
   </component>
 </project>

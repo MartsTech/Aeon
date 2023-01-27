@@ -1,0 +1,26 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "gateway",
+      "image": "martstech/aeon-gateway",
+      "hostname": "gateway",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["catalog"],
+      "memory": 128
+    },
+    {
+      "name": "catalog",
+      "image": "martstech/aeon-catalog",
+      "hostname": "catalog",
+      "essential": false,
+      "memory": 128
+    }
+  ]
+}
