@@ -1,4 +1,3 @@
-using BuildingBlocks.Web;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -18,7 +17,6 @@ new WebHostBuilder()
         services.AddOcelot();
         services.AddMvc();
         services.AddSwaggerForOcelot(context.Configuration);
-        services.AddCustomCors();
     })
     .ConfigureLogging((hostingContext, logging) =>
     {
@@ -29,7 +27,6 @@ new WebHostBuilder()
     {
         app.UseSwaggerForOcelotUI();
         app.UseOcelot().Wait();
-        app.UseCustomCors();
     })
     .Build()
     .Run();
