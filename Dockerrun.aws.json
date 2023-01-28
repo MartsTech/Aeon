@@ -19,7 +19,7 @@
       "name": "catalog",
       "image": "martstech/aeon-catalog",
       "hostname": "catalog",
-      "essential": true,
+      "essential": false,
       "memory": 128
     }
   ]
