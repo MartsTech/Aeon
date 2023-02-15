@@ -19,13 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.Persistence", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bookmarks", "Bookmarks", "{B8A9F987-1DB7-43B9-A6B7-8BA27ADB7D45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Domain", "src\Services\Bookmarks\Bookmarks.Domain\Bookmarks.Domain.csproj", "{57F74BDE-0316-4EAF-A6A2-8EC22AF5FF69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Domain", "src\Services\Bookmarks\src\Bookmarks.Domain\Bookmarks.Domain.csproj", "{57F74BDE-0316-4EAF-A6A2-8EC22AF5FF69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Application", "src\Services\Bookmarks\Bookmarks.Application\Bookmarks.Application.csproj", "{9B3AAFA5-8D6B-4C16-BC25-24F7F6D55756}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Application", "src\Services\Bookmarks\src\Bookmarks.Application\Bookmarks.Application.csproj", "{9B3AAFA5-8D6B-4C16-BC25-24F7F6D55756}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Persistence", "src\Services\Bookmarks\Bookmarks.Persistence\Bookmarks.Persistence.csproj", "{44E1B709-204E-40FB-B21A-5C015C25DD1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Persistence", "src\Services\Bookmarks\src\Bookmarks.Persistence\Bookmarks.Persistence.csproj", "{44E1B709-204E-40FB-B21A-5C015C25DD1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Api", "src\Services\Bookmarks\Bookmarks.Api\Bookmarks.Api.csproj", "{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Api", "src\Services\Bookmarks\src\Bookmarks.Api\Bookmarks.Api.csproj", "{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
