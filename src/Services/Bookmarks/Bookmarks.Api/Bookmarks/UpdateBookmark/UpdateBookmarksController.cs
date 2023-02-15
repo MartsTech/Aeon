@@ -1,5 +1,4 @@
-﻿using Bookmarks.Application.Bookmarks;
-using Bookmarks.Application.Bookmarks.UpdateBookmark;
+﻿using Bookmarks.Application.Bookmarks.UpdateBookmark;
 using BuildingBlocks.Core;
 using BuildingBlocks.MassTransit.Contracts;
 using BuildingBlocks.Web;

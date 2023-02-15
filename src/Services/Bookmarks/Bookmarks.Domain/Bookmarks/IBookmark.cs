@@ -1,6 +1,4 @@
-﻿using Bookmarks.Domain.Wishlists;
-
-namespace Bookmarks.Domain.Bookmarks
+﻿namespace Bookmarks.Domain.Bookmarks
 {
     public interface IBookmark
     {

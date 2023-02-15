@@ -1,11 +1,6 @@
-﻿using BuildingBlocks.Core;
+﻿using Bookmarks.Domain.Wishlists;
+using BuildingBlocks.Core;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bookmarks.Domain.Wishlists;
 
 namespace Bookmarks.Application.Wishlists.GetList
 {
@@ -17,6 +12,7 @@ namespace Bookmarks.Application.Wishlists.GetList
             {
                 IncludeBookmarks = includeBookmarks;
             }
+
             public bool IncludeBookmarks { get; }
         }
 

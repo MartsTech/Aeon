@@ -21,7 +21,8 @@ namespace Bookmarks.Persistence.Wishlists
 
         public async Task<Wishlist?> GetListById(Guid id)
         {
-            return await _dbContext.Wishlists.Include(l => l.Bookmarks).FirstOrDefaultAsync(l => l.Id == id).ConfigureAwait(false);
+            return await _dbContext.Wishlists.Include(l => l.Bookmarks).FirstOrDefaultAsync(l => l.Id == id)
+                .ConfigureAwait(false);
         }
 
         public async Task CreateNewList(Wishlist wishlist)

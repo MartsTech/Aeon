@@ -1,6 +1,5 @@
 ﻿using Bookmarks.Application.Wishlists.GetList;
 using BuildingBlocks.Web;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bookmarks.Api.Wishlists.GetList

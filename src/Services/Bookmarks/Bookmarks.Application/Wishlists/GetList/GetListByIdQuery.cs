@@ -1,6 +1,4 @@
-﻿using Bookmarks.Application.Bookmarks;
-using Bookmarks.Domain.Bookmarks;
-using Bookmarks.Domain.Wishlists;
+﻿using Bookmarks.Domain.Wishlists;
 using BuildingBlocks.Core;
 using MediatR;
 

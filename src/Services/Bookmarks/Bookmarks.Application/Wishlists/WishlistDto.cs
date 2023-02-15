@@ -1,11 +1,5 @@
-﻿using Bookmarks.Domain.Wishlists;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bookmarks.Application.Bookmarks;
-using Bookmarks.Domain.Bookmarks;
+﻿using Bookmarks.Application.Bookmarks;
+using Bookmarks.Domain.Wishlists;
 
 namespace Bookmarks.Application.Wishlists
 {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bookmarks.Domain.Bookmarks;
-using Bookmarks.Domain.Wishlists;
+﻿using Bookmarks.Domain.Bookmarks;
 
 namespace Bookmarks.Application.Bookmarks
 {

@@ -36,7 +36,8 @@ public sealed class AddBookmarkCommand
         private readonly IWishlistRepository _wishlistRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public Handler(IEntityFactory entityFactory, IBookmarkRepository bookmarkRepository, IWishlistRepository wishlistRepository, IUnitOfWork unitOfWork)
+        public Handler(IEntityFactory entityFactory, IBookmarkRepository bookmarkRepository,
+            IWishlistRepository wishlistRepository, IUnitOfWork unitOfWork)
         {
             _entityFactory = entityFactory;
             _bookmarkRepository = bookmarkRepository;
@@ -59,7 +60,8 @@ public sealed class AddBookmarkCommand
                 return Result<BookmarkDto>.Failure($"List {request.Input.ListId} not found");
             }
 
-            Bookmark bookmark = _entityFactory.NewBookmark(request.Input.ProductId, request.Input.Quantity, request.Input.ListId);
+            Bookmark bookmark =
+                _entityFactory.NewBookmark(request.Input.ProductId, request.Input.Quantity, request.Input.ListId);
 
             bool success = await CreateBookmark(bookmark, cancellationToken)
                 .ConfigureAwait(false);
@@ -82,5 +84,4 @@ public sealed class AddBookmarkCommand
             return changes > 0;
         }
     }
-
 }

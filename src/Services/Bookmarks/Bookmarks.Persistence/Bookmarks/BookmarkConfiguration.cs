@@ -27,6 +27,5 @@ namespace Bookmarks.Persistence.Bookmarks
             builder.Property(e => e.ProductId).IsRequired();
             builder.Property(e => e.DateAdded).IsRequired();
         }
-
     }
 }

@@ -1,8 +1,8 @@
+using Bookmarks.Api.Extensions;
+using Bookmarks.Persistence;
 using BuildingBlocks.Authentication;
 using BuildingBlocks.MassTransit;
 using BuildingBlocks.Swagger;
-using Bookmarks.Api.Extensions;
-using Bookmarks.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

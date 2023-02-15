@@ -17,14 +17,12 @@ public static class DomainExtensions
         services.AddDbContext<BookmarksDbContext>(options =>
         {
             var mysql = configuration.GetOptions<MySQLOptions>("MySQLOptions");
-            var connection = $"Server={mysql.Host}; Port={mysql.Port}; Database={mysql.Database}; Uid={mysql.User}; Pwd={mysql.Password};";
-            options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 31)), builder =>
-            {
-                builder.EnableRetryOnFailure();
-            });
-
+            var connection =
+                $"Server={mysql.Host}; Port={mysql.Port}; Database={mysql.Database}; Uid={mysql.User}; Pwd={mysql.Password};";
+            options.UseMySql(connection, new MySqlServerVersion(new Version(8, 0, 31)),
+                builder => { builder.EnableRetryOnFailure(); });
         });
-        
+
         services.AddScoped<IBookmarkRepository, BookmarkRepository>();
         services.AddScoped<IWishlistRepository, WishlistRepository>();
         services.AddScoped<IEntityFactory, EntityFactory>();

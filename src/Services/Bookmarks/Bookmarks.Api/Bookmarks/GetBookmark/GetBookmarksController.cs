@@ -1,6 +1,5 @@
 ﻿using Bookmarks.Application.Bookmarks.GetBookmark;
 using BuildingBlocks.Web;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bookmarks.Api.Bookmarks.GetBookmark

@@ -69,5 +69,4 @@ public sealed class UpdateBookmarkCommand
             return changes > 0;
         }
     }
-
 }

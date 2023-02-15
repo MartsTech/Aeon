@@ -1,6 +1,6 @@
 ﻿using Bookmarks.Domain;
-using Bookmarks.Domain.Wishlists;
 using Bookmarks.Domain.Bookmarks;
+using Bookmarks.Domain.Wishlists;
 
 namespace Bookmarks.Persistence
 {

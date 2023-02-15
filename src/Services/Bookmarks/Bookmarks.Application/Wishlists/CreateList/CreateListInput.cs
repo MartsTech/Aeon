@@ -4,7 +4,6 @@ namespace Bookmarks.Application.Wishlists.CreateList
 {
     public class CreateListInput
     {
-        [Required]
-        public Guid UserId { get; set; }
+        [Required] public Guid UserId { get; set; }
     }
 }

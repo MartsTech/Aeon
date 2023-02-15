@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Bookmarks.Domain.Wishlists;
+﻿using Bookmarks.Domain.Wishlists;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bookmarks.Domain.Bookmarks
 {
@@ -18,8 +18,7 @@ namespace Bookmarks.Domain.Bookmarks
         public Guid ProductId { get; }
         public int ProductQuantity { get; set; }
         public DateOnly DateAdded { get; }
-        [ForeignKey(nameof(List))]
-        public Guid ListId { get; }
+        [ForeignKey(nameof(List))] public Guid ListId { get; }
         public Wishlist List { get; }
     }
 }

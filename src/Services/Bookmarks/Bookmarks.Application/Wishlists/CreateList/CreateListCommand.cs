@@ -73,5 +73,4 @@ public sealed class CreateListCommand
             return changes > 0;
         }
     }
-
 }

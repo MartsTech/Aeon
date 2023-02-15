@@ -68,5 +68,4 @@ public sealed class DeleteListCommand
             return changes > 0;
         }
     }
-
 }

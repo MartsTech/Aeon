@@ -68,5 +68,4 @@ public sealed class DeleteBookmarkCommand
             return changes > 0;
         }
     }
-
 }
