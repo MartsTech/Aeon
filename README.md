@@ -13,6 +13,7 @@
 - Infrastructure - [Martin Velkov](https://github.com/MartsTech)
 - Catalog - [Boyan Belchev](https://github.com/bdbelchev)
 - Client - [Martin Velkov](https://github.com/MartsTech)
+- Bookmarks - [Boyan Belchev](https://github.com/bdbelchev)
 
 ---
 
