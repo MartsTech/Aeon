@@ -3,6 +3,7 @@ using Bookmarks.Persistence;
 using BuildingBlocks.Authentication;
 using BuildingBlocks.MassTransit;
 using BuildingBlocks.Swagger;
+using BuildingBlocks.Web;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,10 +15,12 @@ builder.Services.AddCustomMassTransit(builder.Configuration);
 builder.Services.AddCustomApplication();
 builder.Services.AddCustomDomain(builder.Configuration);
 builder.Services.AddCustomPersistence();
+builder.Services.AddCustomCors();
 
 var app = builder.Build();
 
 app.UseCustomSwagger();
+app.UseCustomCors();
 
 app.UseAuthentication();
 app.UseAuthorization();
