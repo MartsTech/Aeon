@@ -1,3 +1,4 @@
+using BuildingBlocks.Web;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -14,6 +15,7 @@ new WebHostBuilder()
             .AddEnvironmentVariables();
     })
     .ConfigureServices((context, services) => {
+        services.AddCustomCors();
         services.AddOcelot();
         services.AddMvc();
         services.AddSwaggerForOcelot(context.Configuration);
@@ -25,6 +27,7 @@ new WebHostBuilder()
     .UseIISIntegration()
     .Configure(app =>
     {
+        app.UseCustomCors();
         app.UseSwaggerForOcelotUI();
         app.UseOcelot().Wait();
     })
