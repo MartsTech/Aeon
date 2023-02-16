@@ -19,7 +19,7 @@ jobs:
         run: |
           docker build -t martstech/aeon-gateway -f src/ApiGateway/Dockerfile .
           docker build -t martstech/aeon-catalog -f src/Services/Catalog/Dockerfile .
-          docker build -t martstech/aeon-catalog -f src/Services/Bookmarks/Dockerfile .
+          docker build -t martstech/aeon-bookmarks -f src/Services/Bookmarks/Dockerfile .
       - name: Push Docker images
         run: |
           docker push martstech/aeon-gateway
