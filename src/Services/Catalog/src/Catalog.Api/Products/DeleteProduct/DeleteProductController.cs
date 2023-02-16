@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Api.Products.DeleteProduct
 {
-    public class DeleteProductController : UserController
+    public class DeleteProductController : AdminController
     {
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> DeleteProduct(Guid id)

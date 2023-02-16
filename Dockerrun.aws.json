@@ -1,5 +1,5 @@
 {
-  "AWSEBDockerrunVersion": 3,
+  "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
     {
       "name": "gateway",
@@ -12,13 +12,20 @@
           "containerPort": 80
         }
       ],
-      "links": ["catalog"],
+      "links": ["catalog", "bookmarks"],
       "memory": 128
     },
     {
       "name": "catalog",
       "image": "martstech/aeon-catalog",
       "hostname": "catalog",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "bookmarks",
+      "image": "martstech/aeon-bookmarks",
+      "hostname": "bookmarks",
       "essential": false,
       "memory": 128
     }

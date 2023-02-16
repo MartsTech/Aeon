@@ -12,6 +12,8 @@ public static class AuthenticationExtensions
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddMicrosoftIdentityWebApi(configuration.GetSection("AzureAdB2C"));
 
+        services.AddScoped<IUserService, UserService>();
+        
         return services;
     }
 }

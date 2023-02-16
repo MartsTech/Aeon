@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Api.Categories.AddCategory
 {
-    public class AddCategoryController : UserController
+    public class AddCategoryController : AdminController
     {
         [HttpPost]
         public async Task<IActionResult> AddCategory([FromForm] CreateCategoryInput input)
