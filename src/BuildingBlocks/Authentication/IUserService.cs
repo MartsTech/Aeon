@@ -2,5 +2,5 @@
 
 public interface IUserService
 {
-    
+    string? GetCurrentUserId();
 }

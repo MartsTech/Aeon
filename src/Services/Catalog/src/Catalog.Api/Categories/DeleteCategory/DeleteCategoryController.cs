@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Api.Categories.DeleteCategory
 {
-    public class DeleteCategoryController : UserController
+    public class DeleteCategoryController : AdminController
     {
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> DeleteCategory(Guid id)

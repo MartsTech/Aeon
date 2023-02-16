@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Api.Categories.UpdateCategoryName
 {
-    public class UpdateCategoryController : UserController
+    public class UpdateCategoryController : AdminController
     {
         [HttpPut]
         public async Task<IActionResult> UpdateCategory([FromForm] UpdateCategoryInput input)

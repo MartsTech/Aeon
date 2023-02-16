@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Api.Products.CreateProduct
 {
-    public class CreateProductController : UserController
+    public class CreateProductController : AdminController
     {
         [HttpPost]
         public async Task<IActionResult> CreateProduct([FromForm] CreateProductInput input)
