@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BuildingBlocks.Web;
 
 public static class CustomCorsExtensions
 {
-    private const string CorsPolicy = "corsPolicy";
+    private const string CorsPolicy = "CorsPolicy";
 
     public static IServiceCollection AddCustomCors(this IServiceCollection services)
     {
@@ -17,8 +17,7 @@ public static class CustomCorsExtensions
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
-                    .WithExposedHeaders("WWW-Authenticate")
-                    .WithOrigins("http://localhost:3000");
+                    .WithOrigins("http://localhost:3000", "https://aeon.martstech.com");
             });
         });
 
