@@ -3,6 +3,7 @@ using System;
 using Bookmarks.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bookmarks.Persistence.Migrations
 {
     [DbContext(typeof(BookmarksDbContext))]
-    partial class BookmarksDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230216085635_AddBookmarksUserId.cs")]
+    partial class AddBookmarksUserIdcs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

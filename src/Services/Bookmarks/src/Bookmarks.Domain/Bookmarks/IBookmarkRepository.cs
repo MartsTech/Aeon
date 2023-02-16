@@ -2,9 +2,9 @@
 {
     public interface IBookmarkRepository
     {
-        Task<bool> AddBookmark(Bookmark bookmark, Guid listId);
-        Task<Bookmark?> GetBookmarkById(Guid id);
-        Task<bool> UpdateBookmark(Guid id, int newQuantity);
-        Task<bool> DeleteBookmark(Guid id);
+        Task<bool> AddBookmark(Bookmark bookmark);
+        Task<Bookmark?> GetBookmarkById(Guid id, Guid userId);
+        Task<bool> UpdateBookmark(Guid id, int newQuantity, Guid userId);
+        Task<bool> DeleteBookmark(Guid id, Guid userId);
     }
 }

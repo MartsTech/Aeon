@@ -1,5 +1,6 @@
 ﻿using Bookmarks.Domain;
 using Bookmarks.Domain.Wishlists;
+using BuildingBlocks.Authentication;
 using BuildingBlocks.Core;
 using BuildingBlocks.EFCore;
 using FluentValidation;
@@ -24,7 +25,6 @@ public sealed class CreateListCommand
     {
         public CommandValidator()
         {
-            RuleFor(x => x.Input).SetValidator(new CreateListInputValidator());
         }
     }
 
@@ -33,24 +33,34 @@ public sealed class CreateListCommand
         private readonly IEntityFactory _entityFactory;
         private readonly IWishlistRepository _wishlistRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
 
-        public Handler(IEntityFactory entityFactory, IWishlistRepository wishlistRepository, IUnitOfWork unitOfWork)
+        public Handler(IEntityFactory entityFactory, IWishlistRepository wishlistRepository, IUnitOfWork unitOfWork, IUserService userService)
         {
             _entityFactory = entityFactory;
             _wishlistRepository = wishlistRepository;
             _unitOfWork = unitOfWork;
+            _userService = userService;
         }
 
         public async Task<Result<WishlistDto>> Handle(Command request, CancellationToken cancellationToken)
         {
+            var userId = _userService.GetCurrentUserId();
+            
+            if (userId == null)
+            {
+                return Result<WishlistDto>.Failure("User is not authenticated");
+            }
+            
             CommandValidator validator = new CommandValidator();
             ValidationResult validation = await validator.ValidateAsync(request, cancellationToken);
+            
             if (!validation.IsValid)
             {
                 return Result<WishlistDto>.Failure($"{string.Join('\n', validation.Errors)}");
             }
 
-            Wishlist list = _entityFactory.NewList(request.Input.UserId);
+            Wishlist list = _entityFactory.NewList(new Guid(userId));
 
             bool success = await CreateList(list, cancellationToken)
                 .ConfigureAwait(false);

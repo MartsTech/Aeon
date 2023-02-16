@@ -11,6 +11,7 @@ namespace Bookmarks.Application.Bookmarks
             ProductQuantity = bookmark.ProductQuantity;
             DateAdded = bookmark.DateAdded;
             ListId = bookmark.ListId;
+            UserId = bookmark.UserId;
         }
 
         public Guid Id { get; }
@@ -18,5 +19,7 @@ namespace Bookmarks.Application.Bookmarks
         public int ProductQuantity { get; }
         public DateOnly DateAdded { get; }
         public Guid ListId { get; }
+        
+        public Guid UserId { get; }
     }
 }

@@ -6,7 +6,6 @@ namespace Bookmarks.Application.Wishlists.CreateList
     {
         public CreateListInputValidator()
         {
-            RuleFor(x => x.UserId).NotEmpty();
         }
     }
 }
