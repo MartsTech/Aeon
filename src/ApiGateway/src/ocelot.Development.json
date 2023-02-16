@@ -12,6 +12,19 @@
       "UpstreamPathTemplate": "/api/catalog/{everything}",
       "UpstreamHttpMethod": ["Get", "Post", "Put", "Delete"],
       "SwaggerKey": "catalog"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/bookmarks/{everything}",
+      "UpstreamHttpMethod": ["Get", "Post", "Put", "Delete"],
+      "SwaggerKey": "bookmarks"
     }
   ],
   "SwaggerEndPoints": [
@@ -22,6 +35,16 @@
           "Name": "Catalog API",
           "Version": "v1",
           "Url": "http://localhost:5001/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "bookmarks",
+      "Config": [
+        {
+          "Name": "Bookmarks API",
+          "Version": "v1",
+          "Url": "http://localhost:5002/swagger/v1/swagger.json"
         }
       ]
     }

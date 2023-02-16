@@ -12,17 +12,30 @@ services:
       - "80:80"
     links:
       - catalog
+      - bookmarks
     depends_on:
       - catalog
+      - bookmarks
     networks:
       - aeon
-      
+
   #######################################################
   #  Catalog
   #######################################################
   catalog:
     hostname: catalog
     image: "martstech/aeon-catalog"
+    restart: on-failure
+    mem_limit: 128m
+    networks:
+      - aeon
+
+  #######################################################
+  #  Bookmarks
+  #######################################################
+  bookmarks:
+    hostname: bookmarks
+    image: "martstech/aeon-bookmarks"
     restart: on-failure
     mem_limit: 128m
     networks:

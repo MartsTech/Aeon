@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Api.Products.UpdateProduct
 {
-    public class UpdateProductController : UserController
+    public class UpdateProductController : AdminController
     {
         [HttpPut]
         public async Task<IActionResult> UpdateProduct([FromForm] UpdateProductInput input)

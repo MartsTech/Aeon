@@ -13,8 +13,10 @@ services:
       - "80:80"
     links:
       - catalog
+      - bookmarks
     depends_on:
       - catalog
+      - bookmarks
     networks:
       - aeon
 
@@ -27,6 +29,21 @@ services:
     build:
       context: ./
       dockerfile: src/Services/Catalog/Dockerfile
+    depends_on:
+      - rabbitmq
+      - mysql
+    networks:
+      - aeon
+
+  #######################################################
+  #  Bookmarks
+  #######################################################
+  bookmarks:
+    hostname: bookmarks
+    restart: on-failure
+    build:
+      context: ./
+      dockerfile: src/Services/Bookmarks/Dockerfile
     depends_on:
       - rabbitmq
       - mysql
