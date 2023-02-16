@@ -14,9 +14,11 @@ public static class CustomCorsExtensions
             opt.AddPolicy(CorsPolicy, builder =>
             {
                 builder
-                    .AllowAnyOrigin()
                     .AllowAnyMethod()
-                    .AllowAnyHeader();
+                    .AllowAnyHeader()
+                    .AllowCredentials()
+                    .WithExposedHeaders("WWW-Authenticate")
+                    .WithOrigins("http://localhost:3000");
             });
         });
 
