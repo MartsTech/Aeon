@@ -9,8 +9,8 @@ namespace Bookmarks.Domain
 
         Wishlist NewListWithExistingId(Guid id, Guid userId);
 
-        Bookmark NewBookmark(Guid productId, int productQuantity, Guid listId);
+        Bookmark NewBookmark(Guid productId, int productQuantity, Guid listId, Guid userId);
 
-        Bookmark NewBookmarkWithExistingId(Guid id, Guid productId, int productQuantity, Guid listId);
+        Bookmark NewBookmarkWithExistingId(Guid id, Guid productId, int productQuantity, Guid listId, Guid userId);
     }
 }

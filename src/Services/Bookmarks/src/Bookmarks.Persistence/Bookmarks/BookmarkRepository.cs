@@ -1,5 +1,6 @@
 ﻿using Bookmarks.Domain.Bookmarks;
 using Bookmarks.Domain.Wishlists;
+using Bookmarks.Persistence.Wishlists;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bookmarks.Persistence.Bookmarks
@@ -13,11 +14,14 @@ namespace Bookmarks.Persistence.Bookmarks
         }
 
         private readonly BookmarksDbContext _dbContext;
+
         private readonly IWishlistRepository _wishlistRepository;
 
-        public async Task<bool> AddBookmark(Bookmark bookmark, Guid listId)
+        public async Task<bool> AddBookmark(Bookmark bookmark)
         {
-            Wishlist? wishlist = await _wishlistRepository.GetListById(listId).ConfigureAwait(false);
+            var wishlist = await _wishlistRepository
+                .GetListById(bookmark.UserId, bookmark.ListId)
+                .ConfigureAwait(false);
 
             if (wishlist != null)
             {
@@ -29,14 +33,17 @@ namespace Bookmarks.Persistence.Bookmarks
             return false;
         }
 
-        public async Task<Bookmark?> GetBookmarkById(Guid id)
+        public async Task<Bookmark?> GetBookmarkById(Guid id, Guid userId)
         {
-            return await _dbContext.Bookmarks.FirstOrDefaultAsync(b => b.Id == id).ConfigureAwait(false);
+            return await _dbContext.Bookmarks
+                .Where(x => x.UserId == userId)
+                .FirstOrDefaultAsync(b => b.Id == id)
+                .ConfigureAwait(false);
         }
 
-        public async Task<bool> UpdateBookmark(Guid id, int newQuantity)
+        public async Task<bool> UpdateBookmark(Guid id, int newQuantity, Guid userId)
         {
-            Bookmark? bookmark = await GetBookmarkById(id).ConfigureAwait(false);
+            Bookmark? bookmark = await GetBookmarkById(id, userId).ConfigureAwait(false);
 
             if (bookmark != null)
             {
@@ -48,9 +55,9 @@ namespace Bookmarks.Persistence.Bookmarks
             return false;
         }
 
-        public async Task<bool> DeleteBookmark(Guid id)
+        public async Task<bool> DeleteBookmark(Guid id, Guid userId)
         {
-            Bookmark? bookmark = await GetBookmarkById(id).ConfigureAwait(false);
+            Bookmark? bookmark = await GetBookmarkById(id, userId).ConfigureAwait(false);
 
             if (bookmark != null)
             {

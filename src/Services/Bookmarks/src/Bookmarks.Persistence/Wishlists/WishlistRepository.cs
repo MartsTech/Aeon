@@ -12,16 +12,24 @@ namespace Bookmarks.Persistence.Wishlists
 
         private readonly BookmarksDbContext _dbContext;
 
-        public async Task<List<Wishlist>> GetAllLists(bool includeBookmarks)
+        public async Task<List<Wishlist>> GetAllLists(Guid userId, bool includeBookmarks)
         {
             return includeBookmarks
-                ? await _dbContext.Wishlists.Include(l => l.Bookmarks).ToListAsync().ConfigureAwait(false)
+                ? await _dbContext.Wishlists
+                    .Where(x => x.UserId == userId)
+                    .Include(l => l.Bookmarks)
+                    .ToListAsync()
+                    .ConfigureAwait(false)
+                
                 : await _dbContext.Wishlists.ToListAsync().ConfigureAwait(false);
         }
 
-        public async Task<Wishlist?> GetListById(Guid id)
+        public async Task<Wishlist?> GetListById(Guid userId, Guid id)
         {
-            return await _dbContext.Wishlists.Include(l => l.Bookmarks).FirstOrDefaultAsync(l => l.Id == id)
+            return await _dbContext.Wishlists
+                .Where(x => x.UserId == userId)
+                .Include(l => l.Bookmarks)
+                .FirstOrDefaultAsync(l => l.Id == id)
                 .ConfigureAwait(false);
         }
 
@@ -32,7 +40,9 @@ namespace Bookmarks.Persistence.Wishlists
 
         public async Task<bool> DeleteList(Guid id)
         {
-            Wishlist? wishlist = await GetListById(id).ConfigureAwait(false);
+            Wishlist? wishlist = await _dbContext.Wishlists
+                .FirstOrDefaultAsync(x => x.Id == id)
+                .ConfigureAwait(false);
 
             if (wishlist != null)
             {

@@ -19,13 +19,15 @@ namespace Bookmarks.Persistence.Bookmarks
             builder.HasOne(b => b.List)
                 .WithMany(l => l.Bookmarks)
                 .HasForeignKey(b => b.ListId)
-                .IsRequired();
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(e => e.ProductQuantity)
                 .IsRequired();
 
             builder.Property(e => e.ProductId).IsRequired();
             builder.Property(e => e.DateAdded).IsRequired();
+            
+            builder.Property(e => e.UserId).IsRequired();
         }
     }
 }

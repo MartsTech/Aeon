@@ -1,4 +1,5 @@
 ﻿using Bookmarks.Domain.Bookmarks;
+using BuildingBlocks.Authentication;
 using BuildingBlocks.Core;
 using BuildingBlocks.EFCore;
 using FluentValidation;
@@ -31,23 +32,33 @@ public sealed class DeleteBookmarkCommand
     {
         private readonly IBookmarkRepository _bookmarkRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
 
-        public Handler(IBookmarkRepository bookmarkRepository, IUnitOfWork unitOfWork)
+        public Handler(IBookmarkRepository bookmarkRepository, IUnitOfWork unitOfWork, IUserService userService)
         {
             _bookmarkRepository = bookmarkRepository;
             _unitOfWork = unitOfWork;
+            _userService = userService;
         }
 
         public async Task<Result<string>> Handle(Command request, CancellationToken cancellationToken)
         {
+            var userId = _userService.GetCurrentUserId();
+            
+            if (userId == null)
+            {
+                return Result<string>.Failure("No user id found");
+            }
+            
             CommandValidator validator = new CommandValidator();
             ValidationResult validation = await validator.ValidateAsync(request, cancellationToken);
+            
             if (!validation.IsValid)
             {
                 return Result<string>.Failure($"{string.Join('\n', validation.Errors)}");
             }
 
-            bool success = await DeleteBookmark(request.Id, cancellationToken)
+            bool success = await DeleteBookmark(request.Id, new Guid(userId), cancellationToken)
                 .ConfigureAwait(false);
 
             return success
@@ -55,10 +66,10 @@ public sealed class DeleteBookmarkCommand
                 : Result<string>.Failure($"Failed to delete bookmark {request.Id}");
         }
 
-        private async Task<bool> DeleteBookmark(Guid id, CancellationToken cancellationToken)
+        private async Task<bool> DeleteBookmark(Guid id, Guid userId, CancellationToken cancellationToken)
         {
             await _bookmarkRepository
-                .DeleteBookmark(id)
+                .DeleteBookmark(id, userId)
                 .ConfigureAwait(false);
 
             var changes = await _unitOfWork

@@ -1,6 +1,7 @@
 ﻿using Bookmarks.Domain;
 using Bookmarks.Domain.Bookmarks;
 using Bookmarks.Domain.Wishlists;
+using BuildingBlocks.Authentication;
 using BuildingBlocks.Core;
 using BuildingBlocks.EFCore;
 using FluentValidation;
@@ -35,33 +36,43 @@ public sealed class AddBookmarkCommand
         private readonly IBookmarkRepository _bookmarkRepository;
         private readonly IWishlistRepository _wishlistRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
 
         public Handler(IEntityFactory entityFactory, IBookmarkRepository bookmarkRepository,
-            IWishlistRepository wishlistRepository, IUnitOfWork unitOfWork)
+            IWishlistRepository wishlistRepository, IUnitOfWork unitOfWork, IUserService userService)
         {
             _entityFactory = entityFactory;
             _bookmarkRepository = bookmarkRepository;
             _wishlistRepository = wishlistRepository;
             _unitOfWork = unitOfWork;
+            _userService = userService;
         }
 
         public async Task<Result<BookmarkDto>> Handle(Command request, CancellationToken cancellationToken)
         {
+            var userId = _userService.GetCurrentUserId();
+            
+            if (userId == null)
+            {
+                return Result<BookmarkDto>.Failure("No user id found");
+            }
+            
             CommandValidator validator = new CommandValidator();
             ValidationResult validation = await validator.ValidateAsync(request, cancellationToken);
+            
             if (!validation.IsValid)
             {
                 return Result<BookmarkDto>.Failure($"{string.Join('\n', validation.Errors)}");
             }
 
-            Wishlist? wishlist = await _wishlistRepository.GetListById(request.Input.ListId).ConfigureAwait(false);
+            Wishlist? wishlist = await _wishlistRepository.GetListById(new Guid(userId), request.Input.ListId).ConfigureAwait(false);
             if (wishlist == null)
             {
                 return Result<BookmarkDto>.Failure($"List {request.Input.ListId} not found");
             }
 
             Bookmark bookmark =
-                _entityFactory.NewBookmark(request.Input.ProductId, request.Input.Quantity, request.Input.ListId);
+                _entityFactory.NewBookmark(request.Input.ProductId, request.Input.Quantity, request.Input.ListId, new Guid(userId));
 
             bool success = await CreateBookmark(bookmark, cancellationToken)
                 .ConfigureAwait(false);
@@ -74,7 +85,7 @@ public sealed class AddBookmarkCommand
         private async Task<bool> CreateBookmark(Bookmark bookmark, CancellationToken cancellationToken)
         {
             await _bookmarkRepository
-                .AddBookmark(bookmark, bookmark.ListId)
+                .AddBookmark(bookmark)
                 .ConfigureAwait(false);
 
             var changes = await _unitOfWork

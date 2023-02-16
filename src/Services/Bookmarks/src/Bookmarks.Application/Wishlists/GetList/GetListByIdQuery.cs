@@ -1,4 +1,5 @@
 ﻿using Bookmarks.Domain.Wishlists;
+using BuildingBlocks.Authentication;
 using BuildingBlocks.Core;
 using MediatR;
 
@@ -19,24 +20,33 @@ public sealed class GetListByIdQuery
     public class Handler : IRequestHandler<Query, Result<WishlistDto>>
     {
         private readonly IWishlistRepository _wishlistRepository;
+        private readonly IUserService _userService;
 
-        public Handler(IWishlistRepository wishlistRepository)
+        public Handler(IWishlistRepository wishlistRepository, IUserService userService)
         {
             _wishlistRepository = wishlistRepository;
+            _userService = userService;
         }
 
         public async Task<Result<WishlistDto>> Handle(Query request, CancellationToken cancellationToken)
         {
-            var result = await GetListById(request.Id)
+            var userId = _userService.GetCurrentUserId();
+            
+            if (userId == null)
+            {
+                return Result<WishlistDto>.Failure("No user id found");
+            }
+            
+            var result = await GetListById(request.Id, new Guid(userId))
                 .ConfigureAwait(false);
 
             return result != null ? Result<WishlistDto>.Success(result) : Result<WishlistDto>.Failure("Not found");
         }
 
-        private async Task<WishlistDto?> GetListById(Guid id)
+        private async Task<WishlistDto?> GetListById(Guid id, Guid userId)
         {
             Wishlist? wishlist = await _wishlistRepository
-                .GetListById(id)
+                .GetListById(userId, id)
                 .ConfigureAwait(false);
 
             return wishlist != null ? new WishlistDto(wishlist) : null;

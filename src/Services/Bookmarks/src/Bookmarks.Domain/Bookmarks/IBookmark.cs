@@ -7,5 +7,6 @@
         public int ProductQuantity { get; }
         public DateOnly DateAdded { get; }
         public Guid ListId { get; }
+        public Guid UserId { get; }
     }
 }

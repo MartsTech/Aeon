@@ -20,6 +20,11 @@ namespace Bookmarks.Persistence.Wishlists
                 .IsRequired();
 
             builder.Property(e => e.DateCreated).IsRequired();
+            
+            builder.HasMany(l => l.Bookmarks)
+                .WithOne(b => b.List)
+                .HasForeignKey(b => b.ListId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

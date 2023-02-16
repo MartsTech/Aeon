@@ -1,5 +1,6 @@
 ﻿using Bookmarks.Domain;
 using Bookmarks.Domain.Bookmarks;
+using BuildingBlocks.Authentication;
 using BuildingBlocks.Core;
 using BuildingBlocks.EFCore;
 using FluentValidation;
@@ -32,23 +33,33 @@ public sealed class UpdateBookmarkCommand
     {
         private readonly IBookmarkRepository _bookmarkRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
 
-        public Handler(IEntityFactory entityFactory, IBookmarkRepository bookmarkRepository, IUnitOfWork unitOfWork)
+        public Handler(IEntityFactory entityFactory, IBookmarkRepository bookmarkRepository, IUnitOfWork unitOfWork, IUserService userService)
         {
             _bookmarkRepository = bookmarkRepository;
             _unitOfWork = unitOfWork;
+            _userService = userService;
         }
 
         public async Task<Result<bool>> Handle(Command request, CancellationToken cancellationToken)
         {
+            var userId = _userService.GetCurrentUserId();
+            
+            if (userId == null)
+            {
+                return Result<bool>.Failure("No user id found");
+            }
+            
             CommandValidator validator = new CommandValidator();
             ValidationResult validation = await validator.ValidateAsync(request, cancellationToken);
+            
             if (!validation.IsValid)
             {
                 return Result<bool>.Failure($"{string.Join('\n', validation.Errors)}");
             }
 
-            bool success = await UpdateQuantity(request.Input.Id, request.Input.Quantity, cancellationToken)
+            bool success = await UpdateQuantity(request.Input.Id, request.Input.Quantity, new Guid(userId), cancellationToken)
                 .ConfigureAwait(false);
 
             return success
@@ -56,10 +67,10 @@ public sealed class UpdateBookmarkCommand
                 : Result<bool>.Failure($"Failed to update bookmark {request.Input.Id}");
         }
 
-        private async Task<bool> UpdateQuantity(Guid id, int quantity, CancellationToken cancellationToken)
+        private async Task<bool> UpdateQuantity(Guid id, int quantity, Guid userId, CancellationToken cancellationToken)
         {
             await _bookmarkRepository
-                .UpdateBookmark(id, quantity)
+                .UpdateBookmark(id, quantity, userId)
                 .ConfigureAwait(false);
 
             var changes = await _unitOfWork
