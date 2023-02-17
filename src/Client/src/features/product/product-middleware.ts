@@ -8,17 +8,7 @@ export const productMiddleware: StoreMiddleware = store => {
     return (action: AnyAction) => {
       const result = next(action);
 
-      if (action.type === HYDRATE) {
-        const state = store.getState();
-
-        if (!action.payload.product.details) {
-          return result;
-        }
-
-        if (state.product.details?.id === action.payload.product.details.id) {
-          return result;
-        }
-
+      if (action.type === HYDRATE && action.payload.product.details) {
         store.dispatch(
           productHydrated({
             details: action.payload.product.details,

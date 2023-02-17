@@ -1,14 +1,35 @@
+import {bookmarksApi} from '@features/bookmarks/bookmarks-api';
+import {bookmarksCurrentSelector} from '@features/bookmarks/bookmarks-state';
 import {ShoppingCartIcon} from '@heroicons/react/24/outline';
 import {BookmarkIcon, TagIcon} from '@heroicons/react/24/solid';
 import Button from '@lib/components/button/Button';
-import {useStoreSelector} from '@lib/store/store-hooks';
+import {useStoreDispatch, useStoreSelector} from '@lib/store/store-hooks';
 import {pageTransition, pageZoom} from '@lib/utils/animations';
 import {motion} from 'framer-motion';
 import Image from 'next/image';
+import {useCallback} from 'react';
 import {productDetailsSelector} from './product-state';
 
 const ProductModule = () => {
   const product = useStoreSelector(productDetailsSelector);
+
+  const dispatch = useStoreDispatch();
+
+  const bookmark = useStoreSelector(state =>
+    bookmarksCurrentSelector(state, product?.id || ''),
+  );
+
+  const onBookmarkClick = useCallback(() => {
+    if (typeof product?.id !== 'string') {
+      return;
+    }
+
+    if (!bookmark) {
+      dispatch(bookmarksApi.endpoints.addBookmark.initiate(product.id));
+    } else {
+      dispatch(bookmarksApi.endpoints.deleteBookmark.initiate(bookmark.id));
+    }
+  }, [bookmark, product, dispatch]);
 
   if (!product) {
     return null;
@@ -65,10 +86,10 @@ const ProductModule = () => {
                   <ShoppingCartIcon className="mr-2 h-5 w-5" /> Add To Cart
                 </Button>
               )}
-              <Button variant="secondary">
+              <Button variant="secondary" onClick={onBookmarkClick}>
                 <BookmarkIcon
                   className={`${
-                    false && '!fill-white'
+                    typeof bookmark !== 'undefined' && '!fill-white'
                   } h-5 w-5 fill-[transparent] stroke-[#fff] stroke-2 !text-xl`}
                 />
               </Button>

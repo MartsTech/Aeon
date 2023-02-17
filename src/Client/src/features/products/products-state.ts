@@ -1,17 +1,17 @@
 import type {RootState} from '@lib/store/store-types';
 import {createAction, createReducer} from '@reduxjs/toolkit';
-import type {ProductsListModal} from './products-types';
 import {persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import type {ProductsListModal} from './products-types';
 
 export interface ProductsState {
   hydrated: boolean;
-  list: ProductsListModal[];
+  list: ProductsListModal[] | null;
 }
 
 const initialState: ProductsState = {
   hydrated: false,
-  list: [],
+  list: null,
 };
 
 export const productsHydrated = createAction<{list: ProductsState['list']}>(

@@ -6,13 +6,13 @@ import {CategoriesListModal} from './categories-types';
 
 export interface CategoriesState {
   hydrated: boolean;
-  list: CategoriesListModal[];
+  list: CategoriesListModal[] | null;
   selectedId: CategoriesListModal['id'] | null;
 }
 
 const initialState: CategoriesState = {
   hydrated: false,
-  list: [],
+  list: null,
   selectedId: null,
 };
 
@@ -64,5 +64,10 @@ export const categoriesSelectedSelector = (
 ): CategoriesListModal | undefined => {
   const selectedId = categoriesSelectedIdSelector(state);
   const list = categoriesListSelector(state);
+
+  if (!selectedId || !list) {
+    return undefined;
+  }
+
   return list.find(item => item.id === selectedId);
 };

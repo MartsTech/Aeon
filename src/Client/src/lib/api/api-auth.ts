@@ -6,10 +6,11 @@ export const setAuthorizationHeaders = (
   api: ApiHeaders,
 ): Headers => {
   const state = api.getState() as RootState;
-  const {session} = state.auth;
 
-  if (session !== null) {
-    headers.set('Authorization', `Bearer ${session.accessToken}`);
+  const token = state.auth.session?.accessToken;
+
+  if (typeof token === 'string') {
+    headers.set('Authorization', `Bearer ${token}`);
   }
   return headers;
 };
