@@ -4,9 +4,10 @@ import {storeWrapper} from '@lib/store';
 import '@lib/styles/globals.css';
 import type {AppPropsWithLayout} from '@lib/types/page';
 import {SessionProvider} from 'next-auth/react';
-import type {FC} from 'react';
+import {FC, useMemo} from 'react';
 import {Provider as StoreProvider} from 'react-redux';
 import {persistStore} from 'redux-persist';
+import {PersistGate} from 'redux-persist/integration/react';
 
 const App: FC<AppPropsWithLayout> = ({Component, ...rest}) => {
   const {
@@ -16,18 +17,20 @@ const App: FC<AppPropsWithLayout> = ({Component, ...rest}) => {
     },
   } = storeWrapper.useWrappedStore(rest);
 
-  persistStore(store);
+  const persistor = useMemo(() => persistStore(store), [store]);
 
   const getLayout = Component.getLayout ?? (page => page);
 
   return (
-    <SessionProvider session={session}>
+    <PersistGate persistor={persistor}>
       <StoreProvider store={store}>
-        <AuthProvider>
-          <AppProvider>{getLayout(<Component {...pageProps} />)}</AppProvider>
-        </AuthProvider>
+        <SessionProvider session={session}>
+          <AuthProvider>
+            <AppProvider>{getLayout(<Component {...pageProps} />)}</AppProvider>
+          </AuthProvider>
+        </SessionProvider>
       </StoreProvider>
-    </SessionProvider>
+    </PersistGate>
   );
 };
 
