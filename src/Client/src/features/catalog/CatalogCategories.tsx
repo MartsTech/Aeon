@@ -13,7 +13,7 @@ const CatalogCategories: FC = () => {
       <CatalogCategoriesItem
         item={{id: null, name: 'All Categories', products: []}}
       />
-      {categories.map(item => (
+      {categories?.map(item => (
         <CatalogCategoriesItem key={item.id} item={item} />
       ))}
       <div className="absolute top-0 right-0 h-10 w-1/12 bg-gradient-to-l from-gray-50" />

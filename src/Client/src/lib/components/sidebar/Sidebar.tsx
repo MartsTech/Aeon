@@ -1,3 +1,4 @@
+import {bookmarksCountSelector} from '@features/bookmarks/bookmarks-state';
 import {
   BookmarkIcon,
   ClockIcon,
@@ -5,6 +6,7 @@ import {
   ShoppingCartIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
+import {useStoreSelector} from '@lib/store/store-hooks';
 import {FC} from 'react';
 import SidebarLogo from './SidebarLogo';
 import SidebarMenuItem from './SidebarMenuItem';
@@ -16,6 +18,8 @@ interface Props {
 }
 
 const Sidebar: FC<Props> = ({authenticated, active, toggleSidebar}) => {
+  const bookmarksCount = useStoreSelector(bookmarksCountSelector);
+
   return (
     <section
       className={`fixed top-0 left-0 z-50 flex h-screen max-h-screen
@@ -40,7 +44,7 @@ const Sidebar: FC<Props> = ({authenticated, active, toggleSidebar}) => {
         <SidebarMenuItem
           Icon={BookmarkIcon}
           paths={['/bookmarks']}
-          count={0}
+          count={bookmarksCount}
           sidebarActive={active}
           toggleSidebar={toggleSidebar}
         />
