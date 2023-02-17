@@ -10,12 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddCustomSwagger();
+builder.Services.AddCustomCors();
 builder.Services.AddCustomAuthentication(builder.Configuration);
 builder.Services.AddCustomMassTransit(builder.Configuration);
 builder.Services.AddCustomApplication();
 builder.Services.AddCustomDomain(builder.Configuration);
 builder.Services.AddCustomPersistence();
-builder.Services.AddCustomCors();
 
 var app = builder.Build();
 
