@@ -19,13 +19,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.Persistence", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bookmarks", "Bookmarks", "{B8A9F987-1DB7-43B9-A6B7-8BA27ADB7D45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Domain", "src\Services\Bookmarks\src\Bookmarks.Domain\Bookmarks.Domain.csproj", "{57F74BDE-0316-4EAF-A6A2-8EC22AF5FF69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookmarks.Domain", "src\Services\Bookmarks\src\Bookmarks.Domain\Bookmarks.Domain.csproj", "{57F74BDE-0316-4EAF-A6A2-8EC22AF5FF69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Application", "src\Services\Bookmarks\src\Bookmarks.Application\Bookmarks.Application.csproj", "{9B3AAFA5-8D6B-4C16-BC25-24F7F6D55756}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookmarks.Application", "src\Services\Bookmarks\src\Bookmarks.Application\Bookmarks.Application.csproj", "{9B3AAFA5-8D6B-4C16-BC25-24F7F6D55756}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Persistence", "src\Services\Bookmarks\src\Bookmarks.Persistence\Bookmarks.Persistence.csproj", "{44E1B709-204E-40FB-B21A-5C015C25DD1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookmarks.Persistence", "src\Services\Bookmarks\src\Bookmarks.Persistence\Bookmarks.Persistence.csproj", "{44E1B709-204E-40FB-B21A-5C015C25DD1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Api", "src\Services\Bookmarks\src\Bookmarks.Api\Bookmarks.Api.csproj", "{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookmarks.Api", "src\Services\Bookmarks\src\Bookmarks.Api\Bookmarks.Api.csproj", "{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShoppingCart", "ShoppingCart", "{DDE87DC9-BA13-494C-B235-C88C3B7FCE9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.Domain", "Cart.Domain\Cart.Domain.csproj", "{ADB67927-EC15-44AA-AB86-46132349C933}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +77,10 @@ Global
 		{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADB67927-EC15-44AA-AB86-46132349C933}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADB67927-EC15-44AA-AB86-46132349C933}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADB67927-EC15-44AA-AB86-46132349C933}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADB67927-EC15-44AA-AB86-46132349C933}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +94,7 @@ Global
 		{9B3AAFA5-8D6B-4C16-BC25-24F7F6D55756} = {B8A9F987-1DB7-43B9-A6B7-8BA27ADB7D45}
 		{44E1B709-204E-40FB-B21A-5C015C25DD1A} = {B8A9F987-1DB7-43B9-A6B7-8BA27ADB7D45}
 		{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD} = {B8A9F987-1DB7-43B9-A6B7-8BA27ADB7D45}
+		{ADB67927-EC15-44AA-AB86-46132349C933} = {DDE87DC9-BA13-494C-B235-C88C3B7FCE9C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1A9F2C3A-733E-47AE-BA7F-41BB34BB2302}
