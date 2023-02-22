@@ -14,7 +14,7 @@ namespace OrderEntities
         public int OrderId { get; set; }
         public Order Order { get; set; }
 
-        public int Qty { get; set; }
+        public int Quantity { get; set; }
         public double PriceWhenBought { get; set; }
     }
 }
