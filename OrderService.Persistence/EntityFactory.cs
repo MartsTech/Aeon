@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using OrderService.Domain;
+using OrderService.Domain.Orders;
+
 namespace OrderService.Persistence
 {
     public class EntityFactory : IEntityFactory
