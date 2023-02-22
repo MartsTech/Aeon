@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace OrderService.Domain
 {
-    internal class IEntityFactory
+    public interface IEntityFactory
     {
+
+        Order NewOrder(Guid productId, int productQuantity, Guid listId, Guid userId);
+
+        Order NewOrderWithExistingId(Guid id, Guid productId, int productQuantity, Guid listId, Guid userId);
     }
 }
