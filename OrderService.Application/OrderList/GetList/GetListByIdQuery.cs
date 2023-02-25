@@ -3,11 +3,11 @@ using BuildingBlocks.Authentication;
 using BuildingBlocks.Core;
 using MediatR;
 
-namespace Bookmarks.Application.Wishlists.GetList;
+namespace OrderService.Application.OrderList.GetList;
 
 public sealed class GetListByIdQuery
 {
-    public class Query : IRequest<Result<WishlistDto>>
+    public class Query : IRequest<Result<OrderListDto>>
     {
         public Query(Guid id)
         {
@@ -17,14 +17,14 @@ public sealed class GetListByIdQuery
         public Guid Id { get; }
     }
 
-    public class Handler : IRequestHandler<Query, Result<WishlistDto>>
+    public class Handler : IRequestHandler<Query, Result<OrderListDto>>
     {
-        private readonly IWishlistRepository _wishlistRepository;
+        private readonly IOrderListRepository _orderListRepository;
         private readonly IUserService _userService;
 
-        public Handler(IWishlistRepository wishlistRepository, IUserService userService)
+        public Handler(IOrderLististRepository orderListRepository, IUserService userService)
         {
-            _wishlistRepository = wishlistRepository;
+            _orderListRepository = orderListRepository;
             _userService = userService;
         }
 
@@ -40,16 +40,16 @@ public sealed class GetListByIdQuery
             var result = await GetListById(request.Id, new Guid(userId))
                 .ConfigureAwait(false);
 
-            return result != null ? Result<WishlistDto>.Success(result) : Result<WishlistDto>.Failure("Not found");
+            return result != null ? Result<OrderListDto>.Success(result) : Result<OrderListDto>.Failure("Not found");
         }
 
-        private async Task<WishlistDto?> GetListById(Guid id, Guid userId)
+        private async Task<OrderListDto?> GetListById(Guid id, Guid userId)
         {
-            Wishlist? wishlist = await _wishlistRepository
+            OrderList? orderList = await _orderListRepository
                 .GetListById(userId, id)
                 .ConfigureAwait(false);
 
-            return wishlist != null ? new WishlistDto(wishlist) : null;
+            return orderList != null ? new OrderListDto(orderList) : null;
         }
     }
 }

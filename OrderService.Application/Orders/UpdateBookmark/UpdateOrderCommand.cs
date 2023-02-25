@@ -1,5 +1,5 @@
-﻿using Bookmarks.Domain;
-using Bookmarks.Domain.Bookmarks;
+﻿using OrderService.Domain;
+using OrderService.Domain.Orders;
 using BuildingBlocks.Authentication;
 using BuildingBlocks.Core;
 using BuildingBlocks.EFCore;
@@ -7,37 +7,37 @@ using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
 
-namespace Bookmarks.Application.Bookmarks.UpdateBookmark;
+namespace OrderService.Application.Orders.UpdateOrder;
 
-public sealed class UpdateBookmarkCommand
+public sealed class UpdateOrderCommand
 {
     public class Command : IRequest<Result<bool>>
     {
-        public Command(UpdateBookmarkInput input)
+        public Command(UpdateOrderInput input)
         {
             Input = input;
         }
 
-        public UpdateBookmarkInput Input { get; }
+        public UpdateOrderInput Input { get; }
     }
 
     private class CommandValidator : AbstractValidator<Command>
     {
         public CommandValidator()
         {
-            RuleFor(x => x.Input).SetValidator(new UpdateBookmarkInputValidator());
+            RuleFor(x => x.Input).SetValidator(new UpdateOrderInputValidator());
         }
     }
 
     public class Handler : IRequestHandler<Command, Result<bool>>
     {
-        private readonly IBookmarkRepository _bookmarkRepository;
+        private readonly IOrderRepository _orderRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
 
-        public Handler(IEntityFactory entityFactory, IBookmarkRepository bookmarkRepository, IUnitOfWork unitOfWork, IUserService userService)
+        public Handler(IEntityFactory entityFactory, IOrderRepository orderRepository, IUnitOfWork unitOfWork, IUserService userService)
         {
-            _bookmarkRepository = bookmarkRepository;
+            _orderRepository = orderRepository;
             _unitOfWork = unitOfWork;
             _userService = userService;
         }
@@ -64,13 +64,13 @@ public sealed class UpdateBookmarkCommand
 
             return success
                 ? Result<bool>.Success(true)
-                : Result<bool>.Failure($"Failed to update bookmark {request.Input.Id}");
+                : Result<bool>.Failure($"Failed to update order {request.Input.Id}");
         }
 
         private async Task<bool> UpdateQuantity(Guid id, int quantity, Guid userId, CancellationToken cancellationToken)
         {
-            await _bookmarkRepository
-                .UpdateBookmark(id, quantity, userId)
+            await _orderRepository
+                .UpdateOrder(id, quantity, userId)
                 .ConfigureAwait(false);
 
             var changes = await _unitOfWork

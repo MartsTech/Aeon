@@ -1,55 +1,55 @@
-﻿using Bookmarks.Domain.Wishlists;
+﻿using OrderService.Domain.OrderList;
 using BuildingBlocks.Authentication;
 using BuildingBlocks.Core;
 using MediatR;
 
-namespace Bookmarks.Application.Wishlists.GetList
+namespace OrderService.Application.OrderList.GetList
 {
     public sealed class GetAllListsQuery
     {
         public class Query : IRequest<Result<IList<WishlistDto>>>
         {
-            public Query(bool includeBookmarks)
+            public Query(bool includeOrders)
             {
-                IncludeBookmarks = includeBookmarks;
+                IncludeOrders = includeOrders;
             }
 
-            public bool IncludeBookmarks { get; }
+            public bool IncludeOrders { get; }
         }
 
         public class Handler : IRequestHandler<Query, Result<IList<WishlistDto>>>
         {
-            private readonly IWishlistRepository _wishlistRepository;
+            private readonly IOrderListRepository _OrderLististRepository;
             private readonly IUserService _userService;
 
-            public Handler(IWishlistRepository wishlistRepository, IUserService userService)
+            public Handler(IOrderListRepository orderListRepository, IUserService userService)
             {
-                _wishlistRepository = wishlistRepository;
+                _orderListRepository = orderListlistRepository;
                 _userService = userService;
             }
 
-            public async Task<Result<IList<WishlistDto>>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<IList<OrderListDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var userId = _userService.GetCurrentUserId();
 
                 if (userId == null)
                 {
-                    return Result<IList<WishlistDto>>.Failure("No user id found");
+                    return Result<IList<OrderListDto>>.Failure("No user id found");
                 }
                 
-                var result = await GetAllLists(request.IncludeBookmarks, new Guid(userId))
+                var result = await GetAllLists(request.IncludeOrders, new Guid(userId))
                     .ConfigureAwait(false);
 
-                return Result<IList<WishlistDto>>.Success(result);
+                return Result<IList<OrderListDto>>.Success(result);
             }
 
-            private async Task<IList<WishlistDto>> GetAllLists(bool includeBookmarks, Guid userId)
+            private async Task<IList<OrderListDto>> GetAllLists(bool includeOrders, Guid userId)
             {
-                List<Wishlist> wishlists = await _wishlistRepository
-                    .GetAllLists(userId, includeBookmarks)
+                List<OrderList> orderLists = await _orderListRepository
+                    .GetAllLists(userId, includeOrders)
                     .ConfigureAwait(false);
 
-                return new List<WishlistDto>(wishlists.Select(wishlist => new WishlistDto(wishlist)));
+                return new List<OrderListDto>(orders.Select(order => new OrderListDto(order)));
             }
         }
     }

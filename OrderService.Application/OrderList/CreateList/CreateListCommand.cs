@@ -7,7 +7,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
 
-namespace Bookmarks.Application.Wishlists.CreateList;
+namespace OrderService.Application.OrderList.CreateList;
 
 public sealed class CreateListCommand
 {
@@ -31,25 +31,25 @@ public sealed class CreateListCommand
     public class Handler : IRequestHandler<Command, Result<WishlistDto>>
     {
         private readonly IEntityFactory _entityFactory;
-        private readonly IWishlistRepository _wishlistRepository;
+        private readonly IOrderListRepository _orderListRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
 
-        public Handler(IEntityFactory entityFactory, IWishlistRepository wishlistRepository, IUnitOfWork unitOfWork, IUserService userService)
+        public Handler(IEntityFactory entityFactory, IOrderListRepository orderListRepository, IUnitOfWork unitOfWork, IUserService userService)
         {
             _entityFactory = entityFactory;
-            _wishlistRepository = wishlistRepository;
+            _orderListRepository = orderListRepository;
             _unitOfWork = unitOfWork;
             _userService = userService;
         }
 
-        public async Task<Result<WishlistDto>> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Result<OrderListDto>> Handle(Command request, CancellationToken cancellationToken)
         {
             var userId = _userService.GetCurrentUserId();
             
             if (userId == null)
             {
-                return Result<WishlistDto>.Failure("User is not authenticated");
+                return Result<OrderListDto>.Failure("User is not authenticated");
             }
             
             CommandValidator validator = new CommandValidator();
@@ -57,22 +57,22 @@ public sealed class CreateListCommand
             
             if (!validation.IsValid)
             {
-                return Result<WishlistDto>.Failure($"{string.Join('\n', validation.Errors)}");
+                return Result<OrderListDto>.Failure($"{string.Join('\n', validation.Errors)}");
             }
 
-            Wishlist list = _entityFactory.NewList(new Guid(userId));
+            OrderList list = _entityFactory.NewList(new Guid(userId));
 
             bool success = await CreateList(list, cancellationToken)
                 .ConfigureAwait(false);
 
             return success
-                ? Result<WishlistDto>.Success(new WishlistDto(list))
-                : Result<WishlistDto>.Failure("Failed to create a list");
+                ? Result<OrderListDto>.Success(new OrderListDto(list))
+                : Result<OrderLististDto>.Failure("Failed to create a list");
         }
 
-        private async Task<bool> CreateList(Wishlist list, CancellationToken cancellationToken)
+        private async Task<bool> CreateList(OrderList list, CancellationToken cancellationToken)
         {
-            await _wishlistRepository
+            await _OrderListRepository
                 .CreateNewList(list)
                 .ConfigureAwait(false);
 

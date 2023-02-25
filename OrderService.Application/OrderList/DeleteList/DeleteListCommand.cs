@@ -1,11 +1,11 @@
-﻿using Bookmarks.Domain.Wishlists;
+﻿using OrderService.Domain.Wishlists;
 using BuildingBlocks.Core;
 using BuildingBlocks.EFCore;
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
 
-namespace Bookmarks.Application.Wishlists.DeleteList;
+namespace OrderService.Application.OrderList.DeleteList;
 
 public sealed class DeleteListCommand
 {
@@ -29,12 +29,12 @@ public sealed class DeleteListCommand
 
     public class Handler : IRequestHandler<Command, Result<string>>
     {
-        private readonly IWishlistRepository _wishlistRepository;
+        private readonly IOrderListRepository _OrderListRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public Handler(IWishlistRepository wishlistRepository, IUnitOfWork unitOfWork)
+        public Handler(IOrderListRepository orderLististRepository, IUnitOfWork unitOfWork)
         {
-            _wishlistRepository = wishlistRepository;
+            _orderListRepository = orderListRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -51,13 +51,13 @@ public sealed class DeleteListCommand
                 .ConfigureAwait(false);
 
             return success
-                ? Result<string>.Success($"Deleted empty wishlist {request.Id}")
-                : Result<string>.Failure($"Failed to delete wishlist {request.Id}: not found or not empty!");
+                ? Result<string>.Success($"Deleted empty order list {request.Id}")
+                : Result<string>.Failure($"Failed to delete order list {request.Id}: not found or not empty!");
         }
 
         private async Task<bool> DeleteList(Guid id, CancellationToken cancellationToken)
         {
-            await _wishlistRepository
+            await _orderListRepository
                 .DeleteList(id)
                 .ConfigureAwait(false);
 

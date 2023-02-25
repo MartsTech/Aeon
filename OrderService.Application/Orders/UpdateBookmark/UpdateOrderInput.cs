@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Bookmarks.Application.Bookmarks.UpdateBookmark
+namespace OrderService.Application.Orders.UpdateOrder
 {
-    public class UpdateBookmarkInput
+    public class UpdateOrderInput
     {
         [Required] public Guid Id { get; set; }
         [Required] public int Quantity { get; set; }

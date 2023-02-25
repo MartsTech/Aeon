@@ -1,21 +1,21 @@
-﻿using Bookmarks.Application.Bookmarks;
-using Bookmarks.Domain.Wishlists;
+﻿using OrderService.Application.Orders;
+using OrderService.Domain.OrderList;
 
-namespace Bookmarks.Application.Wishlists
+namespace OrderService.Application.Wishlists
 {
-    public class WishlistDto : IWishlist
+    public class OrderListDto : IOrderList
     {
-        public WishlistDto(Wishlist wishlist)
+        public OrderListDto(OrderList orderList)
         {
-            Id = wishlist.Id;
-            UserId = wishlist.UserId;
-            DateCreated = wishlist.DateCreated;
-            Bookmarks = wishlist.Bookmarks.Select(b => new BookmarkDto(b)).ToList();
+            Id = orderList.Id;
+            UserId = orderList.UserId;
+            DateCreated = orderList.DateCreated;
+            Orders = orderList.Orders.Select(b => new OrderDto(b)).ToList();
         }
 
         public Guid Id { get; }
         public Guid UserId { get; }
         public DateOnly DateCreated { get; }
-        public IList<BookmarkDto> Bookmarks { get; }
+        public IList<OrderDto> Orders { get; }
     }
 }
