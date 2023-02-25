@@ -3,30 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OrderService.Domain.Orders;
 
 namespace OrderService.Persistence
 {
     public class OrderRepository : IOrderRepository
     {
-        public OrderRepository(OrderServiceDbContext dbContext, IWishlistRepository wishlistRepository)
+
+
+        public OrderRepository(OrdersDbContext dbContext, IOrderListRepository orderLististRepository)
         {
             _dbContext = dbContext;
-            _wishlistRepository = wishlistRepository;
+            _orderListRepository = orderListRepository;
         }
 
-        private readonly OrderServiceDbContext _dbContext;
+        private readonly OrdersDbContext _dbContext;
 
-        private readonly IWishlistRepository _wishlistRepository;
+        private readonly IOrderListRepository _orderListRepository;
+
 
         public async Task<bool> AddOrder(Order order)
         {
-            var wishlist = await _wishlistRepository
-                .GetListById(bookmark.UserId, bookmark.ListId)
+            var orderList = await _orderListRepository
+                .GetListById(order.UserId, order.ListId)
                 .ConfigureAwait(false);
 
-            if (wishlist != null)
+            if (orderList != null)
             {
-                wishlist.Order.Add(order);
+                orderList.Order.Add(order);
                 _dbContext.Update(order);
                 return true;
             }
@@ -44,7 +48,7 @@ namespace OrderService.Persistence
 
         public async Task<bool> UpdateOrder(Guid id, int newQuantity, Guid userId)
         {
-            Order? bookmark = await GetOrderById(id, userId).ConfigureAwait(false);
+            Order? order = await GetOrderById(id, userId).ConfigureAwait(false);
 
             if (order != null)
             {
@@ -62,7 +66,7 @@ namespace OrderService.Persistence
 
             if (order != null)
             {
-                _dbContext.Orders.Remove(orders);
+                _dbContext.OrderService.Remove(orders);
                 return true;
             }
 

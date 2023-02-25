@@ -12,7 +12,7 @@ namespace OrderService.Persistence
 {
     internal class OrderConfiguration : IEntityTypeConfiguration<Order>
     {
-        public void Configure(EntityTypeBuilder<Bookmark> builder)
+        public void Configure(EntityTypeBuilder<Order> builder)
         {
             if (builder == null)
             {
@@ -23,7 +23,7 @@ namespace OrderService.Persistence
                 .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
 
             builder.HasOne(b => b.List)
-                .WithMany(l => l.Bookmarks)
+                .WithMany(l => l.Orders)
                 .HasForeignKey(b => b.ListId)
                 .OnDelete(DeleteBehavior.Cascade);
 
