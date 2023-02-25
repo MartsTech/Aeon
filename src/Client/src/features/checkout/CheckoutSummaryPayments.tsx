@@ -52,11 +52,21 @@ const CheckoutSummaryPayments = () => {
     } catch (e) {}
   }, [stripe, stripeElemets, dispatch]);
 
+  const payWithCashHandler = useCallback(async () => {
+    try {
+      await dispatch(
+        checkoutApi.endpoints.checkoutPayWithCash.initiate(),
+      ).unwrap();
+    } catch (e) {}
+  }, [dispatch]);
+
   const payNowHandler = useCallback(async () => {
     if (method === 'card') {
       payWithCardHandler();
+    } else if (method === 'cash') {
+      payWithCashHandler();
     }
-  }, [method, payWithCardHandler]);
+  }, [method, payWithCardHandler, payWithCashHandler]);
 
   return (
     <div className="mt-8 flex flex-col space-y-4">

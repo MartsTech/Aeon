@@ -11,6 +11,7 @@ interface ExtendedNextApiRequest extends NextApiRequest {
 type Data =
   | {
       clientSecret: string;
+      orderId: string;
     }
   | {
       error: string;
@@ -46,7 +47,9 @@ const handler = async (
     return;
   }
 
-  res.status(200).json({clientSecret: response.client_secret});
+  res
+    .status(200)
+    .json({clientSecret: response.client_secret, orderId: response.id});
 };
 
 export default handler;

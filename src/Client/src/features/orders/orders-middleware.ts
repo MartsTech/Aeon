@@ -14,6 +14,14 @@ export const ordersMiddleware: StoreMiddleware = store => {
         if (order) {
           store.dispatch(ordersAdded(order));
         }
+      } else if (
+        checkoutApi.endpoints.checkoutPayWithCash.matchFulfilled(action)
+      ) {
+        const order = action.payload;
+
+        if (order) {
+          store.dispatch(ordersAdded(order));
+        }
       }
 
       return result;

@@ -10,6 +10,10 @@ export const checkoutMiddleware: StoreMiddleware = store => {
 
       if (checkoutApi.endpoints.checkoutPayWithCard.matchFulfilled(action)) {
         store.dispatch(checkoutSucceded());
+      } else if (
+        checkoutApi.endpoints.checkoutPayWithCash.matchFulfilled(action)
+      ) {
+        store.dispatch(checkoutSucceded());
       }
 
       return result;

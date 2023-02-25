@@ -170,5 +170,73 @@ export const checkoutApi = api.injectEndpoints({
         };
       },
     }),
+    checkoutPayWithCash: builder.mutation<OrderModel | null, void>({
+      // @ts-ignore
+      queryFn: async (arg, queryApi, _extraOptions, baseQuery) => {
+        const state = queryApi.getState() as RootState;
+
+        const session = state.auth.session;
+
+        if (!session) {
+          return {
+            data: null,
+          };
+        }
+
+        const items = checkoutProductsSelector(state);
+
+        if (!items.length) {
+          return {
+            data: null,
+          };
+        }
+
+        const total = items.reduce(
+          (acc, item) => acc + item.quantity * item.price_data.unit_amount,
+          0,
+        );
+
+        if (total === 0) {
+          return {
+            data: null,
+          };
+        }
+
+        queryApi.dispatch(checkoutProccessingChanged(true));
+
+        const result = await baseQuery({
+          url: `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/checkout/create-intent`,
+          method: 'POST',
+          body: {
+            total,
+          },
+        });
+
+        if (
+          typeof result.data !== 'object' ||
+          result.data === null ||
+          !('orderId' in result.data) ||
+          typeof result.data?.orderId !== 'string'
+        ) {
+          queryApi.dispatch(checkoutProccessingChanged(false));
+
+          return {
+            data: null,
+          };
+        }
+
+        queryApi.dispatch(checkoutProccessingChanged(false));
+
+        return {
+          data: {
+            id: result.data.orderId,
+            amount: total,
+            created: new Date().getTime(),
+            items,
+            type: 'cash',
+          },
+        };
+      },
+    }),
   }),
 });
