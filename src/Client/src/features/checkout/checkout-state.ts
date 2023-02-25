@@ -40,6 +40,8 @@ export const checkoutProccessingChanged = createAction<boolean>(
   `checkout/processingChanged`,
 );
 
+export const checkoutSucceded = createAction('checkout/succeded');
+
 const checkoutReducer = createReducer(initialState, builder => {
   builder.addCase(checkoutCardHolderChanged, (state, action) => {
     state.cardHolder = action.payload;
@@ -53,6 +55,9 @@ const checkoutReducer = createReducer(initialState, builder => {
   });
   builder.addCase(checkoutProccessingChanged, (state, action) => {
     state.processing = action.payload;
+  });
+  builder.addCase(checkoutSucceded, state => {
+    state.success = true;
   });
 });
 

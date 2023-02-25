@@ -1,29 +1,13 @@
-import {cartIsEmptySelector} from '@features/cart/cart-state';
 import CheckoutModule from '@features/checkout/CheckoutModule';
 import DefaultLayout from '@lib/layouts/DefaultLayout';
 import {storeWrapper} from '@lib/store';
-import {useStoreSelector} from '@lib/store/store-hooks';
 import StripeProvider from '@lib/stripe/StripeProvider';
 import type {NextPageWithLayout} from '@lib/types/page';
-import {useStripe} from '@stripe/react-stripe-js';
 import {GetServerSideProps} from 'next';
 import {getSession} from 'next-auth/react';
-import {useRouter} from 'next/router';
-import {ReactElement, useEffect} from 'react';
+import {ReactElement} from 'react';
 
 const Checkout: NextPageWithLayout = () => {
-  const cartIsEmpty = useStoreSelector(cartIsEmptySelector);
-
-  const stripe = useStripe();
-
-  const router = useRouter();
-
-  useEffect(() => {
-    if (cartIsEmpty) {
-      router.push('/');
-    }
-  }, [cartIsEmpty]);
-
   return <CheckoutModule />;
 };
 

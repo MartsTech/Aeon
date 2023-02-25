@@ -2,9 +2,11 @@ import {appReducer} from '@features/app/app-state';
 import {authPersistedReducer} from '@features/auth/auth-state';
 import {bookmarksMiddleware} from '@features/bookmarks/bookmarks-middleware';
 import {bookmarksPersistedReducer} from '@features/bookmarks/bookmarks-state';
+import {cartMiddleware} from '@features/cart/cart-middleware';
 import {cartPersistedReducer} from '@features/cart/cart-state';
 import {cateogoriesMiddleware} from '@features/categories/categories-middleware';
 import {categoriesPersistedReducer} from '@features/categories/categories-state';
+import {checkoutMiddleware} from '@features/checkout/checkout-middleware';
 import {checkoutPersistedReducer} from '@features/checkout/checkout-state';
 import {productMiddleware} from '@features/product/product-middleware';
 import {productPersistedReducer} from '@features/product/product-state';
@@ -41,6 +43,8 @@ export const makeStore = () =>
         productsMiddleware,
         productMiddleware,
         bookmarksMiddleware,
+        cartMiddleware,
+        checkoutMiddleware,
       ),
   });
 

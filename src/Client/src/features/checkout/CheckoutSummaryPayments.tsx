@@ -1,7 +1,6 @@
-import {cartCleared} from '@features/cart/cart-state';
 import Button from '@lib/components/button/Button';
 import {useStoreDispatch, useStoreSelector} from '@lib/store/store-hooks';
-import {useStripe} from '@stripe/react-stripe-js';
+import {CardElement, useElements, useStripe} from '@stripe/react-stripe-js';
 import Image from 'next/image';
 import {useCallback} from 'react';
 import {checkoutApi} from './checkout-api';
@@ -19,38 +18,57 @@ const CheckoutSummaryPayments = () => {
   const processing = useStoreSelector(checkoutProcessingSelector);
 
   const stripe = useStripe();
+  const stripeElemets = useElements();
 
   const dispatch = useStoreDispatch();
 
-  const payViaStripeHandler = useCallback(async () => {
+  const payWithStripeHandler = useCallback(async () => {
+    if (!stripe) {
+      return;
+    }
+
     try {
-      const sessionId = await dispatch(
-        checkoutApi.endpoints.createCheckoutSession.initiate(),
+      await dispatch(
+        checkoutApi.endpoints.createCheckoutSession.initiate(stripe),
       ).unwrap();
-
-      if (!sessionId) {
-        return;
-      }
-
-      dispatch(cartCleared());
-
-      stripe?.redirectToCheckout({
-        sessionId,
-        successUrl: process.env.NEXTAUTH_URL,
-      });
     } catch (e) {}
   }, [stripe, dispatch]);
+
+  const payWithCardHandler = useCallback(async () => {
+    if (!stripe || !stripeElemets) {
+      return;
+    }
+
+    const card = stripeElemets.getElement(CardElement);
+
+    if (!card) {
+      return;
+    }
+
+    try {
+      await dispatch(
+        checkoutApi.endpoints.checkoutPayWithCard.initiate({stripe, card}),
+      ).unwrap();
+    } catch (e) {}
+  }, [stripe, stripeElemets, dispatch]);
+
+  const payNowHandler = useCallback(async () => {
+    if (method === 'card') {
+      payWithCardHandler();
+    }
+  }, [method, payWithCardHandler]);
 
   return (
     <div className="mt-8 flex flex-col space-y-4">
       <Button
+        onClick={payNowHandler}
         disabled={method === 'card' && !allowed}
         variant="primary"
         className="!transform-none uppercase">
         {status}
       </Button>
       <Button
-        onClick={payViaStripeHandler}
+        onClick={payWithStripeHandler}
         disabled={processing}
         variant="outlined"
         className="flex items-center !border-[#635bff] !border-opacity-50
