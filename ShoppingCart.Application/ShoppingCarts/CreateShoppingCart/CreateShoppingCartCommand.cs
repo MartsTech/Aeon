@@ -1,69 +1,79 @@
-﻿using BuildingBlocks.Core;
+﻿using Bookmarks.Domain;
+using Bookmarks.Domain.Wishlists;
+using BuildingBlocks.Authentication;
+using BuildingBlocks.Core;
 using BuildingBlocks.EFCore;
-using ShoppingCart.Domain;
-using ShoppingCart.Domain.ShoppingCarts;
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
 
-namespace ShoppingCart.Application.ShoppingCarts.AddShoppingCart;
+namespace ShoppingCart.Application.ShoppingCarts.CreateShoppingCart;
 
 public sealed class CreateShoppingCartCommand
 {
-    public class Command : IRequest<Result<CategoryDto>>
+    public class Command : IRequest<Result<ShoppingCartDto>>
     {
-        public Command(CreateShoppinCartInput input)
+        public Command(CreateShoppingCartInput input)
         {
             Input = input;
         }
 
-        public CreateShoppinCartInput Input { get; }
+        public CreateShoppingCartInput Input { get; }
     }
 
     public class CommandValidator : AbstractValidator<Command>
     {
         public CommandValidator()
         {
-            RuleFor(x => x.Input).SetValidator(new CreateShoppingCartInputValidator());
         }
     }
 
-    public class Handler : IRequestHandler<Command, Result<CategoryDto>>
+    public class Handler : IRequestHandler<Command, Result<ShoppingCartDto>>
     {
         private readonly IEntityFactory _entityFactory;
         private readonly IShoppingCartRepository _shoppingCartRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
 
-        public Handler(IEntityFactory entityFactory, IShoppingCartRepository shoppingCartRepository, IUnitOfWork unitOfWork)
+        public Handler(IEntityFactory entityFactory, IShoppingCartRepository shoppingCartRepository, IUnitOfWork unitOfWork, IUserService userService)
         {
             _entityFactory = entityFactory;
             _shoppingCartRepository = shoppingCartRepository;
             _unitOfWork = unitOfWork;
+            _userService = userService;
         }
 
         public async Task<Result<ShoppingCartDto>> Handle(Command request, CancellationToken cancellationToken)
         {
+            var userId = _userService.GetCurrentUserId();
+            
+            if (userId == null)
+            {
+                return Result<ShoppingCartDto>.Failure("User is not authenticated");
+            }
+            
             CommandValidator validator = new CommandValidator();
             ValidationResult validation = await validator.ValidateAsync(request, cancellationToken);
+            
             if (!validation.IsValid)
             {
                 return Result<ShoppingCartDto>.Failure($"{string.Join('\n', validation.Errors)}");
             }
 
-            ShoppingCart shoppingCart = _entityFactory.NewShoppingCart(request.Input.Name);
+            ShoppingCart list = _entityFactory.NewList(new Guid(userId));
 
-            bool success = await CreateCategory(shoppingCart, cancellationToken)
+            bool success = await CreateShoppingCart(list, cancellationToken)
                 .ConfigureAwait(false);
 
             return success
-                ? Result<ShoppingCartDto>.Success(new ShoppingCartDto(shoppingCart))
+                ? Result<ShoppingCartDto>.Success(new ShoppingCartDto(list))
                 : Result<ShoppingCartDto>.Failure("Failed to create a shopping cart");
         }
 
         private async Task<bool> CreateShoppingCart(ShoppingCart shoppingCart, CancellationToken cancellationToken)
         {
             await _shoppingCartRepository
-                .AddShoppingCart(shoppingCart)
+                .CreateNewList(shoppingCart)
                 .ConfigureAwait(false);
 
             var changes = await _unitOfWork
@@ -73,5 +83,4 @@ public sealed class CreateShoppingCartCommand
             return changes > 0;
         }
     }
-
 }

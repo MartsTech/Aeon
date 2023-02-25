@@ -1,11 +1,11 @@
-﻿using BuildingBlocks.Core;
+﻿using Bookmarks.Domain.Wishlists;
+using BuildingBlocks.Core;
 using BuildingBlocks.EFCore;
-using Catalog.Domain.Categories;
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
 
-namespace ShoppingCart.Application.ShoppingCarts.DeleteShoppingCart;
+namespace Bookmarks.Application.Wishlists.DeleteList;
 
 public sealed class DeleteShoppingCartCommand
 {
@@ -58,7 +58,7 @@ public sealed class DeleteShoppingCartCommand
         private async Task<bool> DeleteShoppingCart(Guid id, CancellationToken cancellationToken)
         {
             await _shoppingCartRepository
-                .DeleteShoppingCart(id)
+                .DeleteList(id)
                 .ConfigureAwait(false);
 
             var changes = await _unitOfWork
@@ -68,5 +68,4 @@ public sealed class DeleteShoppingCartCommand
             return changes > 0;
         }
     }
-
 }
