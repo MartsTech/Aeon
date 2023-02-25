@@ -1,4 +1,4 @@
-﻿using Bookmarks.Domain.Bookmarks;
+﻿using OrderService.Domain.Orders;
 using BuildingBlocks.Authentication;
 using BuildingBlocks.Core;
 using BuildingBlocks.EFCore;
@@ -6,7 +6,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
 
-namespace Bookmarks.Application.Bookmarks.DeleteBookmark;
+namespace OrderService.Application.Orders.DeleteOrder;
 
 public sealed class DeleteBookmarkCommand
 {
@@ -30,13 +30,13 @@ public sealed class DeleteBookmarkCommand
 
     public class Handler : IRequestHandler<Command, Result<string>>
     {
-        private readonly IBookmarkRepository _bookmarkRepository;
+        private readonly IOrderRepository _orderRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
 
-        public Handler(IBookmarkRepository bookmarkRepository, IUnitOfWork unitOfWork, IUserService userService)
+        public Handler(IOrderRepository orderRepository, IUnitOfWork unitOfWork, IUserService userService)
         {
-            _bookmarkRepository = bookmarkRepository;
+            _orderRepository = orderRepository;
             _unitOfWork = unitOfWork;
             _userService = userService;
         }
@@ -58,18 +58,18 @@ public sealed class DeleteBookmarkCommand
                 return Result<string>.Failure($"{string.Join('\n', validation.Errors)}");
             }
 
-            bool success = await DeleteBookmark(request.Id, new Guid(userId), cancellationToken)
+            bool success = await DeleteOrder(request.Id, new Guid(userId), cancellationToken)
                 .ConfigureAwait(false);
 
             return success
-                ? Result<string>.Success($"Deleted bookmark {request.Id}")
-                : Result<string>.Failure($"Failed to delete bookmark {request.Id}");
+                ? Result<string>.Success($"Deleted order {request.Id}")
+                : Result<string>.Failure($"Failed to delete order {request.Id}");
         }
 
-        private async Task<bool> DeleteBookmark(Guid id, Guid userId, CancellationToken cancellationToken)
+        private async Task<bool> DeleteOrder(Guid id, Guid userId, CancellationToken cancellationToken)
         {
-            await _bookmarkRepository
-                .DeleteBookmark(id, userId)
+            await _orderRepository
+                .DeleteOrder(id, userId)
                 .ConfigureAwait(false);
 
             var changes = await _unitOfWork
