@@ -21,6 +21,8 @@ export const cartQuantityChanged = createAction<{id: string; quantity: number}>(
   'cart/quantityChanged',
 );
 
+export const cartCleared = createAction('cart/cleared');
+
 const cartReducer = createReducer(initialState, builder => {
   builder.addCase(cartItemAdded, (state, action) => {
     const item: CartItem = {
@@ -49,6 +51,9 @@ const cartReducer = createReducer(initialState, builder => {
       }
       return item;
     });
+  });
+  builder.addCase(cartCleared, state => {
+    state.list = [];
   });
 });
 

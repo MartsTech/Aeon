@@ -24,10 +24,15 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
         destination: '/',
         permanent: false,
       },
+      props: {
+        session,
+      },
     };
   }
 
   return {
-    props: {},
+    props: {
+      session,
+    },
   };
 };
