@@ -9,7 +9,7 @@ namespace ShoppingCart.Domain.ShoppingCarts
             Id = id;
             UserId = userId;
             DateCreated = dateCreated;
-            Bookmarks = new List<ShoppingCart>();
+            ShoppingCarts = new List<ShoppingCart>();
         }
 
         public Guid Id { get; }
