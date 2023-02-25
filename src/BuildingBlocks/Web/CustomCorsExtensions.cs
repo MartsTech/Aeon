@@ -16,8 +16,7 @@ public static class CustomCorsExtensions
                 builder
                     .AllowAnyMethod()
                     .AllowAnyHeader()
-                    .AllowCredentials()
-                    .WithOrigins("http://localhost:3000", "https://aeon.martstech.com");
+                    .AllowAnyOrigin();
             });
         });
 

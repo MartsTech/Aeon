@@ -9,6 +9,16 @@ export interface AuthSession extends DefaultSession {
     email: string;
     image: string;
   };
+  profile: {
+    givenName: string;
+    familyName: string;
+    name: string;
+    country: string;
+    postalCode: string;
+    state: string;
+    streetAddress: string;
+    city: string;
+  };
   expires: string;
   accessToken: string;
 }

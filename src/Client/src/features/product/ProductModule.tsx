@@ -1,5 +1,11 @@
+import {authSignedSelector} from '@features/auth/auth-state';
 import {bookmarksApi} from '@features/bookmarks/bookmarks-api';
 import {bookmarksCurrentSelector} from '@features/bookmarks/bookmarks-state';
+import {
+  cartIsAddedSelector,
+  cartItemAdded,
+  cartItemRemoved,
+} from '@features/cart/cart-state';
 import {ShoppingCartIcon} from '@heroicons/react/24/outline';
 import {BookmarkIcon, TagIcon} from '@heroicons/react/24/solid';
 import Button from '@lib/components/button/Button';
@@ -7,19 +13,32 @@ import {useStoreDispatch, useStoreSelector} from '@lib/store/store-hooks';
 import {pageTransition, pageZoom} from '@lib/utils/animations';
 import {motion} from 'framer-motion';
 import Image from 'next/image';
+import {useRouter} from 'next/router';
 import {useCallback} from 'react';
 import {productDetailsSelector} from './product-state';
 
 const ProductModule = () => {
+  const signed = useStoreSelector(authSignedSelector);
   const product = useStoreSelector(productDetailsSelector);
-
-  const dispatch = useStoreDispatch();
 
   const bookmark = useStoreSelector(state =>
     bookmarksCurrentSelector(state, product?.id || ''),
   );
 
+  const inCart = useStoreSelector(state =>
+    cartIsAddedSelector(state, product?.id || ''),
+  );
+
+  const dispatch = useStoreDispatch();
+
+  const router = useRouter();
+
   const onBookmarkClick = useCallback(() => {
+    if (!signed) {
+      router.push('/login');
+      return;
+    }
+
     if (typeof product?.id !== 'string') {
       return;
     }
@@ -29,7 +48,19 @@ const ProductModule = () => {
     } else {
       dispatch(bookmarksApi.endpoints.deleteBookmark.initiate(bookmark.id));
     }
-  }, [bookmark, product, dispatch]);
+  }, [bookmark, product, signed, dispatch]);
+
+  const onCartClick = useCallback(() => {
+    if (typeof product?.id !== 'string') {
+      return;
+    }
+
+    if (!inCart) {
+      dispatch(cartItemAdded(product.id));
+    } else {
+      dispatch(cartItemRemoved(product.id));
+    }
+  }, [product, inCart, dispatch]);
 
   if (!product) {
     return null;
@@ -77,12 +108,12 @@ const ProductModule = () => {
               </p>
             )}
             <div className="mt-6 flex space-x-4">
-              {false ? (
-                <Button variant="primary">
+              {inCart ? (
+                <Button variant="primary" onClick={onCartClick}>
                   <ShoppingCartIcon className="mr-2 h-5 w-5 fill-white" /> Added
                 </Button>
               ) : (
-                <Button variant="primary">
+                <Button variant="primary" onClick={onCartClick}>
                   <ShoppingCartIcon className="mr-2 h-5 w-5" /> Add To Cart
                 </Button>
               )}
