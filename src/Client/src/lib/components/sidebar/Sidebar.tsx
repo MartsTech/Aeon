@@ -1,4 +1,5 @@
 import {bookmarksCountSelector} from '@features/bookmarks/bookmarks-state';
+import {cartTotalCountSelector} from '@features/cart/cart-state';
 import {
   BookmarkIcon,
   ClockIcon,
@@ -19,6 +20,7 @@ interface Props {
 
 const Sidebar: FC<Props> = ({authenticated, active, toggleSidebar}) => {
   const bookmarksCount = useStoreSelector(bookmarksCountSelector);
+  const cartTotalCount = useStoreSelector(cartTotalCountSelector);
 
   return (
     <section
@@ -37,7 +39,7 @@ const Sidebar: FC<Props> = ({authenticated, active, toggleSidebar}) => {
         <SidebarMenuItem
           Icon={ShoppingCartIcon}
           paths={['/cart']}
-          count={0}
+          count={cartTotalCount}
           sidebarActive={active}
           toggleSidebar={toggleSidebar}
         />

@@ -2,6 +2,7 @@ import {appReducer} from '@features/app/app-state';
 import {authPersistedReducer} from '@features/auth/auth-state';
 import {bookmarksMiddleware} from '@features/bookmarks/bookmarks-middleware';
 import {bookmarksPersistedReducer} from '@features/bookmarks/bookmarks-state';
+import {cartPersistedReducer} from '@features/cart/cart-state';
 import {cateogoriesMiddleware} from '@features/categories/categories-middleware';
 import {categoriesPersistedReducer} from '@features/categories/categories-state';
 import {productMiddleware} from '@features/product/product-middleware';
@@ -21,6 +22,7 @@ export const rootReducer = combineReducers({
   products: productsPersistedReducer,
   product: productPersistedReducer,
   bookmarks: bookmarksPersistedReducer,
+  cart: cartPersistedReducer,
 });
 
 export const makeStore = () =>
