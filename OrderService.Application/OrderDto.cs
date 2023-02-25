@@ -1,4 +1,5 @@
-﻿using OrderService.Domain.Orders;
+﻿using OrderService.Application.Orders;
+using OrderService.Domain.Orders;
 
 namespace OrderService.Application.Orders
 {

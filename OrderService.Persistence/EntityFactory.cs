@@ -11,7 +11,15 @@ namespace OrderService.Persistence
 {
     public class EntityFactory : IEntityFactory
     {
-       
+        public OrderList NewList(Guid userId)
+        {
+            return new OrderList(new Guid(), userId, DateOnly.FromDateTime(DateTime.Now));
+        }
+
+        public OrderList NewListWithExistingId(Guid id, Guid userId)
+        {
+            return new OrderList(id, userId, DateOnly.FromDateTime(DateTime.Now));
+        }
 
         public Order NewOrder(Guid productId, int productQuantity, Guid listId, Guid userId)
         {
