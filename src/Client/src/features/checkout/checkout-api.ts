@@ -1,3 +1,4 @@
+import {OrderModel} from '@features/orders/orders-types';
 import {api} from '@lib/api';
 import {RootState} from '@lib/store/store-types';
 import {Stripe, StripeCardElement} from '@stripe/stripe-js';
@@ -53,9 +54,10 @@ export const checkoutApi = api.injectEndpoints({
       },
     }),
     checkoutPayWithCard: builder.mutation<
-      null,
+      OrderModel | null,
       {stripe: Stripe; card: StripeCardElement}
     >({
+      // @ts-ignore
       queryFn: async (arg, queryApi, _extraOptions, baseQuery) => {
         const state = queryApi.getState() as RootState;
 
@@ -125,28 +127,43 @@ export const checkoutApi = api.injectEndpoints({
           };
         }
 
-        await arg.stripe.confirmCardPayment(result.data.clientSecret, {
-          payment_method: {
-            card: arg.card,
-            billing_details: {
-              name: cardHolder,
-              email: session.user.email,
-              address: {
-                country: 'US',
-                postal_code: session.profile.postalCode,
-                state: session.profile.state,
-                line1: session.profile.streetAddress,
+        const payment = await arg.stripe.confirmCardPayment(
+          result.data.clientSecret,
+          {
+            payment_method: {
+              card: arg.card,
+              billing_details: {
+                name: cardHolder,
+                email: session.user.email,
+                address: {
+                  country: 'US',
+                  postal_code: session.profile.postalCode,
+                  state: session.profile.state,
+                  line1: session.profile.streetAddress,
+                },
               },
             },
+            receipt_email: session.user.email,
           },
-          receipt_email: session.user.email,
-        });
+        );
 
         queryApi.dispatch(checkoutProccessingChanged(false));
 
         arg.card.update({
           disabled: false,
         });
+
+        if (payment.paymentIntent) {
+          return {
+            data: {
+              id: payment.paymentIntent.id,
+              amount: payment.paymentIntent.amount,
+              created: payment.paymentIntent.created,
+              items,
+              type: 'card',
+            },
+          };
+        }
 
         return {
           data: null,

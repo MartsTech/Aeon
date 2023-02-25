@@ -8,6 +8,8 @@ import {cateogoriesMiddleware} from '@features/categories/categories-middleware'
 import {categoriesPersistedReducer} from '@features/categories/categories-state';
 import {checkoutMiddleware} from '@features/checkout/checkout-middleware';
 import {checkoutPersistedReducer} from '@features/checkout/checkout-state';
+import {ordersMiddleware} from '@features/orders/orders-middleware';
+import {ordersPersistedReducer} from '@features/orders/orders-state';
 import {productMiddleware} from '@features/product/product-middleware';
 import {productPersistedReducer} from '@features/product/product-state';
 import {productsMiddleware} from '@features/products/products-middleware';
@@ -27,6 +29,7 @@ export const rootReducer = combineReducers({
   bookmarks: bookmarksPersistedReducer,
   cart: cartPersistedReducer,
   checkout: checkoutPersistedReducer,
+  orders: ordersPersistedReducer,
 });
 
 export const makeStore = () =>
@@ -45,6 +48,7 @@ export const makeStore = () =>
         bookmarksMiddleware,
         cartMiddleware,
         checkoutMiddleware,
+        ordersMiddleware,
       ),
   });
 

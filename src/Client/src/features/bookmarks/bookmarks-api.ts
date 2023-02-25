@@ -42,11 +42,13 @@ export const bookmarksApi = api.injectEndpoints({
         });
 
         if (result.meta?.response?.status === 200) {
-          baseApi.dispatch(bookmarksCreated(result.data as WishlistModal));
+          baseApi.dispatch(
+            bookmarksCreated((result.data as WishlistModal) || null),
+          );
         }
 
         return {
-          data: result.data as WishlistModal,
+          data: (result.data as WishlistModal) || null,
         };
       },
     }),
@@ -71,7 +73,7 @@ export const bookmarksApi = api.injectEndpoints({
         }
 
         return {
-          data: result.data as BookmarkModel,
+          data: (result.data as BookmarkModel) || null,
         };
       },
     }),
