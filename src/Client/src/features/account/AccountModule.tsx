@@ -1,11 +1,12 @@
-import {authUserSelecter} from '@features/auth/auth-state';
+import {authProfileSelector, authUserSelector} from '@features/auth/auth-state';
 import Button from '@lib/components/button/Button';
 import {useStoreSelector} from '@lib/store/store-hooks';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const AccountModule = () => {
-  const user = useStoreSelector(authUserSelecter);
+  const user = useStoreSelector(authUserSelector);
+  const profile = useStoreSelector(authProfileSelector);
 
   if (typeof user === 'undefined') {
     return null;
@@ -60,6 +61,34 @@ const AccountModule = () => {
         <p className="flex">
           <span className="profile__label">Email Address</span>
           <span className="flex-[80%]">{user.email}</span>
+        </p>
+        <p className="flex">
+          <span className="profile__label">Given Name</span>
+          <span className="flex-[80%]">{profile?.givenName}</span>
+        </p>
+        <p className="flex">
+          <span className="profile__label">Family Name</span>
+          <span className="flex-[80%]">{profile?.familyName}</span>
+        </p>
+        <p className="flex">
+          <span className="profile__label">Country</span>
+          <span className="flex-[80%]">{profile?.country}</span>
+        </p>
+        <p className="flex">
+          <span className="profile__label">City</span>
+          <span className="flex-[80%]">{profile?.city}</span>
+        </p>
+        <p className="flex">
+          <span className="profile__label">Postal Code</span>
+          <span className="flex-[80%]">{profile?.postalCode}</span>
+        </p>
+        <p className="flex">
+          <span className="profile__label">State</span>
+          <span className="flex-[80%]">{profile?.state}</span>
+        </p>
+        <p className="flex">
+          <span className="profile__label">Street Address</span>
+          <span className="flex-[80%]">{profile?.streetAddress}</span>
         </p>
       </div>
     </div>

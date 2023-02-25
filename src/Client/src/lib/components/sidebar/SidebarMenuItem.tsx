@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import {ComponentProps, FC, useMemo} from 'react';
+import {FC, useMemo} from 'react';
 
 interface Props {
   sidebarActive: boolean;
   toggleSidebar: () => void;
-  Icon: (props: ComponentProps<'svg'>) => JSX.Element;
+  Icon: any;
   paths: string[];
   count?: number;
 }

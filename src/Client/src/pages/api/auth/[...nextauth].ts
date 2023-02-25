@@ -21,18 +21,37 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    jwt: ({token, account, user}) => {
-      if (account && user) {
+    jwt: ({token, account, profile}) => {
+      if (account && profile) {
         return {
           ...token,
           accessToken: account.access_token,
-        };
+          givenName: profile.given_name,
+          familyName: profile.family_name,
+          name: profile.name,
+          country: profile.country,
+          postalCode: profile.postalCode,
+          state: profile.state,
+          streetAddress: profile.streetAddress,
+          city: profile.city,
+        } as any;
       }
       return token;
     },
     session: ({session, token}) => {
       session.accessToken = token.accessToken;
       session.user.id = token.id;
+      session.user.name = token.name;
+      session.profile = {
+        givenName: token.givenName,
+        familyName: token.familyName,
+        name: token.name,
+        country: token.country,
+        postalCode: token.postalCode,
+        state: token.state,
+        streetAddress: token.streetAddress,
+        city: token.city,
+      };
       return session;
     },
   },

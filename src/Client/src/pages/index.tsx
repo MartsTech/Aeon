@@ -50,7 +50,9 @@ export const getServerSideProps: GetServerSideProps =
       );
 
       return {
-        props: {},
+        props: {
+          session,
+        },
       };
     };
   });

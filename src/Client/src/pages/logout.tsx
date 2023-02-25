@@ -18,6 +18,9 @@ export const getServerSideProps = storeWrapper.getServerSideProps(store => {
           destination: '/',
           permanent: false,
         },
+        props: {
+          session,
+        },
       };
     }
 
@@ -25,6 +28,9 @@ export const getServerSideProps = storeWrapper.getServerSideProps(store => {
       redirect: {
         destination: '/api/auth/signout',
         permanent: false,
+      },
+      props: {
+        session,
       },
     };
   };

@@ -22,11 +22,16 @@ Product.getLayout = (page: ReactElement) => {
 export const getServerSideProps: GetServerSideProps =
   storeWrapper.getServerSideProps(store => {
     return async ({query, res, req}) => {
+      const session = await getSession({req});
+
       const {id} = query;
 
       if (typeof id !== 'string') {
         return {
           notFound: true,
+          props: {
+            session,
+          },
         };
       }
 
@@ -37,10 +42,11 @@ export const getServerSideProps: GetServerSideProps =
       } catch (e) {
         return {
           notFound: true,
+          props: {
+            session,
+          },
         };
       }
-
-      const session = await getSession({req});
 
       if (session && session.accessToken) {
         const bookmarks = await store
@@ -64,7 +70,9 @@ export const getServerSideProps: GetServerSideProps =
       );
 
       return {
-        props: {},
+        props: {
+          session,
+        },
       };
     };
   });

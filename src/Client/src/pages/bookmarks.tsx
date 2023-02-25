@@ -28,6 +28,9 @@ export const getServerSideProps: GetServerSideProps =
           destination: '/login',
           permanent: false,
         },
+        props: {
+          session,
+        },
       };
     }
 
@@ -51,6 +54,8 @@ export const getServerSideProps: GetServerSideProps =
     );
 
     return {
-      props: {},
+      props: {
+        session,
+      },
     };
   });
