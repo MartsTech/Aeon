@@ -1,13 +1,13 @@
-﻿using Bookmarks.Domain.Bookmarks;
+﻿using OrderService.Domain.Orders;
 using BuildingBlocks.Authentication;
 using BuildingBlocks.Core;
 using MediatR;
 
-namespace Bookmarks.Application.Bookmarks.GetBookmark;
+namespace OrderService.Application.Orders.GetOrder;
 
-public sealed class GetBookmarkByIdQuery
+public sealed class GetOrderByIdQuery
 {
-    public class Query : IRequest<Result<BookmarkDto>>
+    public class Query : IRequest<Result<OrderDto>>
     {
         public Query(Guid id)
         {
@@ -17,39 +17,39 @@ public sealed class GetBookmarkByIdQuery
         public Guid Id { get; }
     }
 
-    public class Handler : IRequestHandler<Query, Result<BookmarkDto>>
+    public class Handler : IRequestHandler<Query, Result<OrderDto>>
     {
-        private readonly IBookmarkRepository _bookmarkRepository;
+        private readonly IOrderRepository _orderRepository;
         private readonly IUserService _userService;
 
-        public Handler(IBookmarkRepository bookmarkRepository, IUserService userService)
+        public Handler(IOrderRepository orderRepository, IUserService userService)
         {
-            _bookmarkRepository = bookmarkRepository;
+            _orderRepository = orderRepository;
             _userService = userService;
         }
 
-        public async Task<Result<BookmarkDto>> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<Result<OrderDto>> Handle(Query request, CancellationToken cancellationToken)
         {
             var userId = _userService.GetCurrentUserId();
             
             if (userId == null)
             {
-                return Result<BookmarkDto>.Failure("No user id found");
+                return Result<OrderDto>.Failure("No user id found");
             }
             
-            var result = await GetBookmarkById(request.Id, new Guid(userId))
+            var result = await GetOrderById(request.Id, new Guid(userId))
                 .ConfigureAwait(false);
 
-            return result != null ? Result<BookmarkDto>.Success(result) : Result<BookmarkDto>.Failure("Not found");
+            return result != null ? Result<OrderDto>.Success(result) : Result<OrderDto>.Failure("Not found");
         }
 
-        private async Task<BookmarkDto?> GetBookmarkById(Guid id, Guid userId)
+        private async Task<OrderDto?> GetOrderById(Guid id, Guid userId)
         {
-            Bookmark? bookmark = await _bookmarkRepository
-                .GetBookmarkById(id, userId)
+            Order? order = await _orderRepository
+                .GetOrderById(id, userId)
                 .ConfigureAwait(false);
 
-            return bookmark != null ? new BookmarkDto(bookmark) : null;
+            return order != null ? new OrderDto(order) : null;
         }
     }
 }
