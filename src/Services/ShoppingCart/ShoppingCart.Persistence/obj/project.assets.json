@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Savina\\Desktop\\Aeon\\ShoppingCart.Persistence\\ShoppingCart.Persistence.csproj",
+      "projectUniqueName": "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\ShoppingCart\\ShoppingCart.Persistence\\ShoppingCart.Persistence.csproj",
       "projectName": "ShoppingCart.Persistence",
-      "projectPath": "C:\\Users\\Savina\\Desktop\\Aeon\\ShoppingCart.Persistence\\ShoppingCart.Persistence.csproj",
+      "projectPath": "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\ShoppingCart\\ShoppingCart.Persistence\\ShoppingCart.Persistence.csproj",
       "packagesPath": "C:\\Users\\Savina\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Savina\\Desktop\\Aeon\\ShoppingCart.Persistence\\obj\\",
+      "outputPath": "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\ShoppingCart\\ShoppingCart.Persistence\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Savina\\AppData\\Roaming\\NuGet\\NuGet.Config",

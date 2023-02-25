@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Savina\\Desktop\\Aeon\\OrderService.Application\\OrderService.Application.csproj": {}
+    "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\OrderService\\OrderService.Application\\OrderService.Application.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Savina\\Desktop\\Aeon\\OrderService.Application\\OrderService.Application.csproj": {
+    "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\OrderService\\OrderService.Application\\OrderService.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Savina\\Desktop\\Aeon\\OrderService.Application\\OrderService.Application.csproj",
+        "projectUniqueName": "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\OrderService\\OrderService.Application\\OrderService.Application.csproj",
         "projectName": "OrderService.Application",
-        "projectPath": "C:\\Users\\Savina\\Desktop\\Aeon\\OrderService.Application\\OrderService.Application.csproj",
+        "projectPath": "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\OrderService\\OrderService.Application\\OrderService.Application.csproj",
         "packagesPath": "C:\\Users\\Savina\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Savina\\Desktop\\Aeon\\OrderService.Application\\obj\\",
+        "outputPath": "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\OrderService\\OrderService.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Savina\\AppData\\Roaming\\NuGet\\NuGet.Config",

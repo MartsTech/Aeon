@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Savina\\Desktop\\Aeon\\OrderService.Persistence\\OrderService.Persistence.csproj": {}
+    "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\OrderService\\OrderService.Persistence\\OrderService.Persistence.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Savina\\Desktop\\Aeon\\OrderService.Persistence\\OrderService.Persistence.csproj": {
+    "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\OrderService\\OrderService.Persistence\\OrderService.Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Savina\\Desktop\\Aeon\\OrderService.Persistence\\OrderService.Persistence.csproj",
+        "projectUniqueName": "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\OrderService\\OrderService.Persistence\\OrderService.Persistence.csproj",
         "projectName": "OrderService.Persistence",
-        "projectPath": "C:\\Users\\Savina\\Desktop\\Aeon\\OrderService.Persistence\\OrderService.Persistence.csproj",
+        "projectPath": "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\OrderService\\OrderService.Persistence\\OrderService.Persistence.csproj",
         "packagesPath": "C:\\Users\\Savina\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Savina\\Desktop\\Aeon\\OrderService.Persistence\\obj\\",
+        "outputPath": "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\OrderService\\OrderService.Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Savina\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bxt++bNYxjzzTR2YaixujBf54ku7Khy5QTi7amohH/U0JqcF3r16Sd46jVLtB755gf2DdziSBaIGXiMHa5a6tw==",
+  "dgSpecHash": "26cPT99EMOhTyi29SVCSvi6LXoC91MADD9fq7FFGnDuyOJiMcLhGtNjVvzOxiuKeoa2E9fS/jfEk2cXRezYVGg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Savina\\Desktop\\Aeon\\OrderService.Persistence\\OrderService.Persistence.csproj",
+  "projectFilePath": "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\OrderService\\OrderService.Persistence\\OrderService.Persistence.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

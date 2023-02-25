@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lhKKRBXfWvzozdvHaCkZ1E1lmxWe/RNBvvGCB4n/4W5sthftHLpoIoioQGgQmnyaFnFLIE76NhhrPZ5hfrQ+VQ==",
+  "dgSpecHash": "jffjXoAkInlJdSY5x2g1XJjsQVlgev1jbIRMlKpapHI9V9mg0LD0QK/rd5PZ7a/UW4ilGHxDsCQb7XNtBp6cWA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Savina\\Desktop\\Aeon\\ShoppingCart.Persistence\\ShoppingCart.Persistence.csproj",
+  "projectFilePath": "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\ShoppingCart\\ShoppingCart.Persistence\\ShoppingCart.Persistence.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

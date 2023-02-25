@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Savina\\Desktop\\Aeon\\ShoppingCart.Domain\\ShoppingCart.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\ShoppingCart\\ShoppingCart.Domain\\ShoppingCart.Domain.csproj",
       "projectName": "ShoppingCart.Domain",
-      "projectPath": "C:\\Users\\Savina\\Desktop\\Aeon\\ShoppingCart.Domain\\ShoppingCart.Domain.csproj",
+      "projectPath": "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\ShoppingCart\\ShoppingCart.Domain\\ShoppingCart.Domain.csproj",
       "packagesPath": "C:\\Users\\Savina\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Savina\\Desktop\\Aeon\\ShoppingCart.Domain\\obj\\",
+      "outputPath": "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\ShoppingCart\\ShoppingCart.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Savina\\AppData\\Roaming\\NuGet\\NuGet.Config",

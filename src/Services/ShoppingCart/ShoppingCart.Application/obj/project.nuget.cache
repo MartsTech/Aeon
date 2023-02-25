@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9PoHHTLf+qRUcaMmwuPZprq5mRiZ20Xfur5GUoQm2HZs/hToe+YdZC7NBRYZ0PK3/tiurpxMqNfGXU4dq/FyFg==",
+  "dgSpecHash": "Rg/J0CZMyp0iGO+UpE77TL8dKQYrZqztrpaQHRbcU66oYncCux6mJf6Lr2MEU9nbo+dR2EFciJbZeGdR6OsBhw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Savina\\Desktop\\Aeon\\ShoppingCart.Application\\ShoppingCart.Application.csproj",
+  "projectFilePath": "C:\\Users\\Savina\\Desktop\\Aeon\\src\\Services\\ShoppingCart\\ShoppingCart.Application\\ShoppingCart.Application.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
