@@ -4,10 +4,10 @@ namespace Catalog.Persistence;
 
 public sealed class UnitOfWork : IUnitOfWork, IDisposable
 {
-    private readonly CatalogDbContext _context;
+    private readonly ShoppingCartDbContext _context;
     private bool _disposed;
     
-    public UnitOfWork(CatalogDbContext context)
+    public UnitOfWork(ShoppingCartDbContext context)
     {
         _context = context;
     }
