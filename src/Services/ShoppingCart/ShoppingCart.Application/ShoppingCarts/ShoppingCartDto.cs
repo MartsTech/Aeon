@@ -1,5 +1,5 @@
 ﻿using ShoppingCart.Application.ShoppingCarts;
-using ShoppingCart.Domain.ShoppingCarts;
+using Catalog.Domain.Products;
 
 namespace ShoppingCart.Application.ShoppingCarts
 {
@@ -10,12 +10,12 @@ namespace ShoppingCart.Application.ShoppingCarts
             Id = shoppingCart.Id;
             UserId = shoppingCart.UserId;
             DateCreated = shoppingCart.DateCreated;
-            Bookmarks = shoppingCart.ShoppingCarts.Select(b => new ShoppingCartDto(b)).ToList();
+            Product = shoppingCart.ShoppingCarts.Select(p => new ShoppingCartDto(p)).ToList();
         }
 
         public Guid Id { get; }
         public Guid UserId { get; }
         public DateOnly DateCreated { get; }
-        public IList<ShoppingCartDto> Bookmarks { get; }
+        public IList<ShoppingCartDto> Products { get; }
     }
 }
