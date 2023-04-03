@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace Catalog.Application.Comments.UpdateComment
+namespace Catalog.Application.Comments.UpdateComment;
+
+internal class UpdateCommentInputValidator : AbstractValidator<UpdateCommentInput>
 {
-    internal class UpdateCommentInputValidator : AbstractValidator<UpdateCommentInput>
+    public UpdateCommentInputValidator()
     {
-        public UpdateCommentInputValidator()
-        {
-            RuleFor(c => c.Id).NotEmpty();
-            RuleFor(c => c.Content).NotEmpty().MaximumLength(255);
-        }
+        RuleFor(c => c.Id).NotEmpty();
+        RuleFor(c => c.Content).NotEmpty().MaximumLength(255);
     }
 }

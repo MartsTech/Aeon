@@ -1,21 +1,20 @@
 ﻿using BuildingBlocks.MassTransit.Contracts;
 using MassTransit;
 
-namespace Catalog.Api.Comments.AddUpvote
+namespace Catalog.Api.Comments.AddUpvote;
+
+public class AddUpvoteConsumer : IConsumer<UpvoteCreated>
 {
-    public class AddUpvoteConsumer : IConsumer<UpvoteCreated>
+    private readonly ILogger<AddUpvoteConsumer> _logger;
+
+    public AddUpvoteConsumer(ILogger<AddUpvoteConsumer> logger)
     {
-        private readonly ILogger<AddUpvoteConsumer> _logger;
+        _logger = logger;
+    }
 
-        public AddUpvoteConsumer(ILogger<AddUpvoteConsumer> logger)
-        {
-            _logger = logger;
-        }
-
-        public Task Consume(ConsumeContext<UpvoteCreated> context)
-        {
-            _logger.LogInformation("Upvote created with ID: {MessageId}", context.Message.Id);
-            return Task.CompletedTask;
-        }
+    public Task Consume(ConsumeContext<UpvoteCreated> context)
+    {
+        _logger.LogInformation("Upvote created with ID: {MessageId}", context.Message.Id);
+        return Task.CompletedTask;
     }
 }

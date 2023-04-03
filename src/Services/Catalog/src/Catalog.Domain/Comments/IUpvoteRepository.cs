@@ -1,10 +1,9 @@
-﻿namespace Catalog.Domain.Comments
+﻿namespace Catalog.Domain.Comments;
+
+public interface IUpvoteRepository
 {
-    public interface IUpvoteRepository
-    {
-        Task<List<Upvote>> GetUpvotesOfComment(Guid commentId);
-        Task<Upvote?> GetUpvoteById(Guid id);
-        Task<bool> AddUpvote(Upvote upvote);
-        Task<bool> DeleteUpvote(Guid id);
-    }
+    Task<List<Upvote>> GetUpvotesOfComment(Guid commentId);
+    Task<Upvote?> GetUpvoteById(Guid id);
+    Task<bool> AddUpvote(Upvote upvote);
+    Task<bool> DeleteUpvote(Guid id);
 }

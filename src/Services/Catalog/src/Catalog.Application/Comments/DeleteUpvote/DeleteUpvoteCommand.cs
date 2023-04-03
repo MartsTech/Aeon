@@ -3,89 +3,84 @@ using BuildingBlocks.EFCore;
 using Catalog.Domain.Comments;
 using FluentValidation;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BuildingBlocks.Authentication;
 using FluentValidation.Results;
 
-namespace Catalog.Application.Comments.DeleteUpvote
+namespace Catalog.Application.Comments.DeleteUpvote;
+
+public sealed class DeleteUpvoteCommand
 {
-    public sealed class DeleteUpvoteCommand
-    {public class Command : IRequest<Result<string>>
+    public class Command : IRequest<Result<string>>
+    {
+        public Command(Guid id)
         {
-            public Command(Guid id)
-            {
-                Id = id;
-            }
-
-            public Guid Id { get; }
+            Id = id;
         }
 
-        private class CommandValidator : AbstractValidator<Command>
+        public Guid Id { get; }
+    }
+
+    private class CommandValidator : AbstractValidator<Command>
+    {
+        public CommandValidator()
         {
-            public CommandValidator()
-            {
-                RuleFor(x => x.Id).NotEmpty();
-            }
+            RuleFor(x => x.Id).NotEmpty();
+        }
+    }
+
+    public class Handler : IRequestHandler<Command, Result<string>>
+    {
+        private readonly IUpvoteRepository _upvoteRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
+
+        public Handler(IUpvoteRepository upvoteRepository, IUnitOfWork unitOfWork, IUserService userService)
+        {
+            _upvoteRepository = upvoteRepository;
+            _unitOfWork = unitOfWork;
+            _userService = userService;
         }
 
-        public class Handler : IRequestHandler<Command, Result<string>>
+        public async Task<Result<string>> Handle(Command request, CancellationToken cancellationToken)
         {
-            private readonly IUpvoteRepository _upvoteRepository;
-            private readonly IUnitOfWork _unitOfWork;
-            private readonly IUserService _userService;
-
-            public Handler(IUpvoteRepository upvoteRepository, IUnitOfWork unitOfWork, IUserService userService)
+            string? userId = _userService.GetCurrentUserId();
+            if (userId == null)
             {
-                _upvoteRepository = upvoteRepository;
-                _unitOfWork = unitOfWork;
-                _userService = userService;
+                return Result<string>.Failure("Not authenticated!");
             }
 
-            public async Task<Result<string>> Handle(Command request, CancellationToken cancellationToken)
+            CommandValidator validator = new CommandValidator();
+            ValidationResult validation = await validator.ValidateAsync(request, cancellationToken);
+            if (!validation.IsValid)
             {
-                string? userId = _userService.GetCurrentUserId();
-                if (userId == null)
-                {
-                    return Result<string>.Failure("Not authenticated!");
-                }
-
-                CommandValidator validator = new CommandValidator();
-                ValidationResult validation = await validator.ValidateAsync(request, cancellationToken);
-                if (!validation.IsValid)
-                {
-                    return Result<string>.Failure($"{string.Join('\n', validation.Errors)}");
-                }
-
-                Upvote? upvote = await _upvoteRepository.GetUpvoteById(request.Id).ConfigureAwait(false);
-                if (upvote != null && upvote.UserId != new Guid(userId))
-                {
-                    return Result<string>.Failure("Access denied");
-                }
-
-                bool success = await DeleteUpvote(request.Id, cancellationToken)
-                    .ConfigureAwait(false);
-
-                return success
-                    ? Result<string>.Success($"Deleted upvote {request.Id}")
-                    : Result<string>.Failure($"Failed to delete upvote {request.Id}");
+                return Result<string>.Failure($"{string.Join('\n', validation.Errors)}");
             }
 
-            private async Task<bool> DeleteUpvote(Guid id, CancellationToken cancellationToken)
+            Upvote? upvote = await _upvoteRepository.GetUpvoteById(request.Id).ConfigureAwait(false);
+            if (upvote != null && upvote.UserId != new Guid(userId))
             {
-                await _upvoteRepository
-                    .DeleteUpvote(id)
-                    .ConfigureAwait(false);
-
-                var changes = await _unitOfWork
-                    .SaveChangesAsync(cancellationToken)
-                    .ConfigureAwait(false);
-
-                return changes > 0;
+                return Result<string>.Failure("Access denied");
             }
+
+            bool success = await DeleteUpvote(request.Id, cancellationToken)
+                .ConfigureAwait(false);
+
+            return success
+                ? Result<string>.Success($"Deleted upvote {request.Id}")
+                : Result<string>.Failure($"Failed to delete upvote {request.Id}");
+        }
+
+        private async Task<bool> DeleteUpvote(Guid id, CancellationToken cancellationToken)
+        {
+            await _upvoteRepository
+                .DeleteUpvote(id)
+                .ConfigureAwait(false);
+
+            var changes = await _unitOfWork
+                .SaveChangesAsync(cancellationToken)
+                .ConfigureAwait(false);
+
+            return changes > 0;
         }
     }
 }

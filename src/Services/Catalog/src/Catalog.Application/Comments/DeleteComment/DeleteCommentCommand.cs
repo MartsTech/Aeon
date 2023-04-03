@@ -6,82 +6,81 @@ using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
 
-namespace Catalog.Application.Comments.DeleteComment
+namespace Catalog.Application.Comments.DeleteComment;
+
+public sealed class DeleteCommentCommand
 {
-    public sealed class DeleteCommentCommand
+    public class Command : IRequest<Result<string>>
     {
-        public class Command : IRequest<Result<string>>
+        public Command(Guid id)
         {
-            public Command(Guid id)
-            {
-                Id = id;
-            }
-
-            public Guid Id { get; }
+            Id = id;
         }
 
-        private class CommandValidator : AbstractValidator<Command>
+        public Guid Id { get; }
+    }
+
+    private class CommandValidator : AbstractValidator<Command>
+    {
+        public CommandValidator()
         {
-            public CommandValidator()
-            {
-                RuleFor(x => x.Id).NotEmpty();
-            }
+            RuleFor(x => x.Id).NotEmpty();
+        }
+    }
+
+    public class Handler : IRequestHandler<Command, Result<string>>
+    {
+        private readonly ICommentRepository _commentRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
+
+        public Handler(ICommentRepository commentRepository, IUnitOfWork unitOfWork, IUserService userService)
+        {
+            _commentRepository = commentRepository;
+            _unitOfWork = unitOfWork;
+            _userService = userService;
         }
 
-        public class Handler : IRequestHandler<Command, Result<string>>
+        public async Task<Result<string>> Handle(Command request, CancellationToken cancellationToken)
         {
-            private readonly ICommentRepository _commentRepository;
-            private readonly IUnitOfWork _unitOfWork;
-            private readonly IUserService _userService;
-
-            public Handler(ICommentRepository commentRepository, IUnitOfWork unitOfWork, IUserService userService)
+            string? userId = _userService.GetCurrentUserId();
+            if (userId == null)
             {
-                _commentRepository = commentRepository;
-                _unitOfWork = unitOfWork;
-                _userService = userService;
+                return Result<string>.Failure("Not authenticated!");
             }
 
-            public async Task<Result<string>> Handle(Command request, CancellationToken cancellationToken)
+            CommandValidator validator = new CommandValidator();
+            ValidationResult validation = await validator.ValidateAsync(request, cancellationToken);
+            if (!validation.IsValid)
             {
-                string? userId = _userService.GetCurrentUserId();
-                if (userId == null)
-                {
-                    return Result<string>.Failure("Not authenticated!");
-                }
-
-                CommandValidator validator = new CommandValidator();
-                ValidationResult validation = await validator.ValidateAsync(request, cancellationToken);
-                if (!validation.IsValid)
-                {
-                    return Result<string>.Failure($"{string.Join('\n', validation.Errors)}");
-                }
-
-                Comment? comment = await _commentRepository.GetCommentById(request.Id).ConfigureAwait(false);
-                if (comment != null && comment.UserId != new Guid(userId))
-                {
-                    return Result<string>.Failure("Access denied");
-                }
-
-                bool success = await DeleteComment(request.Id, cancellationToken)
-                    .ConfigureAwait(false);
-
-                return success
-                    ? Result<string>.Success($"Deleted comment {request.Id}")
-                    : Result<string>.Failure($"Failed to delete comment {request.Id}");
+                return Result<string>.Failure($"{string.Join('\n', validation.Errors)}");
             }
 
-            private async Task<bool> DeleteComment(Guid id, CancellationToken cancellationToken)
+            Comment? comment = await _commentRepository.GetCommentById(request.Id).ConfigureAwait(false);
+            if (comment != null && comment.UserId != new Guid(userId))
             {
-                await _commentRepository
-                    .DeleteComment(id)
-                    .ConfigureAwait(false);
-
-                var changes = await _unitOfWork
-                    .SaveChangesAsync(cancellationToken)
-                    .ConfigureAwait(false);
-
-                return changes > 0;
+                return Result<string>.Failure("Access denied");
             }
+
+            bool success = await DeleteComment(request.Id, cancellationToken)
+                .ConfigureAwait(false);
+
+            return success
+                ? Result<string>.Success($"Deleted comment {request.Id}")
+                : Result<string>.Failure($"Failed to delete comment {request.Id}");
+        }
+
+        private async Task<bool> DeleteComment(Guid id, CancellationToken cancellationToken)
+        {
+            await _commentRepository
+                .DeleteComment(id)
+                .ConfigureAwait(false);
+
+            var changes = await _unitOfWork
+                .SaveChangesAsync(cancellationToken)
+                .ConfigureAwait(false);
+
+            return changes > 0;
         }
     }
 }

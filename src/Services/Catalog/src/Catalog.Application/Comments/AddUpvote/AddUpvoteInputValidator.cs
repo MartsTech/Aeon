@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace Catalog.Application.Comments.AddUpvote
+namespace Catalog.Application.Comments.AddUpvote;
+
+internal class AddUpvoteInputValidator : AbstractValidator<AddUpvoteInput>
 {
-    internal class AddUpvoteInputValidator : AbstractValidator<AddUpvoteInput>
+    public AddUpvoteInputValidator()
     {
-        public AddUpvoteInputValidator()
-        {
-            RuleFor(u => u.CommentId).NotEmpty();
-        }
+        RuleFor(u => u.CommentId).NotEmpty();
     }
 }

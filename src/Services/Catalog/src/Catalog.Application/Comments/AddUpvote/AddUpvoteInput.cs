@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Catalog.Application.Comments.AddUpvote
+namespace Catalog.Application.Comments.AddUpvote;
+
+public class AddUpvoteInput
 {
-    public class AddUpvoteInput
-    {
-        [Required]
-        public Guid CommentId { get; set; }
-    }
+    [Required] public Guid CommentId { get; set; }
 }
