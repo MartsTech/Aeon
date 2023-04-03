@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BuildingBlocks.Authentication;
 using Catalog.Domain;
 using Catalog.Domain.Comments;
 using FluentValidation.Results;
@@ -37,15 +38,23 @@ namespace Catalog.Application.Comments.UpdateComment
         {
             private readonly ICommentRepository _commentRepository;
             private readonly IUnitOfWork _unitOfWork;
+            private readonly IUserService _userService;
 
-            public Handler(ICommentRepository commentRepository, IUnitOfWork unitOfWork)
+            public Handler(ICommentRepository commentRepository, IUnitOfWork unitOfWork, IUserService userService)
             {
                 _commentRepository = commentRepository;
                 _unitOfWork = unitOfWork;
+                _userService = userService;
             }
 
             public async Task<Result<CommentDto>> Handle(Command request, CancellationToken cancellationToken)
             {
+                string? userId = _userService.GetCurrentUserId();
+                if (userId == null)
+                {
+                    return Result<CommentDto>.Failure("Not authenticated!");
+                }
+
                 CommandValidator validator = new CommandValidator();
                 ValidationResult validation = await validator.ValidateAsync(request, cancellationToken);
                 if (!validation.IsValid)
@@ -57,6 +66,11 @@ namespace Catalog.Application.Comments.UpdateComment
                 if (comment == null)
                 {
                     return Result<CommentDto>.Failure($"Comment with ID {request.Input.Id} not found");
+                }
+
+                if (comment.UserId != new Guid(userId))
+                {
+                    return Result<CommentDto>.Failure("Access denied");
                 }
 
                 bool success = await UpdateComment(request.Input.Id, request.Input.Content, cancellationToken)

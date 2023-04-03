@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BuildingBlocks.Authentication;
 using Catalog.Domain;
 using FluentValidation.Results;
 
@@ -38,16 +39,24 @@ namespace Catalog.Application.Comments.AddUpvote
             private readonly IEntityFactory _entityFactory;
             private readonly IUpvoteRepository _upvoteRepository;
             private readonly IUnitOfWork _unitOfWork;
+            private readonly IUserService _userService;
 
-            public Handler(IEntityFactory entityFactory, IUpvoteRepository upvoteRepository, IUnitOfWork unitOfWork)
+            public Handler(IEntityFactory entityFactory, IUpvoteRepository upvoteRepository, IUnitOfWork unitOfWork, IUserService userService)
             {
                 _entityFactory = entityFactory;
                 _upvoteRepository = upvoteRepository;
                 _unitOfWork = unitOfWork;
+                _userService = userService;
             }
 
             public async Task<Result<UpvoteDto>> Handle(Command request, CancellationToken cancellationToken)
             {
+                string? userId = _userService.GetCurrentUserId();
+                if (userId == null)
+                {
+                    return Result<UpvoteDto>.Failure("Not authenticated!");
+                }
+
                 CommandValidator validator = new CommandValidator();
                 ValidationResult validation = await validator.ValidateAsync(request, cancellationToken);
                 if (!validation.IsValid)
@@ -55,16 +64,14 @@ namespace Catalog.Application.Comments.AddUpvote
                     return Result<UpvoteDto>.Failure($"{string.Join('\n', validation.Errors)}");
                 }
 
-                Upvote upvote = _entityFactory.NewVote(Guid.NewGuid(), request.Input.CommentId);
-                //placeholder GUIDs!
-                //TODO: add authentication
+                Upvote upvote = _entityFactory.NewVote(new Guid(userId), request.Input.CommentId);
 
                 bool success = await AddUpvote(upvote, cancellationToken)
                     .ConfigureAwait(false);
 
                 return success
                     ? Result<UpvoteDto>.Success(new UpvoteDto(upvote))
-                    : Result<UpvoteDto>.Failure("Failed to upvote");
+                    : Result<UpvoteDto>.Failure("Failed to upvote or already upvoted");
             }
 
             private async Task<bool> AddUpvote(Upvote upvote, CancellationToken cancellationToken)

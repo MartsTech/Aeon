@@ -1,4 +1,5 @@
-﻿using BuildingBlocks.Core;
+﻿using BuildingBlocks.Authentication;
+using BuildingBlocks.Core;
 using BuildingBlocks.EFCore;
 using Catalog.Domain.Comments;
 using FluentValidation;
@@ -31,20 +32,34 @@ namespace Catalog.Application.Comments.DeleteComment
         {
             private readonly ICommentRepository _commentRepository;
             private readonly IUnitOfWork _unitOfWork;
+            private readonly IUserService _userService;
 
-            public Handler(ICommentRepository commentRepository, IUnitOfWork unitOfWork)
+            public Handler(ICommentRepository commentRepository, IUnitOfWork unitOfWork, IUserService userService)
             {
                 _commentRepository = commentRepository;
                 _unitOfWork = unitOfWork;
+                _userService = userService;
             }
 
             public async Task<Result<string>> Handle(Command request, CancellationToken cancellationToken)
             {
+                string? userId = _userService.GetCurrentUserId();
+                if (userId == null)
+                {
+                    return Result<string>.Failure("Not authenticated!");
+                }
+
                 CommandValidator validator = new CommandValidator();
                 ValidationResult validation = await validator.ValidateAsync(request, cancellationToken);
                 if (!validation.IsValid)
                 {
                     return Result<string>.Failure($"{string.Join('\n', validation.Errors)}");
+                }
+
+                Comment? comment = await _commentRepository.GetCommentById(request.Id).ConfigureAwait(false);
+                if (comment != null && comment.UserId != new Guid(userId))
+                {
+                    return Result<string>.Failure("Access denied");
                 }
 
                 bool success = await DeleteComment(request.Id, cancellationToken)

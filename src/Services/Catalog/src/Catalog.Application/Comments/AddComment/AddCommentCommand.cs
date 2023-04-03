@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BuildingBlocks.Authentication;
 using Catalog.Domain;
 using Catalog.Domain.Comments;
 using FluentValidation.Results;
@@ -38,16 +39,24 @@ namespace Catalog.Application.Comments.AddComment
             private readonly IEntityFactory _entityFactory;
             private readonly ICommentRepository _commentRepository;
             private readonly IUnitOfWork _unitOfWork;
+            private readonly IUserService _userService;
 
-            public Handler(IEntityFactory entityFactory, ICommentRepository commentRepository, IUnitOfWork unitOfWork)
+            public Handler(IEntityFactory entityFactory, ICommentRepository commentRepository, IUnitOfWork unitOfWork, IUserService userService)
             {
                 _entityFactory = entityFactory;
                 _commentRepository = commentRepository;
                 _unitOfWork = unitOfWork;
+                _userService = userService;
             }
 
             public async Task<Result<CommentDto>> Handle(Command request, CancellationToken cancellationToken)
             {
+                string? userId = _userService.GetCurrentUserId();
+                if (userId == null)
+                {
+                    return Result<CommentDto>.Failure("Not authenticated!");
+                }
+
                 CommandValidator validator = new CommandValidator();
                 ValidationResult validation = await validator.ValidateAsync(request, cancellationToken);
                 if (!validation.IsValid)
@@ -55,9 +64,7 @@ namespace Catalog.Application.Comments.AddComment
                     return Result<CommentDto>.Failure($"{string.Join('\n', validation.Errors)}");
                 }
 
-                Comment comment = _entityFactory.NewComment(Guid.NewGuid(), request.Input.ProductId, request.Input.Content);
-                //placeholder GUIDs!
-                //TODO: add authentication
+                Comment comment = _entityFactory.NewComment(new Guid(userId), request.Input.ProductId, request.Input.Content);
 
                 bool success = await AddComment(comment, cancellationToken)
                     .ConfigureAwait(false);

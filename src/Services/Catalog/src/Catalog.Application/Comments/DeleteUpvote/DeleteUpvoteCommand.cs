@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BuildingBlocks.Authentication;
 using FluentValidation.Results;
 
 namespace Catalog.Application.Comments.DeleteUpvote
@@ -35,20 +36,34 @@ namespace Catalog.Application.Comments.DeleteUpvote
         {
             private readonly IUpvoteRepository _upvoteRepository;
             private readonly IUnitOfWork _unitOfWork;
+            private readonly IUserService _userService;
 
-            public Handler(IUpvoteRepository upvoteRepository, IUnitOfWork unitOfWork)
+            public Handler(IUpvoteRepository upvoteRepository, IUnitOfWork unitOfWork, IUserService userService)
             {
                 _upvoteRepository = upvoteRepository;
                 _unitOfWork = unitOfWork;
+                _userService = userService;
             }
 
             public async Task<Result<string>> Handle(Command request, CancellationToken cancellationToken)
             {
+                string? userId = _userService.GetCurrentUserId();
+                if (userId == null)
+                {
+                    return Result<string>.Failure("Not authenticated!");
+                }
+
                 CommandValidator validator = new CommandValidator();
                 ValidationResult validation = await validator.ValidateAsync(request, cancellationToken);
                 if (!validation.IsValid)
                 {
                     return Result<string>.Failure($"{string.Join('\n', validation.Errors)}");
+                }
+
+                Upvote? upvote = await _upvoteRepository.GetUpvoteById(request.Id).ConfigureAwait(false);
+                if (upvote != null && upvote.UserId != new Guid(userId))
+                {
+                    return Result<string>.Failure("Access denied");
                 }
 
                 bool success = await DeleteUpvote(request.Id, cancellationToken)
