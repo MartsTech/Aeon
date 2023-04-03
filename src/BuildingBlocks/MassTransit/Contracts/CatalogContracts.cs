@@ -11,3 +11,8 @@ public record BookmarkUpdated(Guid Id);
 public record BookmarkDeleted(Guid Id);
 public record WishlistCreated(Guid Id);
 public record WishlistDeleted(Guid Id);
+public record CommentCreated(Guid Id);
+public record CommentUpdated(Guid Id);
+public record CommentDeleted(Guid Id);
+public record UpvoteCreated(Guid Id);
+public record UpvoteDeleted(Guid Id);
