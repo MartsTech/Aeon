@@ -16,3 +16,6 @@ public record CommentUpdated(Guid Id);
 public record CommentDeleted(Guid Id);
 public record UpvoteCreated(Guid Id);
 public record UpvoteDeleted(Guid Id);
+public record RatingCreated(Guid Id);
+public record RatingUpdated(Guid Id);
+public record RatingDeleted(Guid Id);

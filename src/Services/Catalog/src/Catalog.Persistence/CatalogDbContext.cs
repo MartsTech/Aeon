@@ -2,6 +2,7 @@
 using Catalog.Domain.Categories;
 using Catalog.Domain.Comments;
 using Catalog.Domain.Products;
+using Catalog.Domain.Ratings;
 using Catalog.Persistence.Products;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,7 @@ public sealed class CatalogDbContext : DbContextBase
     public DbSet<Category> Categories { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Upvote> Upvotes { get; set; }
+    public DbSet<Rating> Ratings { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

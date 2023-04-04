@@ -1,6 +1,7 @@
 ﻿using Catalog.Domain.Categories;
 using Catalog.Domain.Comments;
 using Catalog.Domain.Products;
+using Catalog.Domain.Ratings;
 
 namespace Catalog.Domain;
 
@@ -20,4 +21,8 @@ public interface IEntityFactory
 
     Upvote NewVote(Guid userId, Guid commentId);
     Upvote NewVoteWithExistingId(Guid id, Guid userId, Guid commentId);
+    //TODO: Useless? Remove?
+
+    Rating NewRating(Guid userId, Guid productId, int value);
+    Rating NewRatingWithExistingId(Guid id, Guid userId, Guid productId, int value);
 }

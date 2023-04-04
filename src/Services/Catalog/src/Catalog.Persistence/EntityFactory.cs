@@ -2,6 +2,7 @@
 using Catalog.Domain.Categories;
 using Catalog.Domain.Comments;
 using Catalog.Domain.Products;
+using Catalog.Domain.Ratings;
 
 namespace Catalog.Persistence;
 
@@ -50,5 +51,15 @@ public class EntityFactory : IEntityFactory
     public Upvote NewVoteWithExistingId(Guid id, Guid userId, Guid commentId)
     {
         return new Upvote(id, userId, commentId);
+    }
+
+    public Rating NewRating(Guid userId, Guid productId, int value)
+    {
+        return new Rating(Guid.NewGuid(), userId, productId, value);
+    }
+
+    public Rating NewRatingWithExistingId(Guid id, Guid userId, Guid productId, int value)
+    {
+        return new Rating(id, userId, productId, value);
     }
 }

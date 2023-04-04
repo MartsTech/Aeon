@@ -2,7 +2,7 @@
 
 namespace Catalog.Application.Products
 {
-    public sealed record ProductDto : IProduct
+    public sealed record ProductDto
     {
         public ProductDto(IProduct product)
         {
@@ -14,6 +14,8 @@ namespace Catalog.Application.Products
             CategoryId = product.CategoryId;
             Image = product.Image;
             Quantity = product.Quantity;
+            CommentCount = product.Comments.Count;
+            AvgRating = product.Ratings.Count == 0 ? null : product.Ratings.Average(e => e.Value);
         }
 
         public Guid Id { get; }
@@ -24,5 +26,7 @@ namespace Catalog.Application.Products
         public Guid CategoryId { get; set; }
         public string? Image { get; }
         public int Quantity { get; }
+        public double? AvgRating { get; }
+        public int CommentCount { get; }
     }
 }

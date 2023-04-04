@@ -14,12 +14,12 @@ namespace Catalog.Persistence.Products
 
         public async Task<List<Product>> GetAllProducts()
         {
-            return await _context.Products.ToListAsync().ConfigureAwait(false);
+            return await _context.Products.Include(c => c.Comments).Include(r => r.Ratings).ToListAsync().ConfigureAwait(false);
         }
 
         public async Task<Product?> GetProductById(Guid id)
         {
-            return await _context.Products.FirstOrDefaultAsync(p => p.Id == id).ConfigureAwait(false);
+            return await _context.Products.Include(c => c.Comments).Include(r => r.Ratings).FirstOrDefaultAsync(p => p.Id == id).ConfigureAwait(false);
         }
 
         public async Task AddProduct(Product product)

@@ -1,5 +1,6 @@
 ﻿using Catalog.Domain.Categories;
 using Catalog.Domain.Comments;
+using Catalog.Domain.Ratings;
 
 namespace Catalog.Domain.Products
 {
@@ -16,6 +17,7 @@ namespace Catalog.Domain.Products
             Image = image;
             Quantity = quantity;
             Comments = new List<Comment>();
+            Ratings = new List<Rating>();
         }
 
         public Guid Id { get; }
@@ -27,6 +29,7 @@ namespace Catalog.Domain.Products
         public Category Category { get; set; }
         public string? Image { get; set; }
         public int Quantity { get; set; }
+        public ICollection<Rating> Ratings { get; }
         public ICollection<Comment> Comments { get; }
     }
 }
