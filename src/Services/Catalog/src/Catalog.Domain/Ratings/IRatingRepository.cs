@@ -8,5 +8,4 @@ public interface IRatingRepository
     Task<bool> AddRating(Rating rating);
     Task<bool> UpdateRating(Guid id, int value);
     Task<bool> DeleteRating(Guid id);
-
 }

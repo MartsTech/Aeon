@@ -14,15 +14,9 @@ public interface IEntityFactory
         string? image, int quantity);
 
     Category NewCategory(string name);
-    Category NewCategoryWithExistingId(Guid id, string name);
 
     Comment NewComment(Guid userId, Guid productId, string content);
-    Comment NewCommentWithExistingId(Guid id, Guid userId, Guid productId, string content);
 
     Upvote NewVote(Guid userId, Guid commentId);
-    Upvote NewVoteWithExistingId(Guid id, Guid userId, Guid commentId);
-    //TODO: Useless? Remove?
 
-    Rating NewRating(Guid userId, Guid productId, int value);
-    Rating NewRatingWithExistingId(Guid id, Guid userId, Guid productId, int value);
-}
+    Rating NewRating(Guid userId, Guid productId, int value); }
