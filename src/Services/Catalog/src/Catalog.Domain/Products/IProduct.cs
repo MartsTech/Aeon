@@ -1,4 +1,7 @@
-﻿namespace Catalog.Domain.Products
+﻿using Catalog.Domain.Comments;
+using Catalog.Domain.Ratings;
+
+namespace Catalog.Domain.Products
 {
     public interface IProduct
     {
@@ -7,8 +10,10 @@
         public string? Description { get; }
         public decimal Price { get; }
         public decimal? Discount { get; }
-        public Guid CategoryId { get; set; }
+        public Guid CategoryId { get; }
         public string? Image { get; }
         public int Quantity { get; }
+        public ICollection<Rating> Ratings { get; }
+        public ICollection<Comment> Comments { get; }
     }
 }

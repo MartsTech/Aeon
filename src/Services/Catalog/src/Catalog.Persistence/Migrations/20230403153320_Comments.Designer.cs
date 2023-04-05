@@ -3,6 +3,7 @@ using System;
 using Catalog.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Catalog.Persistence.Migrations
 {
     [DbContext(typeof(CatalogDbContext))]
-    partial class CatalogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230403153320_Comments")]
+    partial class Comments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,12 +40,12 @@ namespace Catalog.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9966870c-9dc8-483e-b64c-a5f88b3030c2"),
+                            Id = new Guid("402af308-a6b0-4574-acf5-dc3d57d3cad9"),
                             Name = "Fruits"
                         },
                         new
                         {
-                            Id = new Guid("6add9014-ce94-4bdb-9755-960586362474"),
+                            Id = new Guid("3933bc2a-8aa8-4e61-b383-db72679c2547"),
                             Name = "Vegetables"
                         });
                 });
@@ -129,8 +132,8 @@ namespace Catalog.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("20e33b06-18da-4685-8b54-e282072e2be9"),
-                            CategoryId = new Guid("9966870c-9dc8-483e-b64c-a5f88b3030c2"),
+                            Id = new Guid("c15cc235-1596-46d3-b91b-8d66d0e0e715"),
+                            CategoryId = new Guid("402af308-a6b0-4574-acf5-dc3d57d3cad9"),
                             Description = "Orange fruit",
                             Discount = 0m,
                             Image = "",
@@ -140,8 +143,8 @@ namespace Catalog.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a228e017-1770-4fde-abe3-699e015ad74b"),
-                            CategoryId = new Guid("9966870c-9dc8-483e-b64c-a5f88b3030c2"),
+                            Id = new Guid("f69acb2a-06cd-40ac-907c-df9d348f6c82"),
+                            CategoryId = new Guid("402af308-a6b0-4574-acf5-dc3d57d3cad9"),
                             Description = "Red fruit",
                             Discount = 0m,
                             Image = "",
@@ -151,8 +154,8 @@ namespace Catalog.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7b72248b-7176-4e12-b9b1-6bd8cd6395fc"),
-                            CategoryId = new Guid("6add9014-ce94-4bdb-9755-960586362474"),
+                            Id = new Guid("9fae5394-bb21-446b-80b9-c3ed55bc1f51"),
+                            CategoryId = new Guid("3933bc2a-8aa8-4e61-b383-db72679c2547"),
                             Description = "Green vegetable",
                             Discount = 0m,
                             Image = "",
@@ -162,8 +165,8 @@ namespace Catalog.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("69e1eb16-1f07-4ee4-9607-3b12af7fd09d"),
-                            CategoryId = new Guid("6add9014-ce94-4bdb-9755-960586362474"),
+                            Id = new Guid("dcf394e6-5c38-4e32-8192-f2d0982a76bd"),
+                            CategoryId = new Guid("3933bc2a-8aa8-4e61-b383-db72679c2547"),
                             Description = "Red vegetable",
                             Discount = 0m,
                             Image = "",
@@ -171,28 +174,6 @@ namespace Catalog.Persistence.Migrations
                             Quantity = 6,
                             Title = "Tomato"
                         });
-                });
-
-            modelBuilder.Entity("Catalog.Domain.Ratings.Rating", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("Catalog.Domain.Comments.Comment", b =>
@@ -228,17 +209,6 @@ namespace Catalog.Persistence.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Catalog.Domain.Ratings.Rating", b =>
-                {
-                    b.HasOne("Catalog.Domain.Products.Product", "Product")
-                        .WithMany("Ratings")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Catalog.Domain.Categories.Category", b =>
                 {
                     b.Navigation("Products");
@@ -252,8 +222,6 @@ namespace Catalog.Persistence.Migrations
             modelBuilder.Entity("Catalog.Domain.Products.Product", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Ratings");
                 });
 #pragma warning restore 612, 618
         }
