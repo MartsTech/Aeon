@@ -3,6 +3,7 @@ using System;
 using Catalog.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Catalog.Persistence.Migrations
 {
     [DbContext(typeof(CatalogDbContext))]
-    partial class CatalogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230421145300_Seeder")]
+    partial class Seeder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,49 +73,6 @@ namespace Catalog.Persistence.Migrations
                             Id = new Guid("e71cc7b4-5d9f-4594-8d67-eb76c7f3a1eb"),
                             Name = "Photo and video cameras"
                         });
-                });
-
-            modelBuilder.Entity("Catalog.Domain.Comments.Comment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("Catalog.Domain.Comments.Upvote", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("CommentId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.ToTable("Upvotes");
                 });
 
             modelBuilder.Entity("Catalog.Domain.Products.Product", b =>
@@ -385,50 +345,6 @@ namespace Catalog.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Catalog.Domain.Ratings.Rating", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Ratings");
-                });
-
-            modelBuilder.Entity("Catalog.Domain.Comments.Comment", b =>
-                {
-                    b.HasOne("Catalog.Domain.Products.Product", "Product")
-                        .WithMany("Comments")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Catalog.Domain.Comments.Upvote", b =>
-                {
-                    b.HasOne("Catalog.Domain.Comments.Comment", "Comment")
-                        .WithMany("Upvotes")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Comment");
-                });
-
             modelBuilder.Entity("Catalog.Domain.Products.Product", b =>
                 {
                     b.HasOne("Catalog.Domain.Categories.Category", "Category")
@@ -440,32 +356,9 @@ namespace Catalog.Persistence.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Catalog.Domain.Ratings.Rating", b =>
-                {
-                    b.HasOne("Catalog.Domain.Products.Product", "Product")
-                        .WithMany("Ratings")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Catalog.Domain.Categories.Category", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Catalog.Domain.Comments.Comment", b =>
-                {
-                    b.Navigation("Upvotes");
-                });
-
-            modelBuilder.Entity("Catalog.Domain.Products.Product", b =>
-                {
-                    b.Navigation("Comments");
-
-                    b.Navigation("Ratings");
                 });
 #pragma warning restore 612, 618
         }
