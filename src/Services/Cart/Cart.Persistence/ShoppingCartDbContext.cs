@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Catalog.Domain.Products;
 
 using BuildingBlocks.EFCore;
-using Cart.Persistence;
+using Cart.Domain.Carts;
 using Microsoft.EntityFrameworkCore;
 using Catalog.Persistence.Products;
 
@@ -20,7 +20,8 @@ public sealed class ShoppingCartDbContext : DbContextBase
     }
 
     public DbSet<Product> Products { get; set; }
-    public DbSet<ShoppingCartDbContext> ShoppingCart { get; set; }
+    public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
