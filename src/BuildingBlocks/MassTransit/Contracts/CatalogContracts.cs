@@ -19,3 +19,6 @@ public record UpvoteDeleted(Guid Id);
 public record RatingCreated(Guid Id);
 public record RatingUpdated(Guid Id);
 public record RatingDeleted(Guid Id);
+public record ShoppingCartCreated(Guid Id);
+public record ShoppingCartDeleted(Guid Id);
+

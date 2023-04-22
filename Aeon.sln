@@ -19,13 +19,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.Persistence", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bookmarks", "Bookmarks", "{B8A9F987-1DB7-43B9-A6B7-8BA27ADB7D45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Domain", "src\Services\Bookmarks\src\Bookmarks.Domain\Bookmarks.Domain.csproj", "{57F74BDE-0316-4EAF-A6A2-8EC22AF5FF69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookmarks.Domain", "src\Services\Bookmarks\src\Bookmarks.Domain\Bookmarks.Domain.csproj", "{57F74BDE-0316-4EAF-A6A2-8EC22AF5FF69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Application", "src\Services\Bookmarks\src\Bookmarks.Application\Bookmarks.Application.csproj", "{9B3AAFA5-8D6B-4C16-BC25-24F7F6D55756}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookmarks.Application", "src\Services\Bookmarks\src\Bookmarks.Application\Bookmarks.Application.csproj", "{9B3AAFA5-8D6B-4C16-BC25-24F7F6D55756}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Persistence", "src\Services\Bookmarks\src\Bookmarks.Persistence\Bookmarks.Persistence.csproj", "{44E1B709-204E-40FB-B21A-5C015C25DD1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookmarks.Persistence", "src\Services\Bookmarks\src\Bookmarks.Persistence\Bookmarks.Persistence.csproj", "{44E1B709-204E-40FB-B21A-5C015C25DD1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Api", "src\Services\Bookmarks\src\Bookmarks.Api\Bookmarks.Api.csproj", "{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookmarks.Api", "src\Services\Bookmarks\src\Bookmarks.Api\Bookmarks.Api.csproj", "{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cart", "Cart", "{4679081B-48A8-4149-B856-4365CC54CE6B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cart.Api", "..\..\..\Desktop\22-C\Aeon-22-cart-service\src\Services\ShoppingCart\ShoppingCart.Api\Cart.Api.csproj", "{43E1E802-CC3F-4374-B09A-D9808A272C6F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cart.Application", "..\..\..\Desktop\22-C\Aeon-22-cart-service\src\Services\ShoppingCart\ShoppingCart.Application\Cart.Application.csproj", "{1EA55717-9C07-475B-A5FC-8C4DE46A1A56}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cart.Domain", "..\..\..\Desktop\22-C\Aeon-22-cart-service\src\Services\ShoppingCart\ShoppingCart.Domain\Cart.Domain.csproj", "{91B38447-B0AD-42C8-B8BF-496B4CF7A643}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cart.Persistence", "..\..\..\Desktop\22-C\Aeon-22-cart-service\src\Services\ShoppingCart\ShoppingCart.Persistence\Cart.Persistence.csproj", "{9AE5D21B-759A-4F81-95B7-DCA6E386FC43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +83,22 @@ Global
 		{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43E1E802-CC3F-4374-B09A-D9808A272C6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43E1E802-CC3F-4374-B09A-D9808A272C6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43E1E802-CC3F-4374-B09A-D9808A272C6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43E1E802-CC3F-4374-B09A-D9808A272C6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EA55717-9C07-475B-A5FC-8C4DE46A1A56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EA55717-9C07-475B-A5FC-8C4DE46A1A56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EA55717-9C07-475B-A5FC-8C4DE46A1A56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EA55717-9C07-475B-A5FC-8C4DE46A1A56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91B38447-B0AD-42C8-B8BF-496B4CF7A643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91B38447-B0AD-42C8-B8BF-496B4CF7A643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91B38447-B0AD-42C8-B8BF-496B4CF7A643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91B38447-B0AD-42C8-B8BF-496B4CF7A643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AE5D21B-759A-4F81-95B7-DCA6E386FC43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE5D21B-759A-4F81-95B7-DCA6E386FC43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AE5D21B-759A-4F81-95B7-DCA6E386FC43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE5D21B-759A-4F81-95B7-DCA6E386FC43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +112,10 @@ Global
 		{9B3AAFA5-8D6B-4C16-BC25-24F7F6D55756} = {B8A9F987-1DB7-43B9-A6B7-8BA27ADB7D45}
 		{44E1B709-204E-40FB-B21A-5C015C25DD1A} = {B8A9F987-1DB7-43B9-A6B7-8BA27ADB7D45}
 		{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD} = {B8A9F987-1DB7-43B9-A6B7-8BA27ADB7D45}
+		{43E1E802-CC3F-4374-B09A-D9808A272C6F} = {4679081B-48A8-4149-B856-4365CC54CE6B}
+		{1EA55717-9C07-475B-A5FC-8C4DE46A1A56} = {4679081B-48A8-4149-B856-4365CC54CE6B}
+		{91B38447-B0AD-42C8-B8BF-496B4CF7A643} = {4679081B-48A8-4149-B856-4365CC54CE6B}
+		{9AE5D21B-759A-4F81-95B7-DCA6E386FC43} = {4679081B-48A8-4149-B856-4365CC54CE6B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1A9F2C3A-733E-47AE-BA7F-41BB34BB2302}
