@@ -19,23 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.Persistence", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bookmarks", "Bookmarks", "{B8A9F987-1DB7-43B9-A6B7-8BA27ADB7D45}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookmarks.Domain", "src\Services\Bookmarks\src\Bookmarks.Domain\Bookmarks.Domain.csproj", "{57F74BDE-0316-4EAF-A6A2-8EC22AF5FF69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Domain", "src\Services\Bookmarks\src\Bookmarks.Domain\Bookmarks.Domain.csproj", "{57F74BDE-0316-4EAF-A6A2-8EC22AF5FF69}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookmarks.Application", "src\Services\Bookmarks\src\Bookmarks.Application\Bookmarks.Application.csproj", "{9B3AAFA5-8D6B-4C16-BC25-24F7F6D55756}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Application", "src\Services\Bookmarks\src\Bookmarks.Application\Bookmarks.Application.csproj", "{9B3AAFA5-8D6B-4C16-BC25-24F7F6D55756}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookmarks.Persistence", "src\Services\Bookmarks\src\Bookmarks.Persistence\Bookmarks.Persistence.csproj", "{44E1B709-204E-40FB-B21A-5C015C25DD1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Persistence", "src\Services\Bookmarks\src\Bookmarks.Persistence\Bookmarks.Persistence.csproj", "{44E1B709-204E-40FB-B21A-5C015C25DD1A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookmarks.Api", "src\Services\Bookmarks\src\Bookmarks.Api\Bookmarks.Api.csproj", "{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OrderService", "OrderService", "{55A795F6-E6E0-4B94-BEBB-DE5CB2892627}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService.Api", "..\..\..\Desktop\27-O\Aeon-27-OrderService\src\Services\OrderService\OrderService.Api\OrderService.Api.csproj", "{8E173545-1D18-4CF1-A989-A8C7C697532A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService.Application", "..\..\..\Desktop\27-O\Aeon-27-OrderService\src\Services\OrderService\OrderService.Application\OrderService.Application.csproj", "{DAAAE345-B4B0-40F7-9A85-75E9907911F3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService.Domain", "..\..\..\Desktop\27-O\Aeon-27-OrderService\src\Services\OrderService\OrderService.Domain\OrderService.Domain.csproj", "{71CDF441-7BEA-4260-A3A2-68A41032841D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService.Persistence", "..\..\..\Desktop\27-O\Aeon-27-OrderService\src\Services\OrderService\OrderService.Persistence\OrderService.Persistence.csproj", "{7A93F0C3-475A-4C3D-99D2-F0E89BBB84E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookmarks.Api", "src\Services\Bookmarks\src\Bookmarks.Api\Bookmarks.Api.csproj", "{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,22 +73,6 @@ Global
 		{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8E173545-1D18-4CF1-A989-A8C7C697532A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E173545-1D18-4CF1-A989-A8C7C697532A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8E173545-1D18-4CF1-A989-A8C7C697532A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E173545-1D18-4CF1-A989-A8C7C697532A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DAAAE345-B4B0-40F7-9A85-75E9907911F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DAAAE345-B4B0-40F7-9A85-75E9907911F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DAAAE345-B4B0-40F7-9A85-75E9907911F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DAAAE345-B4B0-40F7-9A85-75E9907911F3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71CDF441-7BEA-4260-A3A2-68A41032841D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71CDF441-7BEA-4260-A3A2-68A41032841D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71CDF441-7BEA-4260-A3A2-68A41032841D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71CDF441-7BEA-4260-A3A2-68A41032841D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A93F0C3-475A-4C3D-99D2-F0E89BBB84E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A93F0C3-475A-4C3D-99D2-F0E89BBB84E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A93F0C3-475A-4C3D-99D2-F0E89BBB84E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A93F0C3-475A-4C3D-99D2-F0E89BBB84E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,10 +86,6 @@ Global
 		{9B3AAFA5-8D6B-4C16-BC25-24F7F6D55756} = {B8A9F987-1DB7-43B9-A6B7-8BA27ADB7D45}
 		{44E1B709-204E-40FB-B21A-5C015C25DD1A} = {B8A9F987-1DB7-43B9-A6B7-8BA27ADB7D45}
 		{C34BCD75-C6AA-4478-BE5D-47B0BD8424AD} = {B8A9F987-1DB7-43B9-A6B7-8BA27ADB7D45}
-		{8E173545-1D18-4CF1-A989-A8C7C697532A} = {55A795F6-E6E0-4B94-BEBB-DE5CB2892627}
-		{DAAAE345-B4B0-40F7-9A85-75E9907911F3} = {55A795F6-E6E0-4B94-BEBB-DE5CB2892627}
-		{71CDF441-7BEA-4260-A3A2-68A41032841D} = {55A795F6-E6E0-4B94-BEBB-DE5CB2892627}
-		{7A93F0C3-475A-4C3D-99D2-F0E89BBB84E8} = {55A795F6-E6E0-4B94-BEBB-DE5CB2892627}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1A9F2C3A-733E-47AE-BA7F-41BB34BB2302}

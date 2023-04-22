@@ -19,7 +19,3 @@ public record UpvoteDeleted(Guid Id);
 public record RatingCreated(Guid Id);
 public record RatingUpdated(Guid Id);
 public record RatingDeleted(Guid Id);
-public record OrderDeleted(Guid Id);
-public record OrderCreated(Guid Id);
-public record OrderListCreated(Guid Id);
-public record OrderListDeleted(Guid Id);
