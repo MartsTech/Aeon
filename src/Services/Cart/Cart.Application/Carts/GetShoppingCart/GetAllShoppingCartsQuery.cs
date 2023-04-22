@@ -46,7 +46,7 @@ namespace Cart.Application.Carts.GetShoppingCart
             private async Task<IList<ShoppingCartDto>> GetAllShoppingCarts(bool includeProducts, Guid userId)
             {
                 List<ShoppingCart> shoppingCarts = await _shoppingCartRepository
-                    .GetAllShoppingCarts(userId, includeProducts)
+                    .GetAllLists(userId, includeProducts)
                     .ConfigureAwait(false);
 
                 return new List<ShoppingCartDto>(shoppingCarts.Select(shoppingCart => new ShoppingCartDto(shoppingCart)));

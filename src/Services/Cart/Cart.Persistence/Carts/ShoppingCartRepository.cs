@@ -21,7 +21,7 @@ namespace Cart.Persistence.Carts
         public async Task<List<ShoppingCart>> GetAllLists(Guid userId, bool includeProducts)
         {
             return includeProducts
-                ? await _dbContext.ShoppingCart
+                ? await _dbContext.ShoppingCarts
                     .Where(x => x.UserId == userId)
                     .Include(l => l.Products)
                     .ToListAsync()
@@ -32,7 +32,7 @@ namespace Cart.Persistence.Carts
 
         public async Task<ShoppingCart?> GetListById(Guid userId, Guid id)
         {
-            return await _dbContext.ShoppingCart
+            return await _dbContext.ShoppingCarts
                 .Where(x => x.UserId == userId)
                 .Include(l => l.Products)
                 .FirstOrDefaultAsync(l => l.Id == id)
@@ -46,7 +46,7 @@ namespace Cart.Persistence.Carts
 
         public async Task<bool> DeleteList(Guid id)
         {
-            ShoppingCart? shoppingCart = await _dbContext.ShoppingCart
+            ShoppingCart? shoppingCart = await _dbContext.ShoppingCarts
                 .FirstOrDefaultAsync(x => x.Id == id)
                 .ConfigureAwait(false);
 

@@ -27,10 +27,7 @@ namespace Cart.Persistence.ShoppingCarts
 
             builder.Property(e => e.DateCreated).IsRequired();
 
-            builder.HasMany(l => l.Products)
-                .WithOne(p => p.List)
-                .HasForeignKey(b => b.ListId)
-                .OnDelete(DeleteBehavior.Cascade);
+            
         }
     }
 }

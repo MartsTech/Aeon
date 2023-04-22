@@ -37,7 +37,7 @@ public sealed class GetShoppingCartByIdQuery
                 return Result<ShoppingCartDto>.Failure("No user id found");
             }
 
-            var result = await GetShoppingCartById(request.Id, new Guid(userId))
+            var result = await GetListById(request.Id, new Guid(userId))
                 .ConfigureAwait(false);
 
             return result != null ? Result<ShoppingCartDto>.Success(result) : Result<ShoppingCartDto>.Failure("Not found");
@@ -46,10 +46,10 @@ public sealed class GetShoppingCartByIdQuery
         private async Task<ShoppingCartDto?> GetListById(Guid id, Guid userId)
         {
             ShoppingCart? shoppingCart = await _shoppingCartRepository
-                .GetShoppingCartById(userId, id)
+                .GetListById(userId, id)
                 .ConfigureAwait(false);
 
-            return shoppingCart != null ? new ShoppingCartDto(wishlist) : null;
+            return shoppingCart != null ? new ShoppingCartDto(shoppingCart) : null;
         }
     }
 }
