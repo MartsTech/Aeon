@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\..\Documents\GitHub\Aeon\src\ApiGateway\src\ApiGateway.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\Documents\GitHub\Aeon\src\Services\Bookmarks\src\Bookmarks.Persistence\Bookmarks.Persistence.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\Documents\GitHub\Aeon\src\Services\Catalog\src\Catalog.Application\Catalog.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\..\..\..\Documents\GitHub\Aeon\src\Services\Catalog\src\Catalog.Persistence\Catalog.Persistence.csproj" />
+    <ProjectReference Include="..\Cart.Domain\Cart.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
