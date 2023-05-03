@@ -2,7 +2,6 @@
 
 <p align="center">
   <a href="#acknowledgements">Acknowledgements</a> •
-  <a href="#links">Links</a> •
   <a href="#license">License</a>
 </p>
 
